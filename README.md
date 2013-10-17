@@ -32,4 +32,4 @@ It also doubles as a flexible logging view, offering a loose coupling with SLF4A
 
 A third purpose is as a layer of visual developer tools for simplifying common Flash developer grievances, such as making run-time visual adjustments to the application frontend before committing them to code.
 
-For more informaton, hit the [wiki](Home).
+For more informaton, hit the [wiki](https://github.com/furusystems/DConsole/wiki).
