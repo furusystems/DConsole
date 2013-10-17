@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<data>
+<error><code>1000</code>  <message>The system is out of memory.</message><description><![CDATA[Flash needs more memory to compile your code than your system has available. Close some of the applications or processes running on your system.  ]]></description></error>
+<error><code>1001</code>  <message>The method %m is not implemented.</message><description><![CDATA[]]></description></error>
+<error><code>1002</code>  <message>The precision argument must be between 0 and 20; got %d</message><description><![CDATA[You specified a value less than 0 or greater than 20 for the precision argument of a method or property. Pass a value between 0 and 20 as a precision argument.  ]]></description></error>
+<error><code>1003</code>  <message>The radix argument must be between 2 and 36; got %d</message><description><![CDATA[You passed a value less than 2 or greater than 36 for the radix argument of a method or property. Pass a value between 2 and 36 as a radix argument.  ]]></description></error>
+<error><code>1004</code>  <message>A method of '%t' was invoked on an incompatible object.</message><description><![CDATA[You tried to call a method that is not available to the specified object.This error occurs when you have copied a prototype function from one object to another, and then invoked it, but the target object is not the same type as the original object. Ensure that the target object and original object are the same type. See ECMAScript edition 3 chapter 15 for more details. ]]></description></error>
+<error><code>1005</code>  <message>Array index is not an integer (%f)</message><description><![CDATA[You tried to access a member of an array using an index value that is not an integer. Pass only integers as index values for arrays. ]]></description></error>
+<error><code>1006</code>  <message>Call attempted on an object that is not a function.</message><description><![CDATA[This error occurs when you attempt to call a function that does not exist. Make sure that you are calling the correct function, and that the API has not changed from ActionScript 2.0. Also, make sure that you are using the correct object. For example, you will see this error when you use the following code (because the last line mistakingly calls the variable big instead of blg):
+var blg:String = "foo";
+var big:Sprite = new Sprite();
+var error:int = big.length(); 
+ ]]></description></error>
+<error><code>1007</code>  <message>Instantiation attempted on a non-constructor.</message><description><![CDATA[]]></description></error>  
+<error><code>1008</code>  <message>%n is ambiguous; more than one binding matches.</message><description><![CDATA[]]></description></error>  
+<error><code>1009</code>  <message>null has no properties.</message><description><![CDATA[An object that evaluates to null can have no properties. This error can occur in some unexpected (though valid) situations. For example, consider the following code, which creates a Sprite object. Since this Sprite object is never added to the display list (via the addChild() method of a DisplayObjectContainer object), then its stage property is set to null, and as such, its stage property cannot have any properties. So the code generates the errror:
+import flash.display.Sprite;
+var sprite1:Sprite = new Sprite();
+var q:String = sprite1.stage.quality;
+]]></description></error> 
+<error><code>1010</code>  <message>undefined has no properties.</message><description><![CDATA[This error can occur if you are trying to access a property of an object that does not exist. For example:
+var obj:Object = new Object();
+obj.a = "foo";
+trace(obj.b.prop);
+You can also see this error because of a mispelling, for example in the following, where mc represents a MovieClip object on the display list, and the stage property is misspelled with a capital S (it should be stage):
+
+trace(mc.Stage.quality);
+]]></description></error>
+<error><code>1011</code>  <message>Method %m contained illegal opcode %d at offset %d.</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error> 
+<error><code>1012</code>  <message>The last instruction exceeded code size.</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1013</code>  <message>Cannot call OP_findproperty when scopeDepth is 0.</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1014</code>  <message>Class %n could not be found.	 </message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1015</code>  <message>Method %m cannot set default xml namespace</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1017</code>  <message>Scope stack overflow.</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1018</code>  <message>Scope stack underflow.</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1019</code>  <message>Getscopeobject %d is out of bounds.</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1020</code>  <message>Code cannot fall off the end of a method.</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1021</code>  <message>At least one branch target was not on a valid instruction in the method</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1023</code>  <message>Stack overflow.</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1024</code>  <message>Stack underflow.</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1025</code>  <message>An invalid register %d was accessed.</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1026</code>  <message>Slot %d exceeds slotCount=%d of %t.</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1027</code>  <message>Method_info %d exceeds method_count=%d.</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1028</code>  <message>Disp_id %d exceeds max_disp_id=%d of %t.</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1029</code>  <message>Disp_id %d is undefined on %t.</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1030</code>  <message>Stack depth unbalanced. %d != %d.</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1031</code>  <message>Scope depth unbalanced. %d != %d.</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1032</code>  <message>Cpool index %d out of range %d.</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1033</code>  <message>Cpool entry %d wrong type.</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1034</code>  <message>Type Coercion failed: cannot convert %a to %t</message><description><![CDATA[]]></description></error> 
+<error><code>1035</code>  <message>Illegal super expression in method %m</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1037</code>  <message>Cannot assign to a method %n on %t</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1038</code>  <message>%n is already defined</message><description><![CDATA[You cannot declare a variable or function with the same identfier name more than once within the same scope. In ActionScript 3.0, different code blocks (such as those used in two for loops in the same function definition) are considered to be in the same scope. See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1039</code>  <message>Cannot verify method until it is referenced</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1040</code>  <message>RHS of instanceof must be a Class or Function</message><description><![CDATA[]]></description></error> 
+<error><code>1041</code>  <message>RHS of operator must be a Class</message><description><![CDATA[]]></description></error> 
+<error><code>1042</code>  <message>Not an ABC file. major_version=%d minor_version=%d</message><description><![CDATA[You are attempting to use an invalid file with the player: the tool that generates the SWF may be out of date or the SWF itself may be corrupt.]]></description></error> 
+<error><code>1043</code>  <message>Invalid code_length=%d</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1044</code>  <message>MethodInfo-%d unsupported flags=%d</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1045</code>  <message>Unsupported traits kind=%d</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1046</code>  <message>MethodInfo-%d referenced before definition</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1047</code>  <message>No Entry Point Found</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1049</code>  <message>Prototype objects must be vanilla Objects</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1050</code>  <message>Cannot convert %o to primitive.</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1051</code>  <message>Illegal early binding access to %t</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1052</code>  <message>Invalid URI passed to %s function.</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1053</code>  <message>Illegal override of %n in %t</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1054</code>  <message>Illegal range or target offsets in exception handler</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1055</code>  <message>%S has no properties</message><description><![CDATA[]]></description></error> 
+<error><code>1056</code>  <message>Cannot create property %n on %t</message><description><![CDATA[]]></description></error> 
+<error><code>1057</code>  <message>%t may only contain methods</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1058</code>  <message>Illegal operand type: %t must be %t</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1059</code>  <message>ClassInfo-%d referenced before definition</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1060</code>  <message>ClassInfo %d exceeds class_count=%d.</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1061</code>  <message>The value %1 cannot be converted to %2 without losing precision.</message><description><![CDATA[This error appears if you attempt to assign a decimal number to a property that has data type int.
+This error also appears for out-of-range assignments, such as the following:
+var m0:int = 2147483648; // int.MAX_VALUE == 2147483647
+You can also see this error when using the bitwise left shift operator (<<). For example, consider the following code:
+	
+var m0:uint = 0xFF;
+var m1:uint = m0<<24;
+The result of left shift operator (<<) is interpreted as a 32-bit two's complement number with sign. In the example, the result is a negative value, which causes the error when assigned to the uint typed property. A workaround is the following:
+
+var m0:uint = 0xFF;
+var m1:uint = uint(m0<<24);
+]]></description></error>  
+<error><code>1063</code>  <message>Argument count mismatch on %m. Expected %d, got %d</message><description><![CDATA[]]></description></error> 
+<error><code>1064</code>  <message>Cannot call method %m as constructor</message><description><![CDATA[]]></description></error> 
+<error><code>1065</code>  <message>Variable %n is not defined</message><description><![CDATA[]]></description></error> 
+<error><code>1066</code>  <message>Function('function body') is not supported</message><description><![CDATA[]]></description></error> 
+<error><code>1067</code>  <message>Native method %m has illegal method body</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1068</code>  <message>%t and %t cannot be reconciled</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1069</code>  <message>Property %n not found on %t and there is no default value</message><description><![CDATA[]]></description></error>  
+<error><code>1070</code>  <message>Method %n not found on %t</message><description><![CDATA[]]></description></error>  
+<error><code>1071</code>  <message>Function %m has already been bound to %t</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1072</code>  <message>Disp_id 0 is illegal.</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1073</code>  <message>Non-override method %m replaced because of duplicate disp_id %d</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1075</code>  <message>Math is not a function</message><description><![CDATA[]]></description></error> 
+<error><code>1076</code>  <message>Math is not a constructor</message><description><![CDATA[]]></description></error> 
+<error><code>1077</code>  <message>Illegal read of write-only property %n on %t</message><description><![CDATA[]]></description></error> 
+<error><code>1078</code>  <message>Illegal opcode/multiname combination. </message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1079</code>  <message>Native methods not allowed in loaded code</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1080</code>  <message>Illegal value for namespace</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1082</code>  <message>No default namespace has been set</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1083</code>  <message>The prefix "%S" for element "%w" is not bound.</message><description><![CDATA[]]></description></error> 
+<error><code>1084</code>  <message>Element or attribute ("%w") do not match QName production: QName::=(NCName':')?NCName</message><description><![CDATA[]]></description></error> 
+<error><code>1085</code>  <message>The element type "%S" must be terminated by the matching end-tag "".</message><description><![CDATA[]]></description></error> 
+<error><code>1086</code>  <message>The %s method works only on lists containing one item.</message><description><![CDATA[]]></description></error> 
+<error><code>1087</code>  <message>Assignment to indexed XML is not allowed.</message><description><![CDATA[]]></description></error> 
+<error><code>1088</code>  <message>The markup in the document following the root element must be well-formed.</message><description><![CDATA[]]></description></error> 
+<error><code>1089</code>  <message>Assignment to lists with more than one item is not supported</message><description><![CDATA[]]></description></error> 
+<error><code>1090</code>  <message>XML parser failure: element is malformed</message><description><![CDATA[]]></description></error> 
+<error><code>1091</code>  <message>XML parser failure: Unterminated CDATA section</message><description><![CDATA[]]></description></error> 
+<error><code>1092</code>  <message>XML parser failure: Unterminated XML declaration</message><description><![CDATA[]]></description></error> 
+<error><code>1093</code>  <message>XML parser failure: Unterminated DOCTYPE declaration</message><description><![CDATA[]]></description></error> 
+<error><code>1094</code>  <message>XML parser failure: Unterminated comment</message><description><![CDATA[]]></description></error> 
+<error><code>1095</code>  <message>XML parser failure: Unterminated attribute</message><description><![CDATA[]]></description></error> 
+<error><code>1096</code>  <message>XML parser failure: Unterminated element</message><description><![CDATA[]]></description></error> 
+<error><code>1097</code>  <message>XML parser failure: Unterminated processing instruction</message><description><![CDATA[]]></description></error> 
+<error><code>1098</code>  <message>Illegal prefix '%S' for 'no namespace'.</message><description><![CDATA[]]></description></error> 
+<error><code>1100</code>  <message>Cannot supply flags when constructing one RegExp from another.</message><description><![CDATA[]]></description></error> 
+<error><code>1101</code>  <message>Cannot verify method %m with unknown scope</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1102</code>  <message>Illegal default value for type %n</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1103</code>  <message>Class %n cannot extend final base class</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1104</code>  <message>Attribute "%S" was already specified for element "%S".</message><description><![CDATA[]]></description></error> 
+<error><code>1107</code>  <message>The ABC data is corrupt, attempt to read out of bounds</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1108</code>  <message>The OP_newclass opcode was used with the incorrect base class</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1109</code>  <message>Attempt to directly call unbound function %m from method %m</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1110</code>  <message>%n cannot extend %t</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1111</code>  <message>%n cannot implement %t</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1112</code>  <message>Argument count mismatch on class coercion. Expected 1, got %d</message><description><![CDATA[]]></description></error> 
+<error><code>1113</code>  <message>OP_newactivation used in method without NEED_ACTIVATION flag</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1114</code>  <message>OP_getglobalslot or OP_setglobalslot used with no global scope</message><description><![CDATA[See the note at the bottom of this table. * ]]></description></error>  
+<error><code>1115</code>  <message>%n is not a constructor</message><description><![CDATA[]]></description></error> 
+<error><code>1116</code>  <message>second argument to Function.prototype.apply must be an array</message><description><![CDATA[]]></description></error> 
+<error><code>1500</code>  <message>Error opening file '%S'.</message><description><![CDATA[]]></description></error> 
+<error><code>1501</code>  <message>Error writing to file '%S'.</message><description><![CDATA[]]></description></error> 
+<error><code>1502</code>  <message>A script has executed for longer than 15 seconds.</message><description><![CDATA[]]></description></error> 
+<error><code>1503</code>  <message>A script did not exit in a timely fashion and was terminated.</message><description><![CDATA[]]></description></error> 
+<error><code>1504</code>  <message>End of file</message><description><![CDATA[]]></description></error> 
+<error><code>1505</code>  <message>The string index %d is out of bounds; must be in range %d to %d.</message><description><![CDATA[]]></description></error> 
+<error><code>1506</code>  <message>The range specified is invalid.</message><description><![CDATA[]]></description></error> 
+<error><code>1507</code>  <message>Argument '%s' may not be null.</message><description><![CDATA[]]></description></error> 
+<error><code>1508</code>  <message>The value specified for argument '%s' is invalid.</message><description><![CDATA[]]></description></error> 
+<error><code>1509</code>  <message>There was an error decompressing the data.</message><description><![CDATA[]]></description></error> 
+<error><code>1510</code>  <message>When the callback argument is a method of a class, the optional argument must be null.</message><description><![CDATA[]]></description></error> 
+<error><code>2000</code>  <message>No active security context.</message><description><![CDATA[]]></description></error> 
+<error><code>2001</code>  <message>Too few arguments were specified; got %1, %2 expected.</message><description><![CDATA[]]></description></error> 
+<error><code>2002</code>  <message>Operation attempted on invalid socket.</message><description><![CDATA[]]></description></error> 
+<error><code>2003</code>  <message>Invalid socket port number specified.</message><description><![CDATA[The valid range is 0 to 65535. For more information, see Socket Connections in this language reference.  ]]></description></error> 
+<error><code>2004</code>  <message>One of the parameters is invalid.</message><description><![CDATA[]]></description></error> 
+<error><code>2005</code>  <message>Parameter %1 is of the incorrect type. Should be type %2.</message><description><![CDATA[]]></description></error> 
+<error><code>2006</code>  <message>The supplied index is out of bounds.</message><description><![CDATA[]]></description></error> 
+<error><code>2007</code>  <message>Parameter %1 must be non-null.</message><description><![CDATA[]]></description></error> 
+<error><code>2008</code>  <message>Parameter %1 must be one of the accepted values.</message><description><![CDATA[]]></description></error> 
+<error><code>2009</code>  <message>This method cannot be used on a text field with a style sheet.</message><description><![CDATA[]]></description></error> 
+<error><code>2010</code>  <message>Local-with-filesystem SWF files are not permitted to use sockets.</message><description><![CDATA[]]></description></error> 
+<error><code>2011</code>  <message>Socket connection failed to %1:%2.</message><description><![CDATA[There is a network problem. Possibly a DNS name is not resolving or a TCP socket is not connecting.  ]]></description></error> 
+<error><code>2012</code>  <message>%1 class cannot be instantiated.</message><description><![CDATA[]]></description></error> 
+<error><code>2013</code>  <message>Feature can only be used in Flash Authoring.</message><description><![CDATA[]]></description></error> 
+<error><code>2014</code>  <message>Feature is not available at this time.</message><description><![CDATA[The feature is not supported on this system.  ]]></description></error> 
+<error><code>2015</code>  <message>Invalid BitmapData.</message><description><![CDATA[]]></description></error> 
+<error><code>2017</code>  <message>Only trusted local files may cause the Flash Player to exit.</message><description><![CDATA[]]></description></error> 
+<error><code>2018</code>  <message>System.exit is only available in the standalone Flash Player.</message><description><![CDATA[]]></description></error> 
+<error><code>2019</code>  <message>Depth specified is invalid.</message><description><![CDATA[]]></description></error> 
+<error><code>2020</code>  <message>MovieClips objects with different parents cannot be swapped.</message><description><![CDATA[]]></description></error> 
+<error><code>2021</code>  <message>Object creation failed.</message><description><![CDATA[]]></description></error> 
+<error><code>2022</code>  <message>Class %1 must inherit from DisplayObject to link to a symbol.</message><description><![CDATA[]]></description></error> 
+<error><code>2023</code>  <message>Class %1 must inherit from Sprite to link to the root.</message><description><![CDATA[]]></description></error> 
+<error><code>2024</code>  <message>An object cannot be added as a child of itself.</message><description><![CDATA[]]></description></error> 
+<error><code>2025</code>  <message>The supplied DisplayObject must be a child of the caller.</message><description><![CDATA[]]></description></error> 
+<error><code>2026</code>  <message>An error occurred navigating to the URL %1.</message><description><![CDATA[Possibly the URL does not exist, the network connection has a problem, or the URL is outside the security sandbox.  ]]></description></error> 
+<error><code>2027</code>  <message>Parameter %1 must be a non-negative number; got %2.</message><description><![CDATA[]]></description></error> 
+<error><code>2028</code>  <message>Local-with-filesystem SWF file %1 cannot access Internet URL %2.</message><description><![CDATA[]]></description></error> 
+<error><code>2029</code>  <message>This URLStream object does not have a stream opened.</message><description><![CDATA[]]></description></error> 
+<error><code>2030</code>  <message>End of file was encountered.</message><description><![CDATA[]]></description></error> 
+<error><code>2031</code>  <message>Socket Error.</message><description><![CDATA[A socket error occurred. For more information, see Socket Connections in this language reference.  ]]></description></error> 
+<error><code>2032</code>  <message>Stream Error.</message><description><![CDATA[]]></description></error> 
+<error><code>2033</code>  <message>Key Generation Failed.</message><description><![CDATA[]]></description></error> 
+<error><code>2034</code>  <message>An invalid digest was supplied.</message><description><![CDATA[]]></description></error> 
+<error><code>2035</code>  <message>URL Not Found.</message><description><![CDATA[]]></description></error> 
+<error><code>2036</code>  <message>Load Never Completed.</message><description><![CDATA[]]></description></error> 
+<error><code>2037</code>  <message>Functions called in incorrect sequence, or earlier call was unsuccessful.</message><description><![CDATA[]]></description></error> 
+<error><code>2038</code>  <message>File I/O Error.This error occurs when an application can't get file size, creation date or modification data using the FileReference API.</message><description><![CDATA[]]></description></error> 
+<error><code>2039</code>  <message>Invalid remote URL protocol. The remote URL protocol must be HTTP or HTTPS.</message><description><![CDATA[]]></description></error> 
+<error><code>2041</code>  <message>Only one file browsing session may be performed at a time.</message><description><![CDATA[]]></description></error> 
+<error><code>2042</code>  <message>The digest property is not supported by this load operation.</message><description><![CDATA[]]></description></error> 
+<error><code>2044</code>  <message>Unhandled %1:.</message><description><![CDATA[]]></description></error> 
+<error><code>2046</code>  <message>The loaded file did not have a valid signature.</message><description><![CDATA[]]></description></error> 
+<error><code>2047</code>  <message>Security sandbox violation: %1: %2 cannot access %3.</message><description><![CDATA[]]></description></error> 
+<error><code>2048</code>  <message>Security sandbox violation: %1 cannot load data from %2.</message><description><![CDATA[]]></description></error> 
+<error><code>2049</code>  <message>Security sandbox violation: %1 cannot upload data to %2.</message><description><![CDATA[]]></description></error> 
+<error><code>2051</code>  <message>Security sandbox violation: %1 cannot evaluate scripting URLs within %2 (allowScriptAccess is %3). Attempted URL was %4.</message><description><![CDATA[]]></description></error> 
+<error><code>2052</code>  <message>Only String arguments are permitted for allowDomain and allowInsecureDomain.</message><description><![CDATA[]]></description></error> 
+<error><code>2053</code>  <message>Security sandbox violation: %1 cannot clear an interval timer set by %2.</message><description><![CDATA[]]></description></error> 
+<error><code>2054</code>  <message>The value of Security.exactSettings cannot be changed after it has been used.</message><description><![CDATA[]]></description></error> 
+<error><code>2055</code>  <message>The print job could not be started.</message><description><![CDATA[]]></description></error> 
+<error><code>2056</code>  <message>The print job could not be sent to the printer.</message><description><![CDATA[]]></description></error> 
+<error><code>2057</code>  <message>The page could not be added to the print job.</message><description><![CDATA[The addPage() method is not used correctly. See the addPage() entry in this language reference.  ]]></description></error> 
+<error><code>2058</code>  <message>There was an error decompressing the data.</message><description><![CDATA[]]></description></error> 
+<error><code>2059</code>  <message>Security sandbox violation: %1 cannot overwrite an ExternalInterface callback added by %2.</message><description><![CDATA[]]></description></error> 
+<error><code>2060</code>  <message>Security sandbox violation: ExternalInterface caller %1 cannot access %2.</message><description><![CDATA[]]></description></error> 
+<error><code>2061</code>  <message>No ExternalInterface callback %1 registered.</message><description><![CDATA[]]></description></error> 
+<error><code>2062</code>  <message>Children of Event must override clone() {return new MyEventClass (...);}.</message><description><![CDATA[]]></description></error> 
+<error><code>2063</code>  <message>Error attempting to execute IME command.</message><description><![CDATA[One of the IME services has failed.
+If you are using the setConversionMode() or setEnabled() method, ActionScript 3.0 replaces these methods with the access property.
+If you are using the doConversion() or setComposition() method, these methods are not supported for Macintosh OSX.
+]]></description></error>  
+<error><code>2065</code>  <message>The focus cannot be set for this target.</message><description><![CDATA[]]></description></error> 
+<error><code>2066</code>  <message>The Timer delay specified is out of range.</message><description><![CDATA[]]></description></error> 
+<error><code>2067</code>  <message>The ExternalInterface is not available in this container.</message><description><![CDATA[ExternalInterface requires Internet Explorer ActiveX, Firefox, Mozilla 1.7.5 and greater, or other browsers that support NPRuntime.]]></description></error> 
+<error><code>2068</code>  <message>Invalid sound.</message><description><![CDATA[]]></description></error> 
+<error><code>2069</code>  <message>The Loader class does not implement this method.</message><description><![CDATA[]]></description></error> 
+<error><code>2070</code>  <message>Security sandbox violation: caller %1 cannot access Stage owned by %2.</message><description><![CDATA[]]></description></error> 
+<error><code>2071</code>  <message>The Stage class does not implement this property or method.</message><description><![CDATA[]]></description></error> 
+<error><code>2073</code>  <message>There was a problem saving the application to disk.</message><description><![CDATA[Possibly you do not have write permission or there is not enough disk space.  ]]></description></error> 
+<error><code>2074</code>  <message>The stage is too small to fit the download ui.</message><description><![CDATA[]]></description></error> 
+<error><code>2075</code>  <message>The downloaded file is invalid.</message><description><![CDATA[Possibly the file decompression failed, the file format is invalid, or the signature validation failed.	  ]]></description></error> 
+<error><code>2077</code>  <message>This filter operation cannot be performed with the specified input parameters.</message><description><![CDATA[]]></description></error> 
+<error><code>2078</code>  <message>The name property of a Timeline-placed object cannot be modified.</message><description><![CDATA[]]></description></error> 
+<error><code>2079</code>  <message>Classes derived from Bitmap can only be associated with defineBits characters (bitmaps).</message><description><![CDATA[]]></description></error> 
+<error><code>2082</code>  <message>Connect failed because the object is already connected.</message><description><![CDATA[]]></description></error> 
+<error><code>2083</code>  <message>Close failed because the object is not connected.</message><description><![CDATA[]]></description></error> 
+<error><code>2084</code>  <message>The AMF encoding of the arguments cannot exceed 40K.</message><description><![CDATA[]]></description></error> 
+<error><code>2085</code>  <message>Parameter %1 must be non-empty string.</message><description><![CDATA[]]></description></error> 
+<error><code>2086</code>  <message>A setting in the mms.cfg file prohibits this FileReference request.</message><description><![CDATA[]]></description></error> 
+<error><code>2087</code>  <message>The FileReference.download() file name contains prohibited characters.</message><description><![CDATA[The filename cannot contain spaces or any of the following characters: /, \, :, *, ?, ", <, >, |, %, or the ASCII control characters 0 through 31 (0x00 through 0X1F). Also, filenames longer than 256 characters may fail on some browsers or servers.  ]]></description></error> 
+<error><code>2088</code>  <message>The Proxy class does not implement getProperty. It must be overridden by a subclass.</message><description><![CDATA[]]></description></error> 
+<error><code>2089</code>  <message>The Proxy class does not implement setProperty. It must be overridden by a subclass.</message><description><![CDATA[]]></description></error> 
+<error><code>2090</code>  <message>The Proxy class does not implement callProperty. It must be overridden by a subclass.</message><description><![CDATA[]]></description></error> 
+<error><code>2091</code>  <message>The Proxy class does not implement hasProperty. It must be overridden by a subclass.</message><description><![CDATA[]]></description></error> 
+<error><code>2092</code>  <message>The Proxy class does not implement deleteProperty. It must be overridden by a subclass.</message><description><![CDATA[]]></description></error> 
+<error><code>2093</code>  <message>The Proxy class does not implement getDescendants. It must be overridden by a subclass.</message><description><![CDATA[]]></description></error> 
+<error><code>2094</code>  <message>Event dispatch recursion overflow.</message><description><![CDATA[The recursion exceeds the maximum recursion depth. (The default maximum is 256.)  ]]></description></error> 
+<error><code>2095</code>  <message>%1 was unable to invoke callback %2.</message><description><![CDATA[]]></description></error> 
+<error><code>2096</code>  <message>The HTTP request header %1 cannot be set via ActionScript.</message><description><![CDATA[You are adding a disallowed HTTP header to an HTTP request. See the flash.net.URLRequestHeader class for a complete list of disallowed HTTP request headers.  ]]></description></error> 
+<error><code>2097</code>  <message>The FileFilter Array is not in the correct format.</message><description><![CDATA[There are two valid formats:
+A description with Windows file extensions only
+A description with Windows file extensions and Macintosh file formats.
+The two file formats and not interchangeable; you must use one or the other. For more information, see the FileFilter class in this language reference.]]></description></error> 
+<error><code>2098</code>  <message>The loading object is not a .swf file, you cannot request SWF properties from it.</message><description><![CDATA[]]></description></error> 
+<error><code>2099</code>  <message>The loading object is not sufficiently loaded to provide this information.</message><description><![CDATA[]]></description></error> 
+<error><code>2100</code>  <message>The ByteArray parameter in Loader.loadBytes() must have length greater than 0.</message><description><![CDATA[]]></description></error> 
+<error><code>2101</code>  <message>The String passed to URLVariables.decode() must be a URL-encoded query string containing name/value pairs.</message><description><![CDATA[]]></description></error> 
+<error><code>2102</code>  <message>The before XMLNode parameter must be a child of the caller.</message><description><![CDATA[]]></description></error> 
+<error><code>2103</code>  <message>XML recursion failure: new child would create infinite loop.</message><description><![CDATA[Possibly you are trying to make objects child objects of each other. For example, the following code generates this error because a and b both try to add the other as a child object.
+a.addChild(b);
+b.addChild(a);
+ ]]></description></error> 
+<error><code>2105</code>  <message>The Proxy class does not implement nextNameIndex. It must be overridden by a subclass.</message><description><![CDATA[]]></description></error> 
+<error><code>2106</code>  <message>The Proxy class does not implement nextName. It must be overridden by a subclass.</message><description><![CDATA[]]></description></error> 
+<error><code>2107</code>  <message>The Proxy class does not implement nextValue. It must be overridden by a subclass.</message><description><![CDATA[]]></description></error> 
+<error><code>2108</code>  <message>Scene %1 was not found.</message><description><![CDATA[]]></description></error> 
+<error><code>2109</code>  <message>Frame label %1 not found in scene %2.</message><description><![CDATA[]]></description></error> 
+<error><code>2110</code>  <message>The value of Security.disableAVM1Loading cannot be set unless the caller can access the stage and is in an ActionScript 3.0 SWF file.</message><description><![CDATA[]]></description></error> 
+<error><code>2111</code>  <message>Security.disableAVM1Loading is true so the current load of the ActionScript 1.0/2.0 SWF file has been blocked.</message><description><![CDATA[]]></description></error> 
+<error><code>2112</code>  <message>Provided parameter LoaderContext.ApplicationDomain is from a disallowed domain.</message><description><![CDATA[]]></description></error> 
+<error><code>2113</code>  <message>Provided parameter LoaderContext.SecurityDomain is from a disallowed domain.</message><description><![CDATA[]]></description></error> 
+<error><code>2114</code>  <message>Parameter %1 must be null.</message><description><![CDATA[]]></description></error> 
+<error><code>2115</code>  <message>Parameter %1 must be false.</message><description><![CDATA[]]></description></error> 
+<error><code>2116</code>  <message>Parameter %1 must be true.</message><description><![CDATA[]]></description></error> 
+<error><code>2118</code>  <message>The LoaderInfo class does not implement this method.</message><description><![CDATA[]]></description></error> 
+<error><code>2119</code>  <message>Security sandbox violation: caller %1 cannot access LoaderInfo.applicationDomain owned by %2.</message><description><![CDATA[]]></description></error> 
+<error><code>2121</code>  <message>Security sandbox violation: %1: %2 cannot access %3. This may be worked around by calling Security.allowDomain.</message><description><![CDATA[]]></description></error> 
+<error><code>2122</code>  <message>Security sandbox violation: %1: %2 cannot access %3. A policy file is required, but the checkPolicyFile flag was not set when this media was loaded.</message><description><![CDATA[]]></description></error> 
+<error><code>2123</code>  <message>Security sandbox violation: %1: %2 cannot access %3. No policy files granted access.</message><description><![CDATA[]]></description></error> 
+<error><code>2124</code>  <message>Loaded file is an unknown type.</message><description><![CDATA[]]></description></error> 
+<error><code>2125</code>  <message>Security sandbox violation: %1 cannot use Runtime Shared Library %2 because crossing the boundary between ActionScript 3.0 and ActionScript 1.0/2.0 objects is not allowed.</message><description><![CDATA[]]></description></error> 
+<error><code>2126</code>  <message>NetConnection object must be connected.</message><description><![CDATA[]]></description></error> 
+<error><code>2127</code>  <message>FileReference POST data cannot be type ByteArray.</message><description><![CDATA[]]></description></error> 
+<error><code>2129</code>  <message>Connection to %1 failed.</message><description><![CDATA[]]></description></error> 
+<error><code>2130</code>  <message>Unable to flush SharedObject.</message><description><![CDATA[]]></description></error> 
+<error><code>2131</code>  <message>Definition %1 cannot be found.</message><description><![CDATA[]]></description></error> 
+<error><code>2132</code>  <message>NetConnection.connect cannot be called from a netStatus event handler.</message><description><![CDATA[]]></description></error> 
+<error><code>2133</code>  <message>Callback %1 is not registered.</message><description><![CDATA[]]></description></error> 
+<error><code>2134</code>  <message>Cannot create SharedObject.</message><description><![CDATA[]]></description></error> 
+<error><code>2136</code>  <message>The SWF file %1 contains invalid data.</message><description><![CDATA[]]></description></error> 
+<error><code>2137</code>  <message>Security sandbox violation: %1 cannot navigate window %2 within %3 (allowScriptAccess is %4). Attempted URL was %5.</message><description><![CDATA[]]></description></error> 
+<error><code>2138</code>  <message>Rich text XML could not be parsed.</message><description><![CDATA[]]></description></error> 
+<error><code>2139</code>  <message>SharedObject could not connect.</message><description><![CDATA[]]></description></error> 
+<error><code>2140</code>  <message>Security sandbox violation: %1 cannot load %2. Local-with-filesystem and local-with-networking SWF files cannot load each other.</message><description><![CDATA[]]></description></error> 
+<error><code>2141</code>  <message>Only one PrintJob may be in use at a time.</message><description><![CDATA[]]></description></error> 
+<error><code>2142</code>  <message>Security sandbox violation: local SWF files cannot use the LoaderContext.securityDomain property. %1 was attempting to load %2.</message><description><![CDATA[]]></description></error> 
+<error><code>2143</code>  <message>AccessibilityImplementation.get_accRole() must be overridden from its default.</message><description><![CDATA[]]></description></error> 
+<error><code>2144</code>  <message>AccessibilityImplementation.get_accState() must be overridden from its default.</message><description><![CDATA[]]></description></error> 
+<error><code>2145</code>  <message>Cumulative length of requestHeaders must be less than 8192 characters.</message><description><![CDATA[]]></description></error> 
+<error><code>2146</code>  <message>Security sandbox violation: %1 cannot call %2 because the HTML/container parameter allowNetworking has the value %3.</message><description><![CDATA[]]></description></error> 
+<error><code>2147</code>  <message>Forbidden protocol in URL %1.</message><description><![CDATA[]]></description></error> 
+<error><code>2148</code>  <message>SWF file %1 cannot access local resource %2. Only local-with-filesystem and trusted local SWF files may access local resources.</message><description><![CDATA[]]></description></error> 
+<error><code>2149</code>  <message>Security sandbox violation: %1 cannot make fscommand calls to %2 (allowScriptAccess is %3).</message><description><![CDATA[]]></description></error> 
+<error><code>2150</code>  <message>An object cannot be added as a child to one of it's children (or children's children, etc.).</message><description><![CDATA[]]></description></error> 
+<error><code>2151</code>  <message>You cannot enter full screen mode when the settings dialog is visible.</message><description><![CDATA[]]></description></error> 
+<error><code>2152</code>  <message>Full screen mode is not allowed.</message><description><![CDATA[]]></description></error> 
+<error><code>2153</code>  <message>The URLRequest.requestHeaders array must contain only non-NULL URLRequestHeader objects.</message><description><![CDATA[]]></description></error> 
+<error><code>2154</code>  <message>The NetStream Object is invalid. This may be due to a failed NetConnection.</message><description><![CDATA[]]></description></error> 
+<error><code>2155</code>  <message>The ExternalInterface.call functionName parameter is invalid. Only alphanumeric characters are supported.</message><description><![CDATA[]]></description></error> 
+<error><code>2156</code>  <message>Port %1 may not be accessed using protocol %2. Calling SWF was %3.</message><description><![CDATA[]]></description></error> 
+<error><code>2157</code>  <message>Rejecting URL %1 because the 'asfunction:' protocol may only be used for link targets, not for networking APIs.</message><description><![CDATA[]]></description></error> 
+<error><code>2158</code>  <message>The NetConnection Object is invalid. This may be due to a dropped NetConnection.</message><description><![CDATA[]]></description></error> 
+<error><code>2159</code>  <message>The SharedObject Object is invalid.</message><description><![CDATA[]]></description></error> 
+<error><code>2160</code>  <message>The TextLine is INVALID and cannot be used to access the current state of the TextBlock.</message><description><![CDATA[]]></description></error> 
+<error><code>2161</code>  <message>An internal error occured while laying out the text.</message><description><![CDATA[]]></description></error> 
+<error><code>2162</code>  <message>The Shader output type is not compatible for this operation.</message><description><![CDATA[]]></description></error> 
+<error><code>2163</code>  <message>The Shader input type %1 is not compatible for this operation.</message><description><![CDATA[]]></description></error> 
+<error><code>2164</code>  <message>The Shader input %1 is missing or an unsupported type.</message><description><![CDATA[]]></description></error> 
+<error><code>2165</code>  <message>The Shader input %1 does not have enough data.</message><description><![CDATA[]]></description></error> 
+<error><code>2166</code>  <message>The Shader input %1 lacks valid dimensions.</message><description><![CDATA[]]></description></error> 
+<error><code>2167</code>  <message>The Shader does not have the required number of inputs for this operation.</message><description><![CDATA[]]></description></error> 
+<error><code>2168</code>  <message>Static text lines have no atoms and no reference to a text block.</message><description><![CDATA[]]></description></error> 
+<error><code>2169</code>  <message>The method %1 may not be used for browser scripting. The URL %2 requested by %3 is being ignored. If you intend to call browser script, use navigateToURL instead.</message><description><![CDATA[]]></description></error> 
+<error><code>2170</code>  <message>Security sandbox violation: %1 cannot send HTTP headers to %2.</message><description><![CDATA[]]></description></error> 
+<error><code>2171</code>  <message>The Shader object contains no byte code to execute.</message><description><![CDATA[]]></description></error> 
+<error><code>2172</code>  <message>The ShaderJob is already running or finished.</message><description><![CDATA[]]></description></error> 
+<error><code>2173</code>  <message>Unable to read object in stream. The class %1 does not implement flash.utils.IExternalizable but is aliased to an externalizable class.</message><description><![CDATA[]]></description></error> 
+<error><code>2174</code>  <message>Only one download, upload, load or save operation can be active at a time on each FileReference.</message><description><![CDATA[]]></description></error> 
+<error><code>2175</code>  <message>One or more elements of the content of the TextBlock has a null ElementFormat.</message><description><![CDATA[]]></description></error> 
+<error><code>2176</code>  <message>Certain actions, such as those that display a pop-up window, may only be invoked upon user interaction, for example by a mouse click or button press.</message><description><![CDATA[]]></description></error> 
+<error><code>2177</code>  <message>The Shader input %1 is too large.</message><description><![CDATA[]]></description></error> 
+<error><code>2178</code>  <message>The Clipboard.generalClipboard object must be used instead of creating a new Clipboard.</message><description><![CDATA[]]></description></error> 
+<error><code>2179</code>  <message>The Clipboard.generalClipboard object may only be read while processing a flash.events.Event.PASTE event.</message><description><![CDATA[]]></description></error> 
+<error><code>2180</code>  <message>It is illegal to move AVM1 content (AS1 or AS2) to a different part of the displayList when it has been loaded into AVM2 (AS3) content.</message><description><![CDATA[]]></description></error> 
+<error><code>2181</code>  <message>The TextLine class does not implement this property or method.</message><description><![CDATA[]]></description></error> 
+<error><code>2182</code>  <message>Invalid fieldOfView value. The value must be greater than 0 and less than 180.</message><description><![CDATA[]]></description></error> 
+<error><code>2183</code>  <message>Scale values must not be zero.</message><description><![CDATA[]]></description></error> 
+<error><code>2184</code>  <message>The ElementFormat object is locked and cannot be modified.</message><description><![CDATA[]]></description></error> 
+<error><code>2185</code>  <message>The FontDescription object is locked and cannot be modified.</message><description><![CDATA[]]></description></error> 
+<error><code>2186</code>  <message>Invalid focalLength %1.</message><description><![CDATA[]]></description></error> 
+<error><code>2187</code>  <message>Invalid orientation style %1. Value must be one of 'Orientation3D.EULER_ANGLES', 'Orientation3D.AXIS_ANGLE', or 'Orientation3D.QUATERNION'.</message><description><![CDATA[]]></description></error> 
+<error><code>2188</code>  <message>Invalid raw matrix. Matrix must be invertible.</message><description><![CDATA[]]></description></error> 
+<error><code>2189</code>  <message>A Matrix3D can not be assigned to more than one DisplayObject.</message><description><![CDATA[]]></description></error> 
+<error><code>2190</code>  <message>The attempted load of %1 failed as it had a Content-Disposition of attachment set.</message><description><![CDATA[]]></description></error> 
+<error><code>2191</code>  <message>The Clipboard.generalClipboard object may only be written to as the result of user interaction, for example by a mouse click or button press.</message><description><![CDATA[]]></description></error> 
+<error><code>2192</code>  <message>An unpaired Unicode surrogate was encountered in the input.</message><description><![CDATA[]]></description></error> 
+<error><code>2193</code>  <message>Security sandbox violation: %1: %2 cannot access %3.</message><description><![CDATA[]]></description></error> 
+<error><code>2200</code>  <message>The SystemUpdater class is not supported by this player.</message><description><![CDATA[]]></description></error> 
+<error><code>2201</code>  <message>The requested update type is not supported on this operating system.</message><description><![CDATA[]]></description></error> 
+<error><code>2202</code>  <message>Only one SystemUpdater action is allowed at a time.</message><description><![CDATA[]]></description></error> 
+<error><code>2203</code>  <message>The requested SystemUpdater action cannot be completed.</message><description><![CDATA[]]></description></error> 
+<error><code>2204</code>  <message>This operation cannot be canceled because it is waiting for user interaction.</message><description><![CDATA[]]></description></error> 
+<error><code>2205</code>  <message>Invalid update type %1.</message><description><![CDATA[]]></description></error> 
+<error><code>3000</code>  <message>Illegal path name.</message><description><![CDATA[]]></description></error> 
+<error><code>3001</code>  <message>File or directory access denied.</message><description><![CDATA[]]></description></error> 
+<error><code>3002</code>  <message>File or directory exists.</message><description><![CDATA[]]></description></error> 
+<error><code>3003</code>  <message>File or directory does not exist.</message><description><![CDATA[]]></description></error> 
+<error><code>3004</code>  <message>Insufficient file space.</message><description><![CDATA[]]></description></error> 
+<error><code>3005</code>  <message>Insufficient system resources.</message><description><![CDATA[]]></description></error> 
+<error><code>3006</code>  <message>Not a file.</message><description><![CDATA[]]></description></error> 
+<error><code>3007</code>  <message>Not a directory.</message><description><![CDATA[]]></description></error> 
+<error><code>3008</code>  <message>Read-only or write-protected media.</message><description><![CDATA[]]></description></error> 
+<error><code>3009</code>  <message>Cannot move file or directory to a different device.</message><description><![CDATA[]]></description></error> 
+<error><code>3010</code>  <message>Directory is not empty.</message><description><![CDATA[]]></description></error> 
+<error><code>3011</code>  <message>Move or copy destination already exists.</message><description><![CDATA[]]></description></error> 
+<error><code>3012</code>  <message>Cannot delete file or directory.</message><description><![CDATA[]]></description></error> 
+<error><code>3013</code>  <message>File or directory is in use.</message><description><![CDATA[]]></description></error> 
+<error><code>3014</code>  <message>Cannot copy or move a file or directory to overwrite a containing directory.</message><description><![CDATA[]]></description></error> 
+<error><code>3015</code>  <message>Loader.loadBytes() is not permitted to load content with executable code.</message><description><![CDATA[ ]]></description></error> 
+<error><code>3016</code>  <message>No application was found that can open this file.</message><description><![CDATA[]]></description></error> 
+<error><code>3100</code>  <message>A SQLConnection cannot be closed while statements are still executing.</message><description><![CDATA[]]></description></error> 
+<error><code>3101</code>  <message>Database connection is already open.</message><description><![CDATA[]]></description></error> 
+<error><code>3102</code>  <message>Name argument specified was invalid. It must not be null or empty.</message><description><![CDATA[]]></description></error> 
+<error><code>3103</code>  <message>Operation cannot be performed while there is an open transaction on this connection.</message><description><![CDATA[]]></description></error> 
+<error><code>3104</code>  <message>A SQLConnection must be open to perform this operation.</message><description><![CDATA[]]></description></error> 
+<error><code>3105</code>  <message>Operation is only allowed if a connection has an open transaction.</message><description><![CDATA[]]></description></error> 
+<error><code>3106</code>  <message>Property cannot be changed while SQLStatement.executing is true.</message><description><![CDATA[]]></description></error> 
+<error><code>3107</code>  <message>%1 may not be called unless SQLResult.complete is false.</message><description><![CDATA[]]></description></error> 
+<error><code>3108</code>  <message>Operation is not permitted when the SQLStatement.text property is not set.</message><description><![CDATA[]]></description></error> 
+<error><code>3109</code>  <message>Operation is not permitted when the SQLStatement.sqlConnection property is not set.</message><description><![CDATA[]]></description></error> 
+<error><code>3110</code>  <message>Operation cannot be performed while SQLStatement.executing is true.</message><description><![CDATA[]]></description></error> 
+<error><code>3111</code>  <message>An invalid schema type was specified.</message><description><![CDATA[Valid values are:
+SQLIndexSchema
+SQLTableSchema
+SQLTriggerSchema
+SQLViewSchema
+ ]]></description></error> 
+<error><code>3112</code>  <message>An invalid transaction lock type was specified.</message><description><![CDATA[Valid values are:
+SQLTransactionLockType.DEFERRED
+SQLTransactionLockType.IMMEDIATE
+SQLTransactionLockType.EXCLUSIVE
+ ]]></description></error> 
+<error><code>3113</code>  <message>Reference specified is not of type File.</message><description><![CDATA[]]></description></error> 
+<error><code>3114</code>  <message>An invalid open mode was specified.</message><description><![CDATA[Valid values are:
+SQLMode.READ
+SQLMode.UPDATE
+SQLMode.CREATE
+ ]]></description></error> 
+<error><code>3115</code>  <message>SQL Error.</message><description><![CDATA[ ]]></description></error> 
+<error><code>3116</code>  <message>An internal logic error occurred.</message><description><![CDATA[]]></description></error> 
+<error><code>3117</code>  <message>Access permission denied.</message><description><![CDATA[Indicates that the operation failed because a SQL statement attempted to perform an operation that it didn't have permission to perform, such as specifying an INSERT operation to be performed on a view.  ]]></description></error> 
+<error><code>3118</code>  <message>Operation aborted.</message><description><![CDATA[Indicates that a SQL statement execution failed because execution was aborted. This error occurs when code in a trigger cancels the operation using the SQL RAISE() function, or if the SQLConnection.cancel() or SQLStatement.cancel() methods are called when a statement is executed using SQLStatement.execute() or SQLStatement.next() with a prefetch argument specified, and not all of the results have been returned.  ]]></description></error> 
+<error><code>3119</code>  <message>Database file is currently locked.</message><description><![CDATA[]]></description></error> 
+<error><code>3120</code>  <message>Table is locked.</message><description><![CDATA[Indicates that an operation could not be completed because another AIR application was holding a lock on a table involved in the operation. This can occur when a statement executing through a SQLConnection attempts to write to a table when another SQLConnection (in the same application or a different application) has an open transaction and is writing to the table, or if a SQLConnection attempts to read from or write to a table while another SQLConnection has an exclusive-locked transaction.  ]]></description></error> 
+<error><code>3121</code>  <message>Out of memory.</message><description><![CDATA[]]></description></error> 
+<error><code>3122</code>  <message>Attempt to write a readonly database.</message><description><![CDATA[Indicates that an operation could not be completed because the database is read only. This can occur if the database file is designated as read only in the operating system, if the database is opened in read-only mode, or if an older version of Adobe AIR accesses a database file created with a newer version of the runtime.  ]]></description></error> 
+<error><code>3123</code>  <message>Database disk image is malformed.</message><description><![CDATA[Indicates that the operation failed because the specified file is a database file whose data has become corrupted. This can happen when the application is force quit while in a transaction or any other time that a database file is left in the state of having an open transaction that can't be rolled back when reopening the file.  ]]></description></error> 
+<error><code>3124</code>  <message>Insertion failed because database is full.</message><description><![CDATA[]]></description></error> 
+<error><code>3125</code>  <message>Unable to open the database file.</message><description><![CDATA[Indicates that the connection could not be completed because the database file could not be opened. This can happen if SQLConnection.open() or SQLConnection.openAsync()is called with the openMode parameter set to SQLMode.UPDATE and the database file doesn't exist. It can also happen if the operating system returns an error when the runtime attempts to access the database file.  ]]></description></error> 
+<error><code>3126</code>  <message>Database lock protocol error.</message><description><![CDATA[]]></description></error> 
+<error><code>3127</code>  <message>Database is empty.</message><description><![CDATA[]]></description></error> 
+<error><code>3128</code>  <message>Disk I/O error occurred.</message><description><![CDATA[Indicates that an operation could not be completed because of a disk I/O error. This can happen if the runtime is attempting to delete a temporary file and another program (such as a virus protection application) is holding a lock on the file. This can also happen if the runtime is attempting to write data to a file and the data can't be written.  ]]></description></error> 
+<error><code>3129</code>  <message>The database schema changed.</message><description><![CDATA[Indicates that the operation could not be completed because of a schema error. This occurs when the schema of the database changes after a statement is prepared but before it finishes executing, such as if two SQLConnection instances are connected to the same database, and one instance changes the schema while another one is reading it.  ]]></description></error> 
+<error><code>3130</code>  <message>Too much data for one row of a table.</message><description><![CDATA[]]></description></error> 
+<error><code>3131</code>  <message>Abort due to constraint violation.</message><description><![CDATA[Indicates that the operation could not be completed because the statement caused a violation of one or more data integrity constraints. These are constraints that are defined in the table structure when it is created. For more information, see the CREATE TABLE section in the appendix SQL support in local databases.  ]]></description></error> 
+<error><code>3132</code>  <message>Data type mismatch.</message><description><![CDATA[Indicates that the operation could not be completed because of a data type mismatch error. This occurs when the data type of a value doesn't match the expected or required type. For more information, see the Data type support section in the appendix SQL support in local databases.  ]]></description></error> 
+<error><code>3133</code>  <message>An internal error occurred.</message><description><![CDATA[]]></description></error> 
+<error><code>3134</code>  <message>Feature not supported on this operating system.</message><description><![CDATA[]]></description></error> 
+<error><code>3135</code>  <message>Authorization denied.</message><description><![CDATA[]]></description></error> 
+<error><code>3136</code>  <message>Auxiliary database format error.</message><description><![CDATA[]]></description></error> 
+<error><code>3137</code>  <message>An index specified for a parameter was out of range.</message><description><![CDATA[Indicates that the operation could not be completed because a parameter index was not valid, such as if a parameter is specified with an index less than 0, or if a parameter is specified with index 7 but the statement text only includes five parameters.  ]]></description></error> 
+<error><code>3138</code>  <message>File opened is not a database file.</message><description><![CDATA[]]></description></error> 
+<error><code>3139</code>  <message>The page size specified was not valid for this operation.</message><description><![CDATA[]]></description></error> 
+<error><code>3140</code>  <message>The encryption key size specified was not valid for this operation. Keys must be exactly 16 bytes in length</message><description><![CDATA[]]></description></error> 
+<error><code>3141</code>  <message>The requested database configuration is not supported.</message><description><![CDATA[]]></description></error> 
+<error><code>3143</code>  <message>Unencrypted databases may not be reencrypted.</message><description><![CDATA[]]></description></error> 
+<error><code>3200</code>  <message>Cannot perform operation on closed window.</message><description><![CDATA[]]></description></error> 
+<error><code>3201</code>  <message>Adobe Reader cannot be found.</message><description><![CDATA[]]></description></error> 
+<error><code>3202</code>  <message>Adobe Reader 8.1 or later cannot be found.</message><description><![CDATA[]]></description></error> 
+<error><code>3203</code>  <message>Default Adobe Reader must be version 8.1 or later.</message><description><![CDATA[]]></description></error> 
+<error><code>3204</code>  <message>An error ocurred trying to load Adobe Reader.</message><description><![CDATA[]]></description></error> 
+<error><code>3205</code>  <message>Only application-sandbox content can access this feature.</message><description><![CDATA[]]></description></error> 
+<error><code>3206</code>  <message>Caller %1 cannot set LoaderInfo property %2.</message><description><![CDATA[]]></description></error> 
+<error><code>3207</code>  <message>Application-sandbox content cannot access this feature.</message><description><![CDATA[]]></description></error> 
+<error><code>3208</code>  <message>Attempt to access invalid clipboard.</message><description><![CDATA[]]></description></error> 
+<error><code>3209</code>  <message>Attempt to access dead clipboard.</message><description><![CDATA[]]></description></error> 
+<error><code>3210</code>  <message>The application attempted to reference a JavaScript object in a HTML page that is no longer loaded.</message><description><![CDATA[]]></description></error> 
+<error><code>3211</code>  <message>Drag and Drop File Promise error: %1</message><description><![CDATA[]]></description></error> 
+<error><code>3212</code>  <message>Cannot perform operation on a NativeProcess that is not running.</message><description><![CDATA[]]></description></error> 
+<error><code>3213</code>  <message>Cannot perform operation on a NativeProcess that is already running.</message><description><![CDATA[]]></description></error> 
+<error><code>3214</code>  <message>NativeProcessStartupInfo.executable does not specify a valid executable file.</message><description><![CDATA[]]></description></error> 
+<error><code>3215</code>  <message>NativeProcessStartupInfo.workingDirectory does not specify a valid directory.</message><description><![CDATA[]]></description></error> 
+<error><code>3216</code>  <message>Error while reading data from NativeProcess.standardOutput.</message><description><![CDATA[]]></description></error> 
+<error><code>3217</code>  <message>Error while reading data from NativeProcess.standardError.</message><description><![CDATA[]]></description></error> 
+<error><code>3218</code>  <message>Error while writing data to NativeProcess.standardInput.</message><description><![CDATA[]]></description></error> 
+<error><code>3219</code>  <message>The NativeProcess could not be started. '%1'</message><description><![CDATA[]]></description></error> 
+<error><code>3220</code>  <message>Action '%1' not allowed in current security context '%2'.</message><description><![CDATA[]]></description></error> 
+<error><code>3221</code>  <message>Adobe Flash Player cannot be found.</message><description><![CDATA[]]></description></error> 
+<error><code>3222</code>  <message>The installed version of Adobe Flash Player is too old.</message><description><![CDATA[]]></description></error> 
+<error><code>3223</code>  <message>DNS lookup error: platform error %1</message><description><![CDATA[]]></description></error> 
+<error><code>3224</code>  <message>Socket message too long</message><description><![CDATA[]]></description></error> 
+<error><code>3225</code>  <message>Cannot send data to a location when connected.</message><description><![CDATA[]]></description></error> 
+<error><code>3226</code>  <message>Cannot import a SWF file when LoaderContext.allowCodeImport is false.</message><description><![CDATA[]]></description></error>  
+<error><code>3300</code>  <message>Voucher is invalid.</message><description><![CDATA[Reacquire the voucher from the server.  ]]></description></error> 
+<error><code>3301</code>  <message>User authentication failed.</message><description><![CDATA[Ask user to re-enter credentials.  ]]></description></error> 
+<error><code>3302</code>  <message>Flash Access server does not support SSL.</message><description><![CDATA[SSL must be enabled on the license server when playing content packaged using Flash Media Right Management Server.  ]]></description></error> 
+<error><code>3303</code>  <message>Content expired.	 Reacquire voucher from the server.</message><description><![CDATA[]]></description></error> 
+<error><code>3304</code>  <message>User authorization failed (for example, the user has not purchased the content).</message><description><![CDATA[The current user is not authorized to view the content.  ]]></description></error> 
+<error><code>3305</code>  <message>Can't connect to the server.</message><description><![CDATA[Check the network connection.  ]]></description></error>
+<error><code>3306</code>  <message>Client update required (Flash Access server requires new client).</message><description><![CDATA[Both the runtime (Flash Player or AIR) and the Flash Access module need to be updated.  ]]></description></error> 
+<error><code>3307</code>  <message>Generic internal Flash Access failure.</message><description><![CDATA[]]></description></error> 
+<error><code>3308</code>  <message>Wrong voucher key.</message><description><![CDATA[Reacquire the voucher from the server.  ]]></description></error> 
+<error><code>3309</code>  <message>Video content is corrupted.</message><description><![CDATA[Try downloading the content again.  ]]></description></error> 
+<error><code>3310</code>  <message>The AIR application or Flash Player SWF does not match the one specified in the DRM policy.</message><description><![CDATA[]]></description></error> 
+<error><code>3311</code>  <message>The version of the application does not match the one specified in the DRM policy.</message><description><![CDATA[]]></description></error> 
+<error><code>3312</code>  <message>Verification of voucher failed.</message><description><![CDATA[Reacquire the voucher from the server.  ]]></description></error> 
+<error><code>3313</code>  <message>Write to the file system failed.</message><description><![CDATA[]]></description></error>
+<error><code>3314</code>  <message>Verification of FLV/F4V header file failed.</message><description><![CDATA[Try downloading the DRMContentData object again. If DRMContentData was extracted from FLV/F4V try downloading the content again.  ]]></description></error> 
+<error><code>3315</code>  <message>The current security context does not allow this operation.</message><description><![CDATA[This error can occur when the remote SWF loaded by AIR isn't allowed access to Flash Access functionality. This error can also occur if a security error occurs during network access. Other possible security errors include errors due to a crossdomain.xml file, which restricts client access based on domain, or if crossdomain.xml is not accessible.  ]]></description></error> 
+<error><code>3316</code>  <message>The value of LocalConnection.isPerUser cannot be changed because it has already been locked by a call to LocalConnection.connect, .send, or .close.</message><description><![CDATA[]]></description></error> 
+<error><code>3317</code>  <message>Failed to load Flash Access module.</message><description><![CDATA[If this error occurs in AIR, reinstall AIR. If this error occurs in Flash Player, download the Flash Access module again.  ]]></description></error> 
+<error><code>3318</code>  <message>Incompatible version of Flash Access module found.</message><description><![CDATA[If this error occurs in AIR, reinstall AIR. If this error occurs in Flash Player, download the Flash Access module again.  ]]></description></error> 
+<error><code>3319</code>  <message>Missing Flash Access module API entry point.</message><description><![CDATA[If this error occurs in AIR, reinstall AIR. If this error occurs in Flash Player, download the Flash Access module again.  ]]></description></error> 
+<error><code>3320</code>  <message>Generic internal Flash Access failure.</message><description><![CDATA[]]></description></error> 
+<error><code>3321</code>  <message>Individualization failed.</message><description><![CDATA[There was a problem with the Adobe server (e.g. could be busy). Retry the operation.  ]]></description></error> 
+<error><code>3322</code>  <message>Device binding failed.</message><description><![CDATA[Undo any device changes or reset the license (voucher) files. The Flash Access module will then reindividualize. In AIR, voucher reset can be done by invoking the resetDRMVouchers() on DRMManager, whereas in Flash Player, the user needs to reset the license files in the Flash Player Settings Manager.  ]]></description></error> 
+<error><code>3323</code>  <message>The internal stores are corrupted.</message><description><![CDATA[Retry the operation. If the error persists, reset the license files in the Flash Player Settings Manager. The Flash Access module will then reindividualize.  ]]></description></error> 
+<error><code>3324</code>  <message>Reset license files and the client will fetch a new machine token.</message><description><![CDATA[Reset the license files in the Flash Player Settings Manager and the client will fetch a new machine token.  ]]></description></error> 
+<error><code>3325</code>  <message>Internal stores are corrupt.</message><description><![CDATA[Internal stores are corrupt and has been deleted. Retry the operation.  ]]></description></error> 
+<error><code>3326</code>  <message>Call customer support.</message><description><![CDATA[Tampering has been detected. Options are to call customer support, or reset the license files in the Flash Player Settings Manager.  ]]></description></error> 
+<error><code>3327</code>  <message>Clock tampering detected.</message><description><![CDATA[Options are to reacquire the voucher or to fix the clock.  ]]></description></error> 
+<error><code>3328</code>  <message>Server error; retry the request.</message><description><![CDATA[This error is a server error. Retry the request. The sub error gives the error returned by the server.  ]]></description></error> 
+<error><code>3329</code>  <message>Error in application-specific namespace.</message><description><![CDATA[The server has returned an error in an application-specific namespace. Check the application for details.  ]]></description></error> 
+<error><code>3330</code>  <message>Need to authenticate the user and reacquire the voucher.</message><description><![CDATA[Try authenticating the user and acquiring the voucher again.  ]]></description></error> 
+<error><code>3331</code>  <message>Content is not yet valid.</message><description><![CDATA[The voucher is not yet valid. Try again at a later date.  ]]></description></error> 
+<error><code>3332</code>  <message>Cached voucher has expired. Reacquire the voucher from the server.</message><description><![CDATA[The voucher cached on the local computer has expired. Reacquire the voucher from the server.  ]]></description></error> 
+<error><code>3333</code>  <message>The playback window for this policy has expired.</message><description><![CDATA[The playback window for this policy has expired. The user can no longer play this content under this policy.  ]]></description></error> 
+<error><code>3334</code>  <message>This platform is not allowed to play this content.</message><description><![CDATA[This platform is not allowed to play this media.  ]]></description></error> 
+<error><code>3335</code>  <message>Invalid version of Flash Access module.</message><description><![CDATA[Upgrade AIR or Flash Access module for the Flash Player.	 In AIR, update to the latest version of AIR. In Flash Player, upgrade to the latest version of the Flash Access module and try playing content again.  ]]></description></error> 
+<error><code>3336</code>  <message>This platform is not allowed to play this content.</message><description><![CDATA[This operating system is not allowed to play this media.  ]]></description></error> 
+<error><code>3337</code>  <message>Upgrade Flash Player or AIR and retry playback.</message><description><![CDATA[Upgrade to the latest version of AIR or Flash Player, and try playing content again.	  ]]></description></error> 
+<error><code>3338</code>  <message>Unknown connection type.</message><description><![CDATA[Flash Player or AIR cannot detect the connection type. Try connecting the device to a different connection.  ]]></description></error> 
+<error><code>3339</code>  <message>Can't play back on analog device. Connect to a digital device.</message><description><![CDATA[Cannot play media on an analog device. Connect to a digital device and try again.  ]]></description></error> 
+<error><code>3340</code>  <message>Can't play back because connected analog device doesn't have the correct capabilities.</message><description><![CDATA[Cannot play media because the connected analog device doesn't have the correct capabilities (for example, it doesn't have Macrovision or ACP).  ]]></description></error> 
+<error><code>3341</code>  <message>Can't play back on digital device.</message><description><![CDATA[The policy does not allow play back on digital devices.  ]]></description></error> 
+<error><code>3342</code>  <message>The connected digital device doesn't have the correct capabilities.</message><description><![CDATA[The connected digital device doesn't have the correct capabilities, for example, it doesn't support HDCP.  ]]></description></error> 
+<error><code>3343</code>  <message>Internal Error.</message><description><![CDATA[If this error occurs in AIR, reinstall AIR. If this error occurs in Flash Player, download the Flash Access module.  ]]></description></error> 
+<error><code>3344</code>  <message>Missing Flash Access module.</message><description><![CDATA[If this error occurs in AIR, reinstall AIR. If this error occurs in Flash Player, download the Flash Access module.  ]]></description></error> 
+<error><code>3345</code>  <message>This operation is not permitted with content protected using Flash Access.</message><description></description></error> 
+<error><code>3400</code>  <message>An error occured while executing JavaScript code.</message><description></description></error> 
+<error><code>3401</code>  <message>Security sandbox violation: An object with this name has already been registered from another security domain.</message><description></description></error> 
+<error><code>3402</code>  <message>Security sandbox violation: Bridge caller %1 cannot access %2.</message><description></description></error> 
+</data>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<data>
+	<string id="scalehandle"><![CDATA[Click+drag to expand/contract the console]]></string>
+	<string id="cornerhandle"><![CDATA[Click+drag to resize window]]></string>
+	<string id="headerbar"><![CDATA[Click+drag to move console]]></string>
+	<string id="default"><![CDATA[Enter 'help' to get started]]></string>
+</data>
