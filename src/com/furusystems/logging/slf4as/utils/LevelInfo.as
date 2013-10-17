@@ -1,12 +1,11 @@
-package com.furusystems.logging.slf4as.utils 
-{
+package com.furusystems.logging.slf4as.utils {
 	import com.furusystems.logging.slf4as.constants.Levels;
+	
 	/**
 	 * ...
 	 * @author Andreas Rønning
 	 */
-	public class LevelInfo 
-	{
+	public class LevelInfo {
 		public static function getID(level:String):int {
 			var u:String = level.toUpperCase();
 			if (Levels[u]) {
@@ -14,23 +13,24 @@ package com.furusystems.logging.slf4as.utils
 			}
 			return Levels.DEBUG;
 		}
+		
 		public static function getName(id:int):String {
-			switch(id) {
+			switch (id) {
 				case 0:
-				return "ALL";
+					return "ALL";
 				case 1:
-				return "DEBUG";
+					return "DEBUG";
 				case 2:
-				return "INFO";
+					return "INFO";
 				case 3:
-				return "WARN";
+					return "WARN";
 				case 4:
-				return "ERROR";
+					return "ERROR";
 				case 5:
-				return "FATAL";
+					return "FATAL";
 				case 6:
 				default:
-				return "NONE";
+					return "NONE";
 			}
 		}
 	}

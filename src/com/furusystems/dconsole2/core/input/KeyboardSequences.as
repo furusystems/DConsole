@@ -1,5 +1,4 @@
-package com.furusystems.dconsole2.core.input
-{
+package com.furusystems.dconsole2.core.input {
 	import flash.events.KeyboardEvent;
 	
 	/**
@@ -8,8 +7,7 @@ package com.furusystems.dconsole2.core.input
 	 * @author Cristobal Dabed
 	 * @version 0.2
 	 */
-	public final class KeyboardSequences implements KeyboardList
-	{
+	public final class KeyboardSequences implements KeyboardList {
 		// TODO: Add a more robust validator for validateKeyboardSequence
 		
 		/* Constants  */
@@ -27,10 +25,8 @@ package com.furusystems.dconsole2.core.input
 		 * @return
 		 * 	Returns the singleton representation of this class.
 		 */
-		public static function get instance():KeyboardSequences
-		{
-			if (!INSTANCE)
-			{
+		public static function get instance():KeyboardSequences {
+			if (!INSTANCE) {
 				INSTANCE = new KeyboardSequences();
 			}
 			return INSTANCE;
@@ -43,25 +39,21 @@ package com.furusystems.dconsole2.core.input
 		 * @param callback	The callback function to call.
 		 * @param override	Optional override for an existing keyboard sequence with the new function.
 		 */
-		public function add(keyCodes:Array, callback:Function, override:Boolean = false, replaceAll:Boolean = true):Boolean
-		{
+		public function add(keyCodes:Array, callback:Function, override:Boolean = false, replaceAll:Boolean = true):Boolean {
 			var success:Boolean = true;
 			
 			/*
 			 *	1. Must satisfy minimum of length 1
 			 *  2. Must satisfy a valid callback.
 			 */
-			if (!validateKeyboardSequence(keyCodes))
-			{
+			if (!validateKeyboardSequence(keyCodes)) {
 				throw new Error("A keyboard sequence can not have less than " + KEYBOARD_SEQUENCES_MIN_LENGTH + " elements");
 			}
 			
-			if (typeof(callback) != "function")
-			{
+			if (typeof(callback) != "function") {
 				throw new Error("Invalid callback function");
 			}
-			if (replaceAll)
-			{
+			if (replaceAll) {
 				keyboardSequences = new Vector.<KeyboardSequence>();
 			}
 			
@@ -70,18 +62,12 @@ package com.furusystems.dconsole2.core.input
 			 * 2. If the exist and set to override, remove the old one and add the new one.
 			 * 3. Warn the user that the keyCodes could not be added success is set to false.
 			 */
-			if (!has(keyCodes))
-			{
+			if (!has(keyCodes)) {
 				keyboardSequences.push(new KeyboardSequence(keyCodes, callback));
-			}
-			else if (override)
-			{
+			} else if (override) {
 				remove(keyCodes);
 				keyboardSequences.push(new KeyboardSequence(keyCodes, callback));
-			}
-			else
-			{
-				//trace("Warn: Keyboard sequence exists and was not set to be overriden.");
+			} else {
 				success = false;
 			}
 			return success;
@@ -95,28 +81,19 @@ package com.furusystems.dconsole2.core.input
 		 * @return
 		 * 	Returns true or false depending on wether it successfully removed the keyCode sequence from the list or not.
 		 */
-		public function remove(keyCodes:Array):Boolean
-		{
+		public function remove(keyCodes:Array):Boolean {
 			var success:Boolean = false;
-			if (!isEmpty())
-			{
-				if (has(keyCodes))
-				{
+			if (!isEmpty()) {
+				if (has(keyCodes)) {
 					var i:int = 0;
-					for (var l:int = keyboardSequences.length; i < l; i++)
-					{
-						if (inKeyboardSequence(keyCodes, keyboardSequences[i]))
-						{
+					for (var l:int = keyboardSequences.length; i < l; i++) {
+						if (inKeyboardSequence(keyCodes, keyboardSequences[i])) {
 							break;
 						}
 					}
 					keyboardSequences.splice(i, 1);
 					success = true;
 				}
-			}
-			else
-			{
-				//trace("Warn: Empty keyboard sequences, none to remove");
 			}
 			return success;
 		}
@@ -129,13 +106,10 @@ package com.furusystems.dconsole2.core.input
 		 * @return
 		 * 	Returns true or false depending on wether the given keyCode sequence is in the list or not.
 		 */
-		public function has(keyCodes:Array):Boolean
-		{
+		public function has(keyCodes:Array):Boolean {
 			var success:Boolean = false;
-			for (var i:int = 0, l:int = keyboardSequences.length; i < l; i++)
-			{
-				if (inKeyboardSequence(keyCodes, keyboardSequences[i]))
-				{
+			for (var i:int = 0, l:int = keyboardSequences.length; i < l; i++) {
+				if (inKeyboardSequence(keyCodes, keyboardSequences[i])) {
 					success = true;
 					break;
 				}
@@ -146,13 +120,10 @@ package com.furusystems.dconsole2.core.input
 		/**
 		 * Remove All
 		 */
-		public function removeAll():void
-		{
+		public function removeAll():void {
 			// Reset the internal list.
-			if (!isEmpty())
-			{
-				while (keyboardSequences.length > 0)
-				{
+			if (!isEmpty()) {
+				while (keyboardSequences.length > 0) {
 					keyboardSequences.pop();
 				}
 			}
@@ -164,8 +135,7 @@ package com.furusystems.dconsole2.core.input
 		 * @return
 		 * 	Returns true or false depending on wether there are any registered keyboard sequences or not.
 		 */
-		public function isEmpty():Boolean
-		{
+		public function isEmpty():Boolean {
 			return (keyboardSequences.length == 0 ? true : false);
 		}
 		
@@ -176,23 +146,21 @@ package com.furusystems.dconsole2.core.input
 		 * @return
 		 * 	Returns true or false wether the keyboard sequence is valid or not.
 		 */
-		public function validateKeyboardSequence(keyCodes:Array):Boolean
-		{
+		public function validateKeyboardSequence(keyCodes:Array):Boolean {
 			return (keyCodes.length < KEYBOARD_SEQUENCES_MIN_LENGTH ? false : true);
 		}
 		
 		/* @end */
 		
 		/* @group Delegates called  irectly by the KeyboardManager */
-		// We could have added custom events but do not to save some resources while keyboard input should be as fast as possible. 
+		// We could have added custom events but do not to save some resources while keyboard input should be as fast as possible.
 		
 		/**
 		 * On key down.
 		 *
 		 * @param event The keyboard event.
 		 */
-		public function onKeyDown(event:KeyboardEvent):Boolean
-		{
+		public function onKeyDown(event:KeyboardEvent):Boolean {
 			return false;
 			// Nothing to do here, placeholder function only.
 		}
@@ -202,11 +170,9 @@ package com.furusystems.dconsole2.core.input
 		 *
 		 * @param event 	The keyboard event.
 		 */
-		public function onKeyUp(event:KeyboardEvent):Boolean
-		{
+		public function onKeyUp(event:KeyboardEvent):Boolean {
 			var success:Boolean = false;
-			if (!isEmpty())
-			{
+			if (!isEmpty()) {
 				
 				var value:uint = event.charCode;
 				var modifier:Boolean = false;
@@ -215,23 +181,20 @@ package com.furusystems.dconsole2.core.input
 				 * If the charCode is 0 use the keycode instead.
 				 * Since the charCode is not an unicode character or is either a modifier.
 				 */
-				if (value == 0)
-				{
+				if (value == 0) {
 					value = event.keyCode;
 				}
 				
-				switch (value)
-				{
-					case KeyBindings.ALT: 
-					case KeyBindings.SHIFT: 
-					case KeyBindings.CTRL: 
+				switch (value) {
+					case KeyBindings.ALT:
+					case KeyBindings.SHIFT:
+					case KeyBindings.CTRL:
 						modifier = true;
 						break;
 				}
 				
 				// Only compare with none modifiers.
-				if (!modifier)
-				{
+				if (!modifier) {
 					/*
 					 * Loop over the keyboard sequences.
 					 *  If the value matches the current keyCode in the keystrokes for the given keyboard sequence
@@ -242,31 +205,23 @@ package com.furusystems.dconsole2.core.input
 					 *
 					 *  If we had a successful match break out of the loop block and execute the callback on the i-th element which matched.
 					 */
-					for (var i:int = 0, l:int = keyboardSequences.length, reset:Boolean = true; i < l; i++, reset = true)
-					{
-						if (value == keyboardSequences[i].keystrokes.shift())
-						{
-							if (keyboardSequences[i].keystrokes.length == 0)
-							{
+					for (var i:int = 0, l:int = keyboardSequences.length, reset:Boolean = true; i < l; i++, reset = true) {
+						if (value == keyboardSequences[i].keystrokes.shift()) {
+							if (keyboardSequences[i].keystrokes.length == 0) {
 								success = true;
-							}
-							else
-							{
+							} else {
 								reset = false;
 							}
 							
 						}
-						if (reset)
-						{
+						if (reset) {
 							keyboardSequences[i].keystrokes = keyboardSequences[i].keyCodes.concat();
 						}
-						if (success)
-						{
+						if (success) {
 							break;
 						}
 					}
-					if (success)
-					{
+					if (success) {
 						executeCallback(keyboardSequences[i].callback);
 					}
 				}
@@ -284,15 +239,11 @@ package com.furusystems.dconsole2.core.input
 		 * @param keyCodes	The keyCodes to test for.
 		 * @param keyboardSequence	The keyboardSequence to check on.
 		 */
-		private function inKeyboardSequence(keyCodes:Array, keyboardSequence:KeyboardSequence):Boolean
-		{
+		private function inKeyboardSequence(keyCodes:Array, keyboardSequence:KeyboardSequence):Boolean {
 			var success:Boolean = true;
-			if (keyCodes.length == keyboardSequence.keyCodes.length)
-			{
-				for (var i:int = 0, l:int = keyCodes.length; i < l; i++)
-				{
-					if (keyCodes[i] != keyboardSequence.keyCodes[i])
-					{
+			if (keyCodes.length == keyboardSequence.keyCodes.length) {
+				for (var i:int = 0, l:int = keyCodes.length; i < l; i++) {
+					if (keyCodes[i] != keyboardSequence.keyCodes[i]) {
 						success = false;
 						break;
 					}
@@ -306,20 +257,13 @@ package com.furusystems.dconsole2.core.input
 		 *
 		 * @param callback The callback to execute.
 		 */
-		private function executeCallback(callback:Function):void
-		{
-			if (typeof(callback) == "function")
-			{
-				try
-				{
+		private function executeCallback(callback:Function):void {
+			if (typeof(callback) == "function") {
+				try {
 					callback();
+				} catch (error:Error) { /* supress warning. */
 				}
-				catch (error:Error)
-				{ /* supress warning. */
-				}
-			}
-			else
-			{
+			} else {
 				//trace("Warn: could not execute the callback, perhaps not a valid callback function...");
 			}
 		}

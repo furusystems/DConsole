@@ -1,11 +1,10 @@
-package com.furusystems.dconsole2.core.utils 
-{
+package com.furusystems.dconsole2.core.utils {
+	
 	/**
 	 * ...
-	 * @author Andreas Ronning 
+	 * @author Andreas Ronning
 	 */
-	public class ArgumentCleaner
-	{
+	public class ArgumentCleaner {
 		
 		public static function cleanObjectName(s:String):String {
 			if (s.indexOf("[object ") > -1) {
@@ -16,7 +15,7 @@ package com.furusystems.dconsole2.core.utils
 			}
 			return s;
 		}
-		
+	
 	}
 
 }

@@ -1,5 +1,4 @@
-package com.furusystems.dconsole2.core.gui.maindisplay.sections 
-{
+package com.furusystems.dconsole2.core.gui.maindisplay.sections {
 	import com.furusystems.dconsole2.core.gui.maindisplay.assistant.Assistant;
 	import com.furusystems.dconsole2.core.gui.maindisplay.filtertabrow.FilterTabRow;
 	import com.furusystems.dconsole2.core.gui.maindisplay.input.InputField;
@@ -15,8 +14,7 @@ package com.furusystems.dconsole2.core.gui.maindisplay.sections
 	 * ...
 	 * @author Andreas Roenning
 	 */
-	public class MainSection extends ConsoleViewSection
-	{
+	public class MainSection extends ConsoleViewSection {
 		
 		public var assistant:Assistant;
 		public var filterTabs:FilterTabRow;
@@ -25,8 +23,8 @@ package com.furusystems.dconsole2.core.gui.maindisplay.sections
 		private var _console:DConsole;
 		private var _r:Rectangle;
 		private var _originalRect:Rectangle;
-		public function MainSection(console:DConsole) 
-		{
+		
+		public function MainSection(console:DConsole) {
 			_console = console;
 			filterTabs = new FilterTabRow(console);
 			output = new OutputField(console);
@@ -39,21 +37,20 @@ package com.furusystems.dconsole2.core.gui.maindisplay.sections
 			_console.messaging.addCallback(Notifications.NEW_LOG_CREATED, onLogCountChange, Notifications.LOG_DESTROYED);
 		}
 		
-		private function onLogCountChange(md:MessageData):void
-		{
+		private function onLogCountChange(md:MessageData):void {
 			_r = _originalRect.clone();
 			update();
 		}
-		override public function onParentUpdate(allotedRect:Rectangle):void 
-		{
+		
+		override public function onParentUpdate(allotedRect:Rectangle):void {
 			_originalRect = allotedRect.clone();
 			_r = _originalRect.clone();
 			update();
 		}
 		
-		public function update():void
-		{
-			if (!_r) return;
+		public function update():void {
+			if (!_r)
+				return;
 			var totalH:Number = _r.height;
 			var totalW:Number = _r.width;
 			var h:int = 0, w:Number = 0;
@@ -68,9 +65,7 @@ package com.furusystems.dconsole2.core.gui.maindisplay.sections
 			
 			assistant.visible = totalH > 2 * GUIUnits.SQUARE_UNIT;
 			
-			
-			
-			if (totalH > 3 * GUIUnits.SQUARE_UNIT && _console.logs.logsActive>1) { 
+			if (totalH > 3 * GUIUnits.SQUARE_UNIT && _console.logs.logsActive > 1) {
 				//filtertabs enabled
 				filterTabs.visible = true;
 				filterTabs.onParentUpdate(_r);
@@ -81,8 +76,10 @@ package com.furusystems.dconsole2.core.gui.maindisplay.sections
 				output.visible = true;
 				_r.y = h;
 				var m:int = 3;
-				if (!filterTabs.visible) m--;
-				if (!assistant.visible) m--;
+				if (!filterTabs.visible)
+					m--;
+				if (!assistant.visible)
+					m--;
 				//var m:int = filterTabs.visible?3:2;
 				_r.height = totalH - m * GUIUnits.SQUARE_UNIT;
 				output.onParentUpdate(_r);
@@ -103,7 +100,7 @@ package com.furusystems.dconsole2.core.gui.maindisplay.sections
 				assistant.onParentUpdate(_r);
 			}
 		}
-		
+	
 	}
 
 }

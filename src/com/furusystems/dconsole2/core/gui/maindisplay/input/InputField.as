@@ -1,5 +1,4 @@
-package com.furusystems.dconsole2.core.gui.maindisplay.input 
-{
+package com.furusystems.dconsole2.core.gui.maindisplay.input {
 	import com.furusystems.dconsole2.core.gui.layout.IContainable;
 	import com.furusystems.dconsole2.core.interfaces.IThemeable;
 	import com.furusystems.dconsole2.core.Notifications;
@@ -20,13 +19,11 @@ package com.furusystems.dconsole2.core.gui.maindisplay.input
 	 * The main input field
 	 * @author Andreas Roenning
 	 */
-	public class InputField extends Sprite implements IContainable,IThemeable
-	{
+	public class InputField extends Sprite implements IContainable, IThemeable {
 		private var _inputTextField:TextField;
 		private var _console:IConsole;
 		
-		public function InputField(console:IConsole) 
-		{	
+		public function InputField(console:IConsole) {
 			_console = console;
 			tabEnabled = tabChildren = false;
 			_inputTextField = new TextField();
@@ -48,108 +45,112 @@ package com.furusystems.dconsole2.core.gui.maindisplay.input
 			_console.messaging.addCallback(Notifications.THEME_CHANGED, onThemeChange);
 		}
 		
-		private function onInputlineChangeRequest(md:MessageData):void
-		{
+		private function onInputlineChangeRequest(md:MessageData):void {
 			text = String(md.data);
 			dispatchEvent(new Event(Event.CHANGE));
 		}
 		
-		private function onInputChange(e:Event):void 
-		{
+		private function onInputChange(e:Event):void {
 			dispatchEvent(e.clone());
 		}
+		
 		public function get text():String {
 			return _inputTextField.text;
 		}
+		
 		public function set text(s:String):void {
 			_inputTextField.text = s;
 			focus();
 		}
+		
 		/* INTERFACE com.furusystems.dconsole2.core.gui.layout.IContainable */
 		
-		public function onParentUpdate(allotedRect:Rectangle):void
-		{
+		public function onParentUpdate(allotedRect:Rectangle):void {
 			y = allotedRect.y;
 			x = allotedRect.x;
 			_inputTextField.height = GUIUnits.SQUARE_UNIT;
-			_inputTextField.width = allotedRect.width-1;
+			_inputTextField.width = allotedRect.width - 1;
 		}
 		
-		public function get rect():Rectangle
-		{
+		public function get rect():Rectangle {
 			return getRect(parent);
 		}
 		
-		public function get minHeight():Number
-		{
+		public function get minHeight():Number {
 			return 0;
 		}
 		
-		public function get minWidth():Number
-		{
+		public function get minWidth():Number {
 			return 0;
 		}
-		public function moveCaretToIndex(index:int = -1):void
-		{
+		
+		public function moveCaretToIndex(index:int = -1):void {
 			if (index == -1) {
 				index = inputTextField.length;
 			}
 			inputTextField.setSelection(index, index);
 		}
+		
 		public function get selectionBeginIndex():int {
 			return _inputTextField.selectionBeginIndex;
 		}
+		
 		public function get selectionEndIndex():int {
 			return _inputTextField.selectionEndIndex;
 		}
+		
 		public function getWordAtIndex(index:int):String {
 			return TextUtils.getWordAtIndex(_inputTextField, index);
 		}
+		
 		public function get firstIndexOfWordAtCaret():int {
 			return TextUtils.getFirstIndexOfWordAtCaretIndex(_inputTextField);
 		}
+		
 		public function get firstWord():String {
 			return getWordAtIndex(0);
 		}
+		
 		public function get wordAtCaret():String {
 			return TextUtils.getWordAtCaretIndex(inputTextField);
 		}
+		
 		public function selectWordAtCaret():void {
 			TextUtils.selectWordAtCaretIndex(_inputTextField);
 		}
+		
 		public function moveCaretToEnd():void {
-			moveCaretToIndex( -1);
+			moveCaretToIndex(-1);
 		}
+		
 		public function moveCaretToStart():void {
 			moveCaretToIndex(0);
 		}
 		
-		public function focus():void
-		{
-			if (stage.focus == _inputTextField) return;
+		public function focus():void {
+			if (stage.focus == _inputTextField)
+				return;
 			stage.focus = _inputTextField;
 			moveCaretToEnd();
 		}
 		
 		/* INTERFACE com.furusystems.dconsole2.core.interfaces.IThemable */
 		
-		public function onThemeChange(md:MessageData):void
-		{
+		public function onThemeChange(md:MessageData):void {
 			_inputTextField.borderColor = Colors.INPUT_BORDER;
 			_inputTextField.backgroundColor = Colors.INPUT_BG;
 			_inputTextField.textColor = Colors.INPUT_FG;
 		}
 		
-		public function clear():void
-		{
+		public function clear():void {
 			text = "";
 		}
+		
 		/**
 		 * Insert a string at the current caret index, as though the user typed a word
 		 * @param	string
 		 */
-		public function insertAtCaret(string:String):void 
-		{
+		public function insertAtCaret(string:String):void {
 			deleteSelection();
 			var a:String = text.substr(0, caretIndex);
 			var b:String = text.substr(caretIndex);
@@ -157,26 +158,29 @@ package com.furusystems.dconsole2.core.gui.maindisplay.input
 			moveCaretToIndex(a.length + string.length);
 		}
 		
-		public function deleteSelection():void 
-		{
+		public function deleteSelection():void {
 			var a:String = text.substr(0, _inputTextField.selectionBeginIndex);
 			var b:String = text.substr(_inputTextField.selectionEndIndex);
 			
 			_inputTextField.text = a + b;
 		}
 		
-		public function get selectionActive():Boolean
-		{
+		public function get selectionActive():Boolean {
 			return _inputTextField.selectedText != "";
 		}
 		
-		public function get length():int
-		{
+		public function get length():int {
 			return _inputTextField.length;
 		}
-		public function get caretIndex():int { return _inputTextField.caretIndex; }
-		public function get inputTextField():TextField { return _inputTextField; }
 		
+		public function get caretIndex():int {
+			return _inputTextField.caretIndex;
+		}
+		
+		public function get inputTextField():TextField {
+			return _inputTextField;
+		}
+	
 	}
 
 }

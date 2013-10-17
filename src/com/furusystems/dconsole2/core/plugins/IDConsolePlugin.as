@@ -1,12 +1,10 @@
-package com.furusystems.dconsole2.core.plugins 
-{
+package com.furusystems.dconsole2.core.plugins {
 	
 	/**
 	 * ...
 	 * @author Andreas Roenning
 	 */
-	public interface IDConsolePlugin 
-	{
+	public interface IDConsolePlugin {
 		/**
 		 * Called to initialize the plugin, instantiate it on stage, register event listeners etc
 		 * @param	pm
@@ -27,5 +25,5 @@ package com.furusystems.dconsole2.core.plugins
 		 */
 		function get dependencies():Vector.<Class>;
 	}
-	
+
 }

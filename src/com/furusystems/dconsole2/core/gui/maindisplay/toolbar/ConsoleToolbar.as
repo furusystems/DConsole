@@ -1,5 +1,4 @@
-package com.furusystems.dconsole2.core.gui.maindisplay.toolbar 
-{
+package com.furusystems.dconsole2.core.gui.maindisplay.toolbar {
 	import com.furusystems.dconsole2.core.gui.layout.IContainable;
 	import com.furusystems.dconsole2.core.interfaces.IThemeable;
 	import com.furusystems.dconsole2.core.Notifications;
@@ -17,14 +16,13 @@ package com.furusystems.dconsole2.core.gui.maindisplay.toolbar
 	 * ...
 	 * @author Andreas Roenning
 	 */
-	public class ConsoleToolbar extends Sprite implements IContainable,IThemeable
-	{
+	public class ConsoleToolbar extends Sprite implements IContainable, IThemeable {
 		
 		private var _titleField:TextField = new TextField();
 		private var _rect:Rectangle;
 		private var _console:IConsole;
-		public function ConsoleToolbar(console:IConsole) 
-		{
+		
+		public function ConsoleToolbar(console:IConsole) {
 			_console = console;
 			_titleField.height = GUIUnits.SQUARE_UNIT;
 			_titleField.selectable = _titleField.mouseEnabled = false;
@@ -35,15 +33,16 @@ package com.furusystems.dconsole2.core.gui.maindisplay.toolbar
 			_titleField.x = _titleField.y = 1;
 			addChild(_titleField);
 			_console.messaging.addCallback(Notifications.THEME_CHANGED, onThemeChange);
-			
+		
 		}
+		
 		public function setTitle(text:String):void {
 			_titleField.text = text;
 		}
+		
 		/* INTERFACE com.furusystems.dconsole2.core.gui.layout.IContainable */
 		
-		public function onParentUpdate(allotedRect:Rectangle):void
-		{
+		public function onParentUpdate(allotedRect:Rectangle):void {
 			_rect = allotedRect;
 			//x = _rect.x;
 			//y = _rect.y;
@@ -56,8 +55,7 @@ package com.furusystems.dconsole2.core.gui.maindisplay.toolbar
 		
 		/* INTERFACE com.furusystems.dconsole2.core.interfaces.IThemeable */
 		
-		public function onThemeChange(md:MessageData):void
-		{
+		public function onThemeChange(md:MessageData):void {
 			_titleField.textColor = Colors.HEADER_FG;
 			graphics.clear();
 			graphics.beginFill(Colors.HEADER_BG);
@@ -65,21 +63,18 @@ package com.furusystems.dconsole2.core.gui.maindisplay.toolbar
 			graphics.endFill();
 		}
 		
-		public function get minHeight():Number
-		{
+		public function get minHeight():Number {
 			return 0;
 		}
 		
-		public function get minWidth():Number
-		{
+		public function get minWidth():Number {
 			return 0;
 		}
 		
-		public function get rect():Rectangle
-		{
+		public function get rect():Rectangle {
 			return getRect(this);
 		}
-		
+	
 	}
 
 }

@@ -1,5 +1,4 @@
-package com.furusystems.dconsole2.core.gui.maindisplay.filtertabrow 
-{
+package com.furusystems.dconsole2.core.gui.maindisplay.filtertabrow {
 	import com.furusystems.dconsole2.core.gui.TextFieldFactory;
 	import com.furusystems.dconsole2.core.Notifications;
 	import com.furusystems.dconsole2.core.style.Colors;
@@ -14,17 +13,15 @@ package com.furusystems.dconsole2.core.gui.maindisplay.filtertabrow
 	
 	/**
 	 * A button used along the filter tab row
-	 * @author Andreas Ronning 
+	 * @author Andreas Ronning
 	 */
-	public class FilterTabButton extends Sprite
-	{
+	public class FilterTabButton extends Sprite {
 		private var _name:String;
 		private var label:TextField;
 		private var _active:Boolean;
 		private var _messaging:PimpCentral;
 		
-		public function FilterTabButton(console:IConsole, name:String) 
-		{
+		public function FilterTabButton(console:IConsole, name:String) {
 			_messaging = console.messaging;
 			buttonMode = true;
 			_name = name;
@@ -36,35 +33,38 @@ package com.furusystems.dconsole2.core.gui.maindisplay.filtertabrow
 			addEventListener(MouseEvent.CLICK, onClick, false, 0, true);
 		}
 		
-		public function redraw():void 
-		{
+		public function redraw():void {
 			active = _active;
 		}
 		
-		private function onClick(e:MouseEvent):void 
-		{
+		private function onClick(e:MouseEvent):void {
 			_messaging.send(Notifications.LOG_BUTTON_CLICKED, _name, this);
 		}
+		
 		public function set active(b:Boolean):void {
 			_active = b;
 			graphics.clear();
-			if(!_active){
+			if (!_active) {
 				graphics.lineStyle(0, Colors.BUTTON_BORDER);
 				graphics.beginFill(Colors.BUTTON_INACTIVE_BG);
 				label.textColor = Colors.BUTTON_INACTIVE_FG;
-			}else {
+			} else {
 				graphics.lineStyle(0, Colors.BUTTON_BORDER);
 				graphics.beginFill(Colors.BUTTON_ACTIVE_BG);
 				label.textColor = Colors.BUTTON_ACTIVE_FG;
 			}
-			graphics.drawRect(0, 0, label.textWidth+4, GUIUnits.SQUARE_UNIT);
+			graphics.drawRect(0, 0, label.textWidth + 4, GUIUnits.SQUARE_UNIT);
 			graphics.endFill();
 		}
 		
-		public function get active():Boolean { return _active; }
+		public function get active():Boolean {
+			return _active;
+		}
 		
-		public function get logName():String { return _name; }
-		
+		public function get logName():String {
+			return _name;
+		}
+	
 	}
 
 }

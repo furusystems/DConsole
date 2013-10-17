@@ -1,11 +1,10 @@
-package com.furusystems.dconsole2.core.style 
-{
+package com.furusystems.dconsole2.core.style {
+	
 	/**
 	 * ...
 	 * @author Andreas Rønning
 	 */
-	public class TextColors 
-	{
+	public class TextColors {
 		public static var TEXT_USER:uint = 0x859900;
 		public static var TEXT_SYSTEM:uint = 0x859900;
 		public static var TEXT_DEBUG:uint = 0x859900;
@@ -19,8 +18,7 @@ package com.furusystems.dconsole2.core.style
 		public static var TEXT_INPUT:uint = 0x859900;
 		public static var TEXT_TAG:uint = 0;
 		
-		public static function update(sm:StyleManager):void 
-		{
+		public static function update(sm:StyleManager):void {
 			TEXT_USER = sm.theme.data.output.text.user;
 			TEXT_SYSTEM = sm.theme.data.output.text.system;
 			TEXT_DEBUG = sm.theme.data.output.text.debug;
@@ -34,7 +32,7 @@ package com.furusystems.dconsole2.core.style
 			TEXT_ASSISTANT = sm.theme.data.assistant.fore;
 			TEXT_INPUT = sm.theme.data.input.fore;
 		}
-		
+	
 	}
 
 }

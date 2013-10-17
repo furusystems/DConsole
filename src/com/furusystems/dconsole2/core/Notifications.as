@@ -1,12 +1,11 @@
-package com.furusystems.dconsole2.core 
-{
+package com.furusystems.dconsole2.core {
 	import com.furusystems.messaging.pimp.Message;
+	
 	/**
 	 * Enumeration of all constant notifications used throughout, and made available to the plugin API through PimpCentral
 	 * @author Andreas Roenning
 	 */
-	public final class Notifications
-	{	
+	public final class Notifications {
 		static public const CONSOLE_VIEW_TRANSITION_COMPLETE:Message = new Message();
 		
 		static public const ESCAPE_KEY:Message = new Message();
@@ -21,7 +20,6 @@ package com.furusystems.dconsole2.core
 		static public const CORNER_DRAG_START:Message = new Message();
 		static public const CORNER_DRAG_STOP:Message = new Message();
 		static public const CORNER_DRAG_UPDATE:Message = new Message();
-		
 		
 		static public const CURRENT_LOG_CHANGED:Message = new Message();
 		static public const LOG_BUTTON_CLICKED:Message = new Message();
@@ -54,13 +52,12 @@ package com.furusystems.dconsole2.core
 		 */
 		
 		public static const CONSOLE_INPUT_LINE_CHANGE_REQUEST:Message = new Message();
-		 
+		
 		public static const REQUEST_PROPERTY_CHANGE_ON_SCOPE:Message = new Message();
 		public static const PROPERTY_CHANGE_ON_SCOPE:Message = new Message();
 		
 		public static const TOOLTIP_SHOW_REQUEST:Message = new Message();
 		public static const TOOLTIP_HIDE_REQUEST:Message = new Message();
-		
 		
 		public static const SCOPE_CHANGE_REQUEST_FROM_PROPERTY:Message = new Message();
 		public static const SCOPE_CHANGE_REQUEST_FROM_CHILD_NAME:Message = new Message();

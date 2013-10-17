@@ -1,8 +1,8 @@
-package com.furusystems.messaging.pimp 
-{
+package com.furusystems.messaging.pimp {
+	
 	/**
 	 * Message queue item used by PimpCentral to manage the message buffer
-	 * @author Andreas Rønning 
+	 * @author Andreas Rønning
 	 */
 	internal final class MessageQueueItem {
 		

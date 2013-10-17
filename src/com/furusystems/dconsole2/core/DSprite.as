@@ -1,15 +1,14 @@
-﻿package com.furusystems.dconsole2.core 
-{
+﻿package com.furusystems.dconsole2.core {
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
+	
 	/**
 	 * ...
 	 * @author Andreas Roenning
 	 */
-	public class DSprite extends Sprite
-	{
+	public class DSprite extends Sprite {
 		private static const tempPoint:Point = new Point();
 		
 		public var data:*;
@@ -28,13 +27,14 @@
 		public static const ADDMODE_COLUMN:uint = 1;
 		public static const ADDMODE_GRID:uint = 2;
 		
-		public function DSprite() 
-		{
-			
+		public function DSprite() {
+		
 		}
-		protected function nativeTrace(...args:Array):void {
+		
+		protected function nativeTrace(... args:Array):void {
 			trace.apply(this, args);
 		}
+		
 		/**
 		 * Add a child directly at a certain position
 		 * @param	d
@@ -52,11 +52,14 @@
 		 */
 		public function addChildAtPosition(d:DisplayObject, x:Number, y:Number, centerVertically:Boolean = false, centerHorizontally:Boolean = false):DisplayObject {
 			d.x = x;
-			if (centerHorizontally) d.x -= d.width >> 1;
+			if (centerHorizontally)
+				d.x -= d.width >> 1;
 			d.y = y;
-			if (centerVertically) d.y -= d.height >> 1;
+			if (centerVertically)
+				d.y -= d.height >> 1;
 			return this.addChild(d);
 		}
+		
 		/**
 		 * Removes every child off the displaylist, and optionally calls a method on each of them
 		 * @param	forEachFunction
@@ -66,42 +69,43 @@
 			var count:int = numChildren;
 			while (numChildren > 0) {
 				var ob:DisplayObject = removeChild(getChildAt(0));
-				if (forEachFunction != null) forEachFunction(ob);
+				if (forEachFunction != null)
+					forEachFunction(ob);
 			}
 			return count;
 		}
+		
 		/**
 		 * Returns an array of first level child display objects
 		 * @return an array of display objects
 		 */
 		public function getChildren():Array {
 			var a:Array = [];
-			for (var i:int = 0; i < numChildren; i++) 
-			{
+			for (var i:int = 0; i < numChildren; i++) {
 				a.push(getChildAt(i));
 			}
 			return a;
 		}
+		
 		public function alignChildren(alignType:int = ALIGN_TOP):void {
 			var c:Array = getChildren();
 			var alignValue:Number = 0;
 			var rect:Rectangle = getRect(this);
-			for (var i:int = 0; i < c.length; i++) 
-			{
+			for (var i:int = 0; i < c.length; i++) {
 				var d:DisplayObject = DisplayObject(c[i]);
-				switch(alignType) {
+				switch (alignType) {
 					case ALIGN_BOT:
-					d.y = rect.height - d.height;
-					break;
+						d.y = rect.height - d.height;
+						break;
 					case ALIGN_TOP:
-					d.y = 0;
-					break;
+						d.y = 0;
+						break;
 					case ALIGN_LEFT:
-					d.x = 0;
-					break;
+						d.x = 0;
+						break;
 					case ALIGN_RIGHT:
-					d.x = rect.width - d.width;
-					break;
+						d.x = rect.width - d.width;
+						break;
 				}
 			}
 		}
@@ -110,6 +114,7 @@
 			x = p.x;
 			y = p.y;
 		}
+		
 		public function getPoint():Point {
 			return new Point(x, y);
 		}
@@ -120,6 +125,7 @@
 			width = rect.width;
 			height = rect.height;
 		}
+		
 		/**
 		 * Centers the sprite at a point
 		 * @param	x
@@ -143,46 +149,46 @@
 		 * The alignment type
 		 */
 		public function alignWithPoint(p:Point, alignment:uint):void {
-			switch (alignment) 
-			{
+			switch (alignment) {
 				case ALIGN_BOT:
-				x = p.x - width *.5;
-				y = p.y - height;
-				break;
+					x = p.x - width * .5;
+					y = p.y - height;
+					break;
 				case ALIGN_BOT_LEFT:
-				x = p.x;
-				y = p.y - height;
-				break;
+					x = p.x;
+					y = p.y - height;
+					break;
 				case ALIGN_BOT_RIGHT:
-				x = p.x - width;
-				y = p.y - height;
-				break;
+					x = p.x - width;
+					y = p.y - height;
+					break;
 				case ALIGN_TOP:
-				x = p.x - width * .5;
-				y = p.y;
-				break;
+					x = p.x - width * .5;
+					y = p.y;
+					break;
 				case ALIGN_TOP_LEFT:
-				x = p.x;
-				y = p.y;
-				break;
+					x = p.x;
+					y = p.y;
+					break;
 				case ALIGN_TOP_RIGHT:
-				x = p.x - width;
-				y = p.y;
-				break;
+					x = p.x - width;
+					y = p.y;
+					break;
 				case ALIGN_LEFT:
-				y = p.y - height * .5;
-				x = p.x;
-				break;
+					y = p.y - height * .5;
+					x = p.x;
+					break;
 				case ALIGN_RIGHT:
-				y = p.y - height * .5;
-				x = p.x - width;
-				break;
+					y = p.y - height * .5;
+					x = p.x - width;
+					break;
 				case ALIGN_CENTER:
-				y = p.y - height * .5;
-				x = p.x - width * .5;
-				break;
+					y = p.y - height * .5;
+					x = p.x - width * .5;
+					break;
 			}
 		}
+		
 		/**
 		 * Adds an array of display objects to the display list
 		 * @param	children
@@ -197,33 +203,34 @@
 		 * The max number of items per row
 		 */
 		public function addChildren(children:Array, addMode:int = -1, margin:int = 0, startPos:Point = null, maxCol:int = 5):Array {
-			if (!startPos) startPos = new Point();
+			if (!startPos)
+				startPos = new Point();
 			var c1:int = 0;
 			var c2:int = 0;
 			var c3:int = 0;
 			var ob:DisplayObject;
-			switch(addMode) {
+			switch (addMode) {
 				case ADDMODE_COLUMN:
-					for each(ob in children) {
+					for each (ob in children) {
 						addChild(ob);
-						ob.y = startPos.y+c1;
+						ob.y = startPos.y + c1;
 						ob.x = startPos.x;
 						c1 += ob.height + margin;
 					}
-				break;
+					break;
 				case ADDMODE_ROW:
-					for each(ob in children) {
+					for each (ob in children) {
 						addChild(ob);
 						ob.y = startPos.y;
-						ob.x = startPos.x+c1;
+						ob.x = startPos.x + c1;
 						c1 += ob.width + margin;
 					}
-				break;
+					break;
 				case ADDMODE_GRID:
-					for each(ob in children) {
+					for each (ob in children) {
 						addChild(ob);
-						ob.x = startPos.x+c1;
-						ob.y = startPos.y+c2;
+						ob.x = startPos.x + c1;
+						ob.y = startPos.y + c2;
 						c1 += ob.width + margin;
 						c3++;
 						if (c3 > maxCol) {
@@ -231,25 +238,28 @@
 							c3 = c1 = 0;
 						}
 					}
-				break;
+					break;
 				default:
-					for each(ob in children) {
+					for each (ob in children) {
 						addChild(ob);
 					}
 			}
 			return children;
 		}
+		
 		public function layoutChildren(addMode:int = -1, margin:int = 0, startPos:Point = null, maxCol:int = 5):void {
 			var a:Array = getChildren();
 			addChildren(a, addMode, margin, startPos, maxCol);
 		}
+		
 		public function set xy(n:Number):void {
 			x = y = n;
 		}
+		
 		public function set scaleXY(n:Number):void {
 			scaleX = scaleY = n;
 		}
-		
+	
 	}
 
 }

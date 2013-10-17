@@ -1,7 +1,6 @@
-﻿package com.furusystems.dconsole2.core.output
-{
-	public class ConsoleMessageTypes
-	{
+﻿package com.furusystems.dconsole2.core.output {
+	
+	public class ConsoleMessageTypes {
 		public static const SYSTEM:String = "System";
 		static public const DEBUG:String = "Debug";
 		static public const FATAL:String = "Fatal";
@@ -13,5 +12,5 @@
 		public static const EVENT:String = "Event";
 		public static const HOORAY:String = "Hooray";
 	}
-	
+
 }

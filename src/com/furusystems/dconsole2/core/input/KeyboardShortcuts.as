@@ -1,5 +1,4 @@
-package com.furusystems.dconsole2.core.input
-{
+package com.furusystems.dconsole2.core.input {
 	import flash.events.KeyboardEvent;
 	import flash.ui.Keyboard;
 	
@@ -9,8 +8,7 @@ package com.furusystems.dconsole2.core.input
 	 * @author Andreas Roenning, Cristobal Dabed
 	 * @version 0.1
 	 */
-	public final class KeyboardShortcuts implements KeyboardList
-	{
+	public final class KeyboardShortcuts implements KeyboardList {
 		private static var INSTANCE:KeyboardShortcuts = null;
 		private var keyboardShortcuts:Vector.<KeyboardShortcut> = new Vector.<KeyboardShortcut>();
 		
@@ -22,10 +20,8 @@ package com.furusystems.dconsole2.core.input
 		 * @return
 		 * 	Returns the singleton representation of this class.
 		 */
-		public static function get instance():KeyboardShortcuts
-		{
-			if (!INSTANCE)
-			{
+		public static function get instance():KeyboardShortcuts {
+			if (!INSTANCE) {
 				INSTANCE = new KeyboardShortcuts();
 			}
 			return INSTANCE;
@@ -42,8 +38,7 @@ package com.furusystems.dconsole2.core.input
 		 * @return
 		 * 	Return true or false depending on wether the shortcut was successfully added or not.
 		 */
-		public function add(keystroke:uint, modifier:uint, callback:Function, override:Boolean = false, replaceAll:Boolean = true):Boolean
-		{
+		public function add(keystroke:uint, modifier:uint, callback:Function, override:Boolean = false, replaceAll:Boolean = true):Boolean {
 			var success:Boolean;
 			
 			/*
@@ -54,43 +49,31 @@ package com.furusystems.dconsole2.core.input
 			 *		4. Not an valid callback.
 			 */
 			
-			if (!validateKeystroke(keystroke))
-			{
+			if (!validateKeystroke(keystroke)) {
 				throw new Error("Invalid keystroke");
 			}
 			
-			if (!validateModifier(modifier))
-			{
+			if (!validateModifier(modifier)) {
 				throw new Error("Invalid modifier");
 			}
 			
-			if (!validateKeystrokeWithModifier(keystroke, modifier))
-			{
+			if (!validateKeystrokeWithModifier(keystroke, modifier)) {
 				throw new Error("Invalid keystroke + modifier combination");
 			}
 			
-			if (typeof(callback) != "function")
-			{
+			if (typeof(callback) != "function") {
 				throw new Error("Invalid callback function");
 			}
 			
-			if (replaceAll)
-			{
+			if (replaceAll) {
 				keyboardShortcuts = new Vector.<KeyboardShortcut>();
 			}
 			
-			if (!has(keystroke, modifier))
-			{
+			if (!has(keystroke, modifier)) {
 				keyboardShortcuts.push(new KeyboardShortcut(keystroke, modifier, callback));
-			}
-			else if (override)
-			{
+			} else if (override) {
 				instance.removeKeyboardShortcut(keystroke, modifier);
 				keyboardShortcuts.push(new KeyboardShortcut(keystroke, modifier, callback));
-			}
-			else
-			{
-				//trace("Warn: keystroke, modifier combination already exists and was not set to be overriden.");
 			}
 			
 			return success;
@@ -105,27 +88,18 @@ package com.furusystems.dconsole2.core.input
 		 * @return
 		 * 	Return true or false depending on wether the shortcut was successfully removed or not.
 		 */
-		public function remove(keystroke:uint, modifier:uint):Boolean
-		{
+		public function remove(keystroke:uint, modifier:uint):Boolean {
 			var success:Boolean = false;
-			if (!isEmpty())
-			{
-				if (has(keystroke, modifier))
-				{
+			if (!isEmpty()) {
+				if (has(keystroke, modifier)) {
 					var i:int = 0;
-					for (var l:int = keyboardShortcuts.length; i < l; i++)
-					{
-						if (inKeyboardShortcut(keystroke, modifier, keyboardShortcuts[i]))
-						{
+					for (var l:int = keyboardShortcuts.length; i < l; i++) {
+						if (inKeyboardShortcut(keystroke, modifier, keyboardShortcuts[i])) {
 							break;
 						}
 					}
 					keyboardShortcuts.splice(i, 1);
 				}
-			}
-			else
-			{
-				//trace("Warn: Empty keyboard shortcuts, none to remove");
 			}
 			return success;
 		}
@@ -136,13 +110,10 @@ package com.furusystems.dconsole2.core.input
 		 * @return
 		 * 	Returns true or false depending on wether the keystroke, modifier combination already exists or not.
 		 */
-		private function has(keystroke:uint, modifier:uint):Boolean
-		{
+		private function has(keystroke:uint, modifier:uint):Boolean {
 			var success:Boolean = false;
-			for (var i:int = 0, l:int = keyboardShortcuts.length; i < l; i++)
-			{
-				if (inKeyboardShortcut(keystroke, modifier, keyboardShortcuts[i]))
-				{
+			for (var i:int = 0, l:int = keyboardShortcuts.length; i < l; i++) {
+				if (inKeyboardShortcut(keystroke, modifier, keyboardShortcuts[i])) {
 					success = true;
 					break;
 				}
@@ -153,12 +124,9 @@ package com.furusystems.dconsole2.core.input
 		/**
 		 * Remove All
 		 */
-		public function removeAll():void
-		{
-			if (!isEmpty())
-			{
-				while (keyboardShortcuts.length > 0)
-				{
+		public function removeAll():void {
+			if (!isEmpty()) {
+				while (keyboardShortcuts.length > 0) {
 					keyboardShortcuts.pop();
 				}
 			}
@@ -170,26 +138,23 @@ package com.furusystems.dconsole2.core.input
 		 * @return
 		 * 	Returns true or false depending on wether there are any registered keyboard shortcuts or not.
 		 */
-		public function isEmpty():Boolean
-		{
+		public function isEmpty():Boolean {
 			return (keyboardShortcuts.length == 0 ? true : false);
 		}
 		
 		/* @end */
 		
 		/* @group Delegates called directly by the KeyboardManager */
-		// We could have added custom events but do not to save some resources while keyboard input should be as fast as possible. 
+		// We could have added custom events but do not to save some resources while keyboard input should be as fast as possible.
 		
 		/**
 		 * On key down.
 		 *
 		 * @param event The keyboard event.
 		 */
-		public function onKeyDown(event:KeyboardEvent):Boolean
-		{
+		public function onKeyDown(event:KeyboardEvent):Boolean {
 			var success:Boolean = false;
-			if (!isEmpty())
-			{
+			if (!isEmpty()) {
 				
 				// Get the modifier
 				var modifier:uint = getModifierFromKeyboardEvent(event);
@@ -199,25 +164,18 @@ package com.furusystems.dconsole2.core.input
 				 */
 				var keyCode:uint = event.keyCode;
 				var i:int = 0;
-				for (var l:int = keyboardShortcuts.length; i < l; i++)
-				{
-					if (inKeyboardShortcut(keyCode, modifier, keyboardShortcuts[i]))
-					{
+				for (var l:int = keyboardShortcuts.length; i < l; i++) {
+					if (inKeyboardShortcut(keyCode, modifier, keyboardShortcuts[i])) {
 						success = true;
 						break;
 					}
 				}
-				if (success)
-				{
-					if (keyboardShortcuts[i].released)
-					{
+				if (success) {
+					if (keyboardShortcuts[i].released) {
 						keyboardShortcuts[i].released = false;
-						try
-						{
+						try {
 							keyboardShortcuts[i].callback();
-						}
-						catch (error:Error)
-						{ /* suppress warning. */
+						} catch (error:Error) { /* suppress warning. */
 						}
 					}
 				}
@@ -230,11 +188,9 @@ package com.furusystems.dconsole2.core.input
 		 *
 		 * @param event The keyboard event.
 		 */
-		public function onKeyUp(event:KeyboardEvent):Boolean
-		{
+		public function onKeyUp(event:KeyboardEvent):Boolean {
 			var success:Boolean = false;
-			if (!isEmpty())
-			{
+			if (!isEmpty()) {
 				// Get the modifier
 				var modifier:uint = getModifierFromKeyboardEvent(event);
 				var keyCode:uint = event.keyCode;
@@ -242,10 +198,8 @@ package com.furusystems.dconsole2.core.input
 				/*
 				 * Loop over the keyboard shortcuts and release the respective if they have the keystroke and are not already released.
 				 */
-				for (var i:int = 0, l:int = keyboardShortcuts.length; i < l; i++)
-				{
-					if ((keyCode == keyboardShortcuts[i].keystroke) && !keyboardShortcuts[i].released)
-					{
+				for (var i:int = 0, l:int = keyboardShortcuts.length; i < l; i++) {
+					if ((keyCode == keyboardShortcuts[i].keystroke) && !keyboardShortcuts[i].released) {
 						keyboardShortcuts[i].released = success = true;
 					}
 				}
@@ -262,8 +216,7 @@ package com.furusystems.dconsole2.core.input
 		 * @return
 		 * 	Returns true or false depending on wether the keystroke + modifier is a valid combination.
 		 */
-		public function validateKeystrokeWithModifier(keystroke:uint, modifier:uint):Boolean
-		{
+		public function validateKeystrokeWithModifier(keystroke:uint, modifier:uint):Boolean {
 			var success:Boolean = true;
 			/*
 			 * 1. ENTER must satisfy at least 2 modifiers but can not be used with ALT_SHIFT since it is a reserved keystroke i Windows for Fullscreen.
@@ -272,31 +225,25 @@ package com.furusystems.dconsole2.core.input
 			 * 3. FN*   can not have a  modifier
 			 * 4. SPACE must have at least one modifier.
 			 */
-			if (keystroke == KeyBindings.ENTER)
-			{
-				if (modifier != KeyBindings.ALT_SHIFT)
-				{
+			if (keystroke == KeyBindings.ENTER) {
+				if (modifier != KeyBindings.ALT_SHIFT) {
 					success = isCombinedModifier(modifier);
 				}
 			}
 			
-			if (keystroke == KeyBindings.TAB)
-			{
+			if (keystroke == KeyBindings.TAB) {
 				success = (modifier == KeyBindings.ALT_SHIFT);
 			}
 			
-			if (keystroke == KeyBindings.ESC)
-			{
+			if (keystroke == KeyBindings.ESC) {
 				success = !isCombinedModifier(modifier);
 			}
 			
-			if (modifier == KeyBindings.NONE)
-			{
+			if (modifier == KeyBindings.NONE) {
 				success = !isKeystrokeFN(keystroke);
 			}
 			
-			if ((keystroke == KeyBindings.SPACE))
-			{
+			if ((keystroke == KeyBindings.SPACE)) {
 				success = (modifier != KeyBindings.NONE);
 			}
 			return success;
@@ -311,21 +258,19 @@ package com.furusystems.dconsole2.core.input
 		 *
 		 * @param keystroke	The keystroke to validate.
 		 */
-		private function validateKeystroke(keystroke:uint):Boolean
-		{
+		private function validateKeystroke(keystroke:uint):Boolean {
 			var success:Boolean = true;
-			switch (keystroke)
-			{
-				case KeyBindings.ALT: 
-				case KeyBindings.SHIFT: 
-				case KeyBindings.CTRL: 
-				case Keyboard.BACKSPACE: 
-				case Keyboard.CAPS_LOCK: 
-				case Keyboard.INSERT: 
-				case Keyboard.DELETE: 
-				case Keyboard.HOME: 
-				case Keyboard.PAGE_UP: 
-				case Keyboard.PAGE_DOWN: 
+			switch (keystroke) {
+				case KeyBindings.ALT:
+				case KeyBindings.SHIFT:
+				case KeyBindings.CTRL:
+				case Keyboard.BACKSPACE:
+				case Keyboard.CAPS_LOCK:
+				case Keyboard.INSERT:
+				case Keyboard.DELETE:
+				case Keyboard.HOME:
+				case Keyboard.PAGE_UP:
+				case Keyboard.PAGE_DOWN:
 					success = false;
 					break;
 			}
@@ -340,18 +285,16 @@ package com.furusystems.dconsole2.core.input
 		 * @return
 		 * 	Returns true or false depedending on wether it was an valid shortcut or not.
 		 */
-		private function validateModifier(modifier:uint):Boolean
-		{
+		private function validateModifier(modifier:uint):Boolean {
 			var success:Boolean = false;
-			switch (modifier)
-			{
-				case KeyBindings.NONE: 
-				case KeyBindings.ALT: 
-				case KeyBindings.SHIFT: 
-				case KeyBindings.CTRL: 
-				case KeyBindings.ALT_SHIFT: 
-				case KeyBindings.CTRL_ALT: 
-				case KeyBindings.CTRL_SHIFT: 
+			switch (modifier) {
+				case KeyBindings.NONE:
+				case KeyBindings.ALT:
+				case KeyBindings.SHIFT:
+				case KeyBindings.CTRL:
+				case KeyBindings.ALT_SHIFT:
+				case KeyBindings.CTRL_ALT:
+				case KeyBindings.CTRL_SHIFT:
 					success = true;
 					break;
 			}
@@ -366,14 +309,12 @@ package com.furusystems.dconsole2.core.input
 		 * @return
 		 * 	Returns true or false depending on wether the modifier is a combined modifier or not.
 		 */
-		private function isCombinedModifier(modifier:uint):Boolean
-		{
+		private function isCombinedModifier(modifier:uint):Boolean {
 			var success:Boolean = false;
-			switch (modifier)
-			{
-				case KeyBindings.ALT_SHIFT: 
-				case KeyBindings.CTRL_ALT: 
-				case KeyBindings.CTRL_SHIFT: 
+			switch (modifier) {
+				case KeyBindings.ALT_SHIFT:
+				case KeyBindings.CTRL_ALT:
+				case KeyBindings.CTRL_SHIFT:
 					success = true;
 					break;
 			}
@@ -388,26 +329,24 @@ package com.furusystems.dconsole2.core.input
 		 * @return
 		 * 	Returns true or false depending on wether the keeystroke is a FN key code or not.
 		 */
-		private function isKeystrokeFN(modifier:uint):Boolean
-		{
+		private function isKeystrokeFN(modifier:uint):Boolean {
 			var success:Boolean = false;
-			switch (modifier)
-			{
-				case KeyBindings.F1: 
-				case KeyBindings.F2: 
-				case KeyBindings.F3: 
-				case KeyBindings.F4: 
-				case KeyBindings.F5: 
-				case KeyBindings.F6: 
-				case KeyBindings.F7: 
-				case KeyBindings.F8: 
-				case KeyBindings.F9: 
-				case KeyBindings.F10: 
-				case KeyBindings.F11: 
-				case KeyBindings.F12: 
-				case KeyBindings.F13: 
-				case KeyBindings.F14: 
-				case KeyBindings.F15: 
+			switch (modifier) {
+				case KeyBindings.F1:
+				case KeyBindings.F2:
+				case KeyBindings.F3:
+				case KeyBindings.F4:
+				case KeyBindings.F5:
+				case KeyBindings.F6:
+				case KeyBindings.F7:
+				case KeyBindings.F8:
+				case KeyBindings.F9:
+				case KeyBindings.F10:
+				case KeyBindings.F11:
+				case KeyBindings.F12:
+				case KeyBindings.F13:
+				case KeyBindings.F14:
+				case KeyBindings.F15:
 					success = true;
 					break;
 			}
@@ -420,8 +359,7 @@ package com.furusystems.dconsole2.core.input
 		 * @param keystroke The keystroke code
 		 * @param modifier	The modifier value.
 		 */
-		private function addKeyboardShortcut(keystroke:uint, modifier:uint, callback:Function):void
-		{
+		private function addKeyboardShortcut(keystroke:uint, modifier:uint, callback:Function):void {
 			keyboardShortcuts.push(new KeyboardShortcut(keystroke, modifier, callback));
 		}
 		
@@ -431,13 +369,10 @@ package com.furusystems.dconsole2.core.input
 		 * @param keystroke The keystroke code
 		 * @param modifier	The modifier value.
 		 */
-		private function removeKeyboardShortcut(keystroke:uint, modifier:uint):void
-		{
+		private function removeKeyboardShortcut(keystroke:uint, modifier:uint):void {
 			var i:int = 0;
-			for (var l:int = keyboardShortcuts.length; i < l; i++)
-			{
-				if (inKeyboardShortcut(keystroke, modifier, keyboardShortcuts[i]))
-				{
+			for (var l:int = keyboardShortcuts.length; i < l; i++) {
+				if (inKeyboardShortcut(keystroke, modifier, keyboardShortcuts[i])) {
 					break;
 				}
 			}
@@ -454,8 +389,7 @@ package com.furusystems.dconsole2.core.input
 		 * @returns
 		 * 	Returns true or false depending on wether the keyboard shortcut contains the keystroke, modifier combination.
 		 */
-		private function inKeyboardShortcut(keystroke:uint, modifier:uint, keyboardShortcut:KeyboardShortcut):Boolean
-		{
+		private function inKeyboardShortcut(keystroke:uint, modifier:uint, keyboardShortcut:KeyboardShortcut):Boolean {
 			return ((keyboardShortcut.keystroke == keystroke) && (keyboardShortcut.modifier == modifier));
 		}
 		
@@ -464,19 +398,15 @@ package com.furusystems.dconsole2.core.input
 		 *
 		 * @param event	The keyboard event to parse.
 		 */
-		private function getModifierFromKeyboardEvent(event:KeyboardEvent):uint
-		{
+		private function getModifierFromKeyboardEvent(event:KeyboardEvent):uint {
 			var modifier:uint = KeyBindings.NONE;
-			if (event.altKey)
-			{
+			if (event.altKey) {
 				modifier += KeyBindings.ALT;
 			}
-			if (event.ctrlKey)
-			{
+			if (event.ctrlKey) {
 				modifier += KeyBindings.CTRL;
 			}
-			if (event.shiftKey)
-			{
+			if (event.shiftKey) {
 				modifier += Keyboard.SHIFT;
 			}
 			return modifier;

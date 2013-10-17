@@ -1,13 +1,11 @@
-package com.furusystems.dconsole2.core.plugins 
-{
+package com.furusystems.dconsole2.core.plugins {
 	import com.furusystems.dconsole2.core.output.ConsoleMessage;
 	
 	/**
 	 * ...
 	 * @author Andreas Roenning
 	 */
-	public interface IFilteringDConsolePlugin extends IDConsolePlugin
-	{
+	public interface IFilteringDConsolePlugin extends IDConsolePlugin {
 		/**
 		 * Defines a filtering function that validates a message for output
 		 * @param	output
@@ -17,5 +15,5 @@ package com.furusystems.dconsole2.core.plugins
 		 */
 		function filter(output:ConsoleMessage):Boolean;
 	}
-	
+
 }

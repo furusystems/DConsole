@@ -1,5 +1,4 @@
-package com.furusystems.dconsole2.core.inspector 
-{
+package com.furusystems.dconsole2.core.inspector {
 	import com.furusystems.dconsole2.core.interfaces.IScrollable;
 	import flash.events.Event;
 	
@@ -7,8 +6,7 @@ package com.furusystems.dconsole2.core.inspector
 	 * ...
 	 * @author Andreas Roenning
 	 */
-	public interface IInspectorView extends IScrollable
-	{ 
+	public interface IInspectorView extends IScrollable {
 		function get visible():Boolean;
 		function set visible(b:Boolean):void;
 		function beginDragging():void;
@@ -16,5 +14,5 @@ package com.furusystems.dconsole2.core.inspector
 		function onFrameUpdate(e:Event = null):void;
 		function resize():void;
 	}
-	
+
 }

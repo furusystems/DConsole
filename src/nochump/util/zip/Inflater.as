@@ -26,12 +26,12 @@ package nochump.util.zip {
 	import flash.utils.ByteArray;
 	
 	/**
-	 * Inflater is used to decompress data that has been compressed according 
+	 * Inflater is used to decompress data that has been compressed according
 	 * to the "deflate" standard described in rfc1950.
 	 *
 	 * The usage is as following.  First you have to set some input with
 	 * <code>setInput()</code>, then inflate() it.
-	 * 
+	 *
 	 * This implementation is a port of Puff by Mark Addler that comes with
 	 * the zlip data compression library.  It is not the fastest routine as
 	 * he intended it for learning purposes, his actual optimized inflater code
@@ -39,7 +39,7 @@ package nochump.util.zip {
 	 * headache looking at the optimized inflater code and porting this
 	 * was a breeze.  The speed should be adequate but there is plenty of room
 	 * for improvements here.
-	 * 
+	 *
 	 * @author dchang
 	 */
 	public class Inflater {
@@ -68,7 +68,7 @@ package nochump.util.zip {
 		
 		/**
 		 * Sets the input.
-		 * 
+		 *
 		 * @param buf the input.
 		 */
 		public function setInput(buf:ByteArray):void {
@@ -78,7 +78,7 @@ package nochump.util.zip {
 		
 		/**
 		 * Inflates the compressed stream to the output buffer.
-		 * 
+		 *
 		 * @param buf the output buffer.
 		 */
 		public function inflate(buf:ByteArray):uint {
@@ -87,7 +87,6 @@ package nochump.util.zip {
 			do { // process blocks until last block or error
 				var last:int = bits(1); // one if last block
 				var type:int = bits(2); // block type 0..3
-				//trace('	block type ' + type);
 				if(type == 0) stored(buf); // uncompressed block
 				else if(type == 3) throw new Error('invalid block type (type == 3)', -1);
 				else { // compressed block

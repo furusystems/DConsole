@@ -1,13 +1,11 @@
-package com.furusystems.dconsole2.core.interfaces 
-{
+package com.furusystems.dconsole2.core.interfaces {
 	
 	/**
 	 * ...
 	 * @author Andreas Roenning
 	 */
-	public interface IDisposable 
-	{
+	public interface IDisposable {
 		function dispose():void;
 	}
-	
+
 }

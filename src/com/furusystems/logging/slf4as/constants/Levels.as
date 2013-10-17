@@ -1,11 +1,10 @@
-package com.furusystems.logging.slf4as.constants 
-{
+package com.furusystems.logging.slf4as.constants {
+	
 	/**
 	 * ...
 	 * @author Andreas Rønning
 	 */
-	public final class Levels 
-	{
+	public final class Levels {
 		public static const ALL:int = 0;
 		public static const DEBUG:int = 1;
 		public static const INFO:int = 2;

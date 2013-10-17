@@ -1,5 +1,4 @@
-package com.furusystems.dconsole2.core.gui.maindisplay.output
-{
+package com.furusystems.dconsole2.core.gui.maindisplay.output {
 	import com.furusystems.dconsole2.core.gui.layout.IContainable;
 	import com.furusystems.dconsole2.core.gui.SimpleScrollbarNorm;
 	import com.furusystems.dconsole2.core.interfaces.IThemeable;
@@ -28,8 +27,7 @@ package com.furusystems.dconsole2.core.gui.maindisplay.output
 	 * Handles rendering of a vector of messages
 	 * @author Andreas Roenning
 	 */
-	public class OutputField extends Sprite implements IContainable,IThemeable
-	{
+	public class OutputField extends Sprite implements IContainable, IThemeable {
 		private var _textOutput:TextField;
 		private var _scrollbar:SimpleScrollbarNorm;
 		private var _locked:Boolean = false;
@@ -47,8 +45,8 @@ package com.furusystems.dconsole2.core.gui.maindisplay.output
 		private var _dirty:Boolean = false;
 		private const TRUNCATE:Boolean = false;
 		private var _console:DConsole;
-		public function OutputField(console:DConsole)
-		{
+		
+		public function OutputField(console:DConsole) {
 			_console = console;
 			_textOutput = new TextField();
 			_textOutput.defaultTextFormat = TextFormats.outputTformatOld;
@@ -60,7 +58,6 @@ package com.furusystems.dconsole2.core.gui.maindisplay.output
 			_scrollbar = new SimpleScrollbarNorm(SimpleScrollbarNorm.VERTICAL);
 			_scrollbar.addEventListener(Event.CHANGE, onScrollbarChange);
 			_scrollbar.trackWidth = 10;
-			//_textOutput.y--;
 			addChild(_scrollbar);
 			_textOutput.mouseWheelEnabled = false;
 			_textOutput.addEventListener(MouseEvent.MOUSE_WHEEL, onMouseWheel);
@@ -69,51 +66,50 @@ package com.furusystems.dconsole2.core.gui.maindisplay.output
 			console.messaging.addCallback(Notifications.CURRENT_LOG_CHANGED, onCurrentLogChange);
 			console.messaging.addCallback(Notifications.FRAME_UPDATE, onFrameUpdate);
 			
-			if(TRUNCATE) _textOutput.addEventListener(MouseEvent.CLICK, onTextClick);
+			if (TRUNCATE)
+				_textOutput.addEventListener(MouseEvent.CLICK, onTextClick);
 		}
 		
-		private function onFrameUpdate():void
-		{
+		private function onFrameUpdate():void {
 			if (_locked) {
-				trace("Locked");
 				return;
 			}
-			if (_currentLog.dirty||_dirty) {
+			if (_currentLog.dirty || _dirty) {
 				drawMessages();
 				_currentLog.setClean();
 				_dirty = false;
 			}
 		}
 		
-		private function onCurrentLogChange(md:MessageData):void
-		{
+		private function onCurrentLogChange(md:MessageData):void {
 			var lm:DLogManager = DLogManager(md.source);
 			currentLog = lm.currentLog;
 			_dirty = true;
 		}
 		
-		private function onTextClick(e:MouseEvent):void
-		{
+		private function onTextClick(e:MouseEvent):void {
 			var lineIDX:int = _textOutput.getLineIndexAtPoint(_textOutput.mouseX, _textOutput.mouseY);
 			var msg:ConsoleMessage = getMessageAtLine(lineIDX);
 			if (msg.truncated) {
-				//trace(msg.text); //TODO: Display clicked text in some sort of popover
+				//TODO: Display clicked text in some sort of popover
 			}
 		}
 		
-		private function onScrollbarChange(e:Event):void
-		{
+		private function onScrollbarChange(e:Event):void {
 			scrollIndex = _scrollbar.outValue * maxScroll;
 		}
+		
 		/**
 		 * The number of lines displayable
 		 */
 		public function get numLines():int {
 			return Math.max(1, Math.floor((_textOutput.height - 4) / _lineMetrics.height));
 		}
+		
 		public function set text(s:String):void {
 			_textOutput.text = s;
 		}
+		
 		public function get text():String {
 			return _textOutput.text;
 		}
@@ -124,8 +120,7 @@ package com.furusystems.dconsole2.core.gui.maindisplay.output
 		
 		/* INTERFACE com.furusystems.dconsole2.core.gui.layout.IContainable */
 		
-		public function onParentUpdate(allotedRect:Rectangle):void
-		{
+		public function onParentUpdate(allotedRect:Rectangle):void {
 			_allotedRect = allotedRect;
 			y = allotedRect.y;
 			x = allotedRect.x;
@@ -139,86 +134,94 @@ package com.furusystems.dconsole2.core.gui.maindisplay.output
 			
 			if (prevHeight != _textOutput.height) {
 				_dirty = true;
-				//update(); //introduces latency but avoids clogging when called in a loop
-				//drawMessages();
+					//update(); //introduces latency but avoids clogging when called in a loop
+					//drawMessages();
 			}
 		}
+		
 		private function drawBackground():void {
-			if (!_allotedRect) return;
+			if (!_allotedRect)
+				return;
 			graphics.clear();
 			graphics.beginFill(Colors.OUTPUT_BG, Alphas.CONSOLE_CORE_ALPHA);
 			graphics.drawRect(0, 0, _allotedRect.width, _allotedRect.height);
 		}
 		
-		public function get minHeight():Number
-		{
+		public function get minHeight():Number {
 			return 0;
 		}
 		
-		public function get minWidth():Number
-		{
+		public function get minWidth():Number {
 			return 0;
 		}
 		
-		public function get rect():Rectangle
-		{
+		public function get rect():Rectangle {
 			return _allotedRect;
 		}
 		
-		public function get textOutput():TextField { return _textOutput; }
+		public function get textOutput():TextField {
+			return _textOutput;
+		}
 		
-		public function get locked():Boolean { return _locked; }
-		
+		public function get locked():Boolean {
+			return _locked;
+		}
 		
 		public function gotoLine(line:int):void {
-			scrollToLine(line-1);
+			scrollToLine(line - 1);
 		}
+		
 		public function scrollToLine(line:int):void {
 			var diff:int = scrollIndex - line;
-			//trace("scrolltoline", scrollIndex, line);
 			scroll(diff);
 		}
 		
 		public function lockOutput():void {
 			_locked = true;
 		}
+		
 		public function unlockOutput():void {
 			_locked = false;
 		}
+		
 		/**
 		 * Toggle display of message timestamp
 		 */
 		public function toggleTimestamp(input:String = null):void {
 			if (input == null) {
 				showTimeStamp = !showTimeStamp;
-			}else {
+			} else {
 				showTimeStamp = StringUtil.verboseToBoolean(input);
 			}
-			if (showTimeStamp) _console.print("Timestamp on",ConsoleMessageTypes.SYSTEM)
-			else _console.print("Timestamp off",ConsoleMessageTypes.SYSTEM);
+			if (showTimeStamp)
+				_console.print("Timestamp on", ConsoleMessageTypes.SYSTEM)
+			else
+				_console.print("Timestamp off", ConsoleMessageTypes.SYSTEM);
 		}
-		private function onMouseWheel(e:MouseEvent):void
-		{
+		
+		private function onMouseWheel(e:MouseEvent):void {
 			scroll(e.delta);
 		}
 		
-		public function toggleLineNumbers(input:String = null):void
-		{
+		public function toggleLineNumbers(input:String = null):void {
 			if (input == null) {
 				showLineNum = !showLineNum;
-			}else {
+			} else {
 				showLineNum = StringUtil.verboseToBoolean(input);
 			}
 			showLineNum ? _console.print("Line numbers: on", ConsoleMessageTypes.SYSTEM) : _console.print("Line numbers: off", ConsoleMessageTypes.SYSTEM);
 			_dirty = true;
 		}
+		
 		public function scroll(deltaY:int = 0, deltaX:int = 0):void {
 			_textOutput.scrollH += deltaX;
-			if(deltaY!=0){
-				if (currentLog.length < numLines) return;
+			if (deltaY != 0) {
+				if (currentLog.length < numLines)
+					return;
 				scrollIndex = scrollIndex - deltaY;
 			}
 		}
+		
 		public function set scrollIndex(i:int):void {
 			var _prevIndex:int = _scrollIndex;
 			_scrollIndex = Math.max(0, Math.min(i, maxScroll));
@@ -227,31 +230,39 @@ package com.furusystems.dconsole2.core.gui.maindisplay.output
 				_dirty = true;
 			}
 		}
+		
 		public function get scrollIndex():int {
 			return _scrollIndex;
 		}
+		
 		public function get maxScroll():int {
-			if (!currentLog) return 0;
+			if (!currentLog)
+				return 0;
 			return Math.max(0, currentLog.messages.length - numLines);
 		}
+		
 		public function update():void {
 			onFrameUpdate();
 		}
+		
 		public function set currentLog(l:DConsoleLog):void {
 			_currentLog = l;
 			showTag = _currentLog.manager.rootLog == _currentLog;
 			update();
 		}
+		
 		public function get currentLog():DConsoleLog {
 			return _currentLog;
 		}
+		
 		public function getMessageAtLine(line:int):ConsoleMessage {
 			var currentLogVector:Vector.<ConsoleMessage> = currentLog.messages;
 			line += _scrollIndex;
 			return currentLog.messages[line];
 		}
+		
 		public function drawMessages():void {
-			if (!visible || _locked || !currentLog ) {
+			if (!_console.visible || _locked || !currentLog) {
 				return;
 			}
 			if (_atBottom) {
@@ -261,7 +272,7 @@ package com.furusystems.dconsole2.core.gui.maindisplay.output
 			var date:Date = new Date();
 			clear();
 			_scrollRange = Math.min(currentLogVector.length, scrollIndex + numLines);
-			if (numLines > _scrollRange-scrollIndex) {
+			if (numLines > _scrollRange - scrollIndex) {
 				_scrollIndex = maxScroll;
 				_atBottom = true;
 				_scrollRange = Math.min(currentLogVector.length, scrollIndex + numLines);
@@ -269,16 +280,15 @@ package com.furusystems.dconsole2.core.gui.maindisplay.output
 			_scrollbar.visible = numLines < currentLogVector.length;
 			if (_scrollbar.visible) {
 				_textOutput.width = _allotedRect.width - _scrollbar.trackWidth;
-			}else {
+			} else {
 				_textOutput.width = _allotedRect.width;
 			}
-			for (var i:int = scrollIndex; i < _scrollRange; i++)
-			{
+			for (var i:int = scrollIndex; i < _scrollRange; i++) {
 				var msg:ConsoleMessage = currentLogVector[i];
 				var lineLength:int = 0;
-				var lineNum:int = i+1;
-				if (msg.type == ConsoleMessageTypes.TRACE && !showTraceValues) continue;
-				//if ((msg.type == ConsoleMessageTypes.TRACE && !showTraceValues) || !msg.visible) continue;
+				var lineNum:int = i + 1;
+				if (msg.type == ConsoleMessageTypes.TRACE && !showTraceValues)
+					continue;
 				var messageVisible:Boolean = msg.visible;
 				var fmt:TextFormat;
 				textOutput.defaultTextFormat = fmt = TextFormats.outputTformatDebug;
@@ -294,72 +304,72 @@ package com.furusystems.dconsole2.core.gui.maindisplay.output
 					appendWithFormat("[" + lineNumStr + "]", TextFormats.outputTformatLineNo);
 				}
 				if (showTimeStamp) {
-					fmt = messageVisible?TextFormats.outputTformatTimeStamp:TextFormats.outputTformatHidden;
+					fmt = messageVisible ? TextFormats.outputTformatTimeStamp : TextFormats.outputTformatHidden;
 					date.setTime(msg.timestamp)
-					var dateStr:String = " "+date.toLocaleDateString() + " " + date.toLocaleTimeString() + " ";
+					var dateStr:String = " " + date.toLocaleDateString() + " " + date.toLocaleTimeString() + " ";
 					lineLength += dateStr.length;
 					appendWithFormat(dateStr, fmt);
 				}
 				if (showTag && msg.tag != "" && msg.tag != DConsole.TAG && messageVisible) {
-					fmt = messageVisible?TextFormats.outputTformatTag:TextFormats.outputTformatHidden;
+					fmt = messageVisible ? TextFormats.outputTformatTag : TextFormats.outputTformatHidden;
 					lineLength += (1 + msg.tag.length);
 					appendWithFormat(" " + msg.tag, fmt);
 				}
 				if (msg.type == ConsoleMessageTypes.USER) {
 					appendWithFormat(" < ", TextFormats.outputTformatAux);
-				}else {
+				} else {
 					appendWithFormat(" > ", TextFormats.outputTformatAux);
 				}
 				lineLength += 3;
 				var _hooray:Boolean = false;
-				if (messageVisible||msg.type==ConsoleMessageTypes.USER) {
-					switch(msg.type) {
+				if (messageVisible || msg.type == ConsoleMessageTypes.USER) {
+					switch (msg.type) {
 						case ConsoleMessageTypes.USER:
 							fmt = TextFormats.outputTformatUser;
-						break;
+							break;
 						case ConsoleMessageTypes.SYSTEM:
 							fmt = TextFormats.outputTformatSystem;
-						break;
+							break;
 						case ConsoleMessageTypes.ERROR:
 							fmt = TextFormats.outputTformatError;
-						break;
+							break;
 						case ConsoleMessageTypes.WARNING:
 							fmt = TextFormats.outputTformatWarning;
-						break;
+							break;
 						case ConsoleMessageTypes.FATAL:
 							fmt = TextFormats.outputTformatFatal;
-						break;
+							break;
 						case ConsoleMessageTypes.HOORAY:
 							_hooray = true;
 							fmt = TextFormats.hoorayFormat;
-						break;
+							break;
 						case ConsoleMessageTypes.INFO:
 							fmt = TextFormats.outputTformatInfo;
-						break;
+							break;
 						case ConsoleMessageTypes.TRACE:
 						case ConsoleMessageTypes.DEBUG:
 						default:
-							if(i==currentLogVector.length-1){
+							if (i == currentLogVector.length - 1) {
 								fmt = TextFormats.outputTformatNew;
-							}else {
+							} else {
 								fmt = TextFormats.outputTformatOld;
 							}
-						break;
+							break;
 					}
-				}else {
+				} else {
 					fmt = TextFormats.outputTformatHidden;
 				}
 				var idx:int = text.length;
 				var str:String = msg.text;
 				if (msg.repeatcount > 0) {
-					var str2:String = " x" + (msg.repeatcount+1);
+					var str2:String = " x" + (msg.repeatcount + 1);
 					str += str2;
 				}
 				
 				//determine length of current line
 				lineLength += str.length;
 				msg.truncated = false;
-				if(TRUNCATE){
+				if (TRUNCATE) {
 					if (lineLength * _lineMetrics.width > width) {
 						//truncate
 						var diff:int = lineLength - (width / _lineMetrics.width);
@@ -370,9 +380,9 @@ package com.furusystems.dconsole2.core.gui.maindisplay.output
 					}
 				}
 				
-				if (i != _scrollRange-1) {
+				if (i != _scrollRange - 1) {
 					appendWithFormat(str + "\n", fmt);
-				}else {
+				} else {
 					appendWithFormat(str, fmt);
 				}
 				try {
@@ -382,17 +392,18 @@ package com.furusystems.dconsole2.core.gui.maindisplay.output
 							fmt.color = Math.random() * 0xFFFFFF;
 							textOutput.setTextFormat(fmt, idx + sindex, idx + sindex + str.length - sindex);
 						}
-					}else {
+					} else {
 						//if(str.length>0) textOutput.setTextFormat(fmt, idx, idx + str.length);
-						if(str.length>0) textOutput.setTextFormat(fmt, idx, idx + str.length);
+						if (str.length > 0)
+							textOutput.setTextFormat(fmt, idx, idx + str.length);
 					}
-				}catch (e:Error) {
+				} catch (e:Error) {
 					currentLogVector.splice(i, 1);
 					_console.print(e.message, ConsoleMessageTypes.ERROR);
 					_console.print("The console encountered a message draw error. Did you attempt to log a ByteArray?", ConsoleMessageTypes.ERROR);
 					drawMessages();
 				}
-				//_logManager.currentLog.setClean();
+					//_logManager.currentLog.setClean();
 			}
 			_scrollbar.draw(_textOutput.height, _scrollIndex, maxScroll);
 		}
@@ -401,32 +412,31 @@ package com.furusystems.dconsole2.core.gui.maindisplay.output
 		 * @param	string
 		 * @param	format
 		 */
+		[Inline]
+		
 		private function appendWithFormat(string:String, format:TextFormat):void {
 			var idx:int = textOutput.length;
 			textOutput.appendText(string);
 			textOutput.setTextFormat(format, idx, textOutput.length);
 		}
 		
-		public function clear():void
-		{
+		public function clear():void {
 			_textOutput.text = "";
 		}
 		
 		/* INTERFACE com.furusystems.dconsole2.core.interfaces.IThemable */
 		
-		public function onThemeChange(md:MessageData):void
-		{
+		public function onThemeChange(md:MessageData):void {
 			var sm:StyleManager = StyleManager(md.source);
 			drawBackground();
 			_scrollbar.draw(_textOutput.height, _scrollIndex, maxScroll);
 			drawMessages();
 		}
 		
-		public function scrollToBottom():void
-		{
+		public function scrollToBottom():void {
 			scrollToLine(int.MAX_VALUE);
 		}
-		
+	
 	}
 
 }

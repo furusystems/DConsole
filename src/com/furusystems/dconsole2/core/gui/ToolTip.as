@@ -1,5 +1,4 @@
-package com.furusystems.dconsole2.core.gui 
-{
+package com.furusystems.dconsole2.core.gui {
 	import com.furusystems.dconsole2.core.effects.Filters;
 	import com.furusystems.dconsole2.core.gui.TextFieldFactory;
 	import com.furusystems.dconsole2.core.interfaces.IThemeable;
@@ -18,13 +17,11 @@ package com.furusystems.dconsole2.core.gui
 	 * ...
 	 * @author Andreas Roenning
 	 */
-	public class ToolTip extends Sprite implements IThemeable
-	{
+	public class ToolTip extends Sprite implements IThemeable {
 		private var labelField:TextField;
 		private var _console:IConsole;
 		
-		public function ToolTip(console:IConsole) 
-		{
+		public function ToolTip(console:IConsole) {
 			_console = console;
 			mouseEnabled = mouseChildren = false;
 			labelField = TextFieldFactory.getLabel("Help");
@@ -35,35 +32,35 @@ package com.furusystems.dconsole2.core.gui
 			
 			filters = [Filters.CONSOLE_DROPSHADOW];
 			labelField.background = true;
-			addChild(labelField).y = -GUIUnits.SQUARE_UNIT*1.5;
+			addChild(labelField).y = -GUIUnits.SQUARE_UNIT * 1.5;
 			_console.messaging.addCallback(Notifications.TOOLTIP_SHOW_REQUEST, onTooltipShowRequest);
 			_console.messaging.addCallback(Notifications.TOOLTIP_HIDE_REQUEST, onTooltipHideRequest);
 			_console.messaging.addCallback(Notifications.THEME_CHANGED, onThemeChange);
 			visible = false;
 		}
 		
-		private function onTooltipHideRequest():void
-		{
+		private function onTooltipHideRequest():void {
 			hide();
 		}
 		
-		private function onTooltipShowRequest(md:MessageData):void
-		{
-			setToolTip(String(md.data),stage.mouseX,stage.mouseY);
+		private function onTooltipShowRequest(md:MessageData):void {
+			setToolTip(String(md.data), stage.mouseX, stage.mouseY);
 		}
+		
 		public function setToolTip(string:String, x:Number, y:Number):void {
-			if (string.length < 1 || string == " ") return;
+			if (string.length < 1 || string == " ")
+				return;
 			labelField.text = string;
 			visible = true;
 			stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
 			onMouseMove();
 		}
 		
-		private function onMouseMove(e:MouseEvent = null):void 
-		{
+		private function onMouseMove(e:MouseEvent = null):void {
 			x = stage.mouseX + GUIUnits.SQUARE_UNIT;
 			y = stage.mouseY;
 		}
+		
 		public function hide():void {
 			visible = false;
 			stage.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
@@ -71,12 +68,11 @@ package com.furusystems.dconsole2.core.gui
 		
 		/* INTERFACE com.furusystems.dconsole2.core.interfaces.IThemeable */
 		
-		public function onThemeChange(md:MessageData):void
-		{
+		public function onThemeChange(md:MessageData):void {
 			labelField.textColor = Colors.TOOLTIP_FG;
 			labelField.backgroundColor = Colors.TOOLTIP_BG;
 		}
-		
+	
 	}
 
 }

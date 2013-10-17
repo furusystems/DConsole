@@ -1,5 +1,4 @@
-package com.furusystems.dconsole2.core.inspector.buttons 
-{
+package com.furusystems.dconsole2.core.inspector.buttons {
 	import com.furusystems.dconsole2.core.DSprite;
 	import com.furusystems.dconsole2.core.gui.DropDown;
 	import com.furusystems.dconsole2.core.gui.DropDownOption;
@@ -18,42 +17,40 @@ package com.furusystems.dconsole2.core.inspector.buttons
 	 * ...
 	 * @author Andreas Roenning
 	 */
-	public class ModeSelector extends DSprite implements IThemeable
-	{
+	public class ModeSelector extends DSprite implements IThemeable {
 		private var modeMap:Dictionary = new Dictionary();
 		//private var _buttons:Array = [];
 		private var dropdown:DropDown;
 		private var _messaging:PimpCentral;
-		public function ModeSelector(console:IConsole) 
-		{
+		
+		public function ModeSelector(console:IConsole) {
 			_messaging = console.messaging;
 			_messaging.addCallback(Notifications.THEME_CHANGED, onThemeChange);
 			dropdown = new DropDown("Inspectors");
 			addChild(dropdown);
-			dropdown.addEventListener(DropDownEvent.SELECTION, onSelection,false,0,true);
+			dropdown.addEventListener(DropDownEvent.SELECTION, onSelection, false, 0, true);
 		}
 		
-		private function onSelection(e:DropDownEvent):void 
-		{
+		private function onSelection(e:DropDownEvent):void {
 			setCurrentMode(e.selectedOption.data);
 		}
 		
-		//private function onButtonClick(e:MouseEvent):void 
+		//private function onButtonClick(e:MouseEvent):void
 		//{
-			//var btn:AbstractButton = e.currentTarget as AbstractButton;
-			//setCurrentMode(modeMap[btn]);
+		//var btn:AbstractButton = e.currentTarget as AbstractButton;
+		//setCurrentMode(modeMap[btn]);
 		//}
 		
 		/* INTERFACE com.furusystems.dconsole2.core.interfaces.IThemeable */
 		
-		public function onThemeChange(md:MessageData):void
-		{
+		public function onThemeChange(md:MessageData):void {
 			dropdown.updateAppearance();
-			//for (var i:int = 0; i < _buttons.length; i++) 
+			//for (var i:int = 0; i < _buttons.length; i++)
 			//{
-				//AbstractButton(_buttons[i]).updateAppearance();
+			//AbstractButton(_buttons[i]).updateAppearance();
 			//}
 		}
+		
 		public function addOption(v:IDConsoleInspectorPlugin):void {
 			dropdown.addOption(new DropDownOption(v.title, v.view, true));
 			//var btn:AbstractButton = createButton(v.tabIcon);
@@ -63,20 +60,20 @@ package com.furusystems.dconsole2.core.inspector.buttons
 			//removeAllChildren();
 			//addChildren(_buttons, 0);
 		}
+		
 		public function removeButton(v:IDConsoleInspectorPlugin):void {
 			//TODO: Remove and clean up button and mapping
 			dropdown.removeOption(v.title);
 		}
 		
-		public function setCurrentMode(v:AbstractInspectorView):void
-		{
-			//for (var i:int = 0; i < _buttons.length; i++) 
+		public function setCurrentMode(v:AbstractInspectorView):void {
+			//for (var i:int = 0; i < _buttons.length; i++)
 			//{
-				//if (modeMap[_buttons[i]] == v) {
-					//AbstractButton(_buttons[i]).active = true;
-				//}else {
-					//AbstractButton(_buttons[i]).active = false;
-				//}
+			//if (modeMap[_buttons[i]] == v) {
+			//AbstractButton(_buttons[i]).active = true;
+			//}else {
+			//AbstractButton(_buttons[i]).active = false;
+			//}
 			//}
 			dropdown.setCurrentSelection(v.title);
 			_messaging.send(Notifications.INSPECTOR_MODE_CHANGE, v, this);

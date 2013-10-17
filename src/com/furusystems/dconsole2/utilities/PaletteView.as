@@ -1,23 +1,22 @@
-package com.furusystems.dconsole2.utilities 
-{
+package com.furusystems.dconsole2.utilities {
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
+	
 	/**
 	 * ...
 	 * @author Andreas Rønning
 	 */
-	public class PaletteView extends Sprite
-	{
+	public class PaletteView extends Sprite {
 		
 		private var _selectedSwatch:ColorSwatch = null;
 		private var rowLength:int;
 		private var nameField:TextField = new TextField();
 		private var swatchContainer:Sprite = new Sprite();
 		private var configurer:ThemeConfigurer;
-		public function PaletteView(rowLength:int = 8) 
-		{
+		
+		public function PaletteView(rowLength:int = 8) {
 			this.rowLength = rowLength;
 			addChild(swatchContainer);
 			addChild(nameField);
@@ -28,21 +27,20 @@ package com.furusystems.dconsole2.utilities
 			nameField.text = "Bahh";
 			nameField.addEventListener(Event.CHANGE, onTextchange);
 		}
+		
 		public function setConfigurer(p:ThemeConfigurer):void {
 			this.configurer = p;
 		}
 		
-		private function onTextchange(e:Event):void 
-		{
+		private function onTextchange(e:Event):void {
 			if (_selectedSwatch != null) {
 				_selectedSwatch.color.name = nameField.text;
 			}
 		}
 		
-		public function setColors(colors:Vector.<ColorDef>):void 
-		{
+		public function setColors(colors:Vector.<ColorDef>):void {
 			clear();
-			for each(var c:ColorDef in colors){
+			for each (var c:ColorDef in colors) {
 				var swatch:ColorSwatch = new ColorSwatch(c);
 				swatchContainer.addChild(swatch);
 				swatch.addEventListener(MouseEvent.MOUSE_DOWN, onSwatchClicked);
@@ -51,11 +49,11 @@ package com.furusystems.dconsole2.utilities
 			layout();
 		}
 		
-		private function onSwatchClicked(e:MouseEvent):void 
-		{
+		private function onSwatchClicked(e:MouseEvent):void {
 			setSelectedSwatch(e.currentTarget as ColorSwatch);
-			
+		
 		}
+		
 		private function setSelectedSwatch(swatch:ColorSwatch):void {
 			if (_selectedSwatch != null) {
 				_selectedSwatch.selected = false;
@@ -69,12 +67,12 @@ package com.furusystems.dconsole2.utilities
 			}
 		}
 		
-		private function clear():void 
-		{
+		private function clear():void {
 			while (swatchContainer.numChildren > 0) {
 				swatchContainer.removeChildAt(0).removeEventListener(MouseEvent.MOUSE_DOWN, onSwatchClicked);
 			}
 		}
+		
 		public function addSwatch(color:ColorDef):void {
 			var swatch:ColorSwatch = new ColorSwatch(color);
 			swatchContainer.addChild(swatch);
@@ -82,11 +80,12 @@ package com.furusystems.dconsole2.utilities
 			swatch.addEventListener(Event.CHANGE, onSwatchChange);
 			layout();
 		}
-		private function onSwatchChange(e:Event):void 
-		{
+		
+		private function onSwatchChange(e:Event):void {
 			var swatch:ColorSwatch = e.currentTarget as ColorSwatch;
 			configurer.updateColor(swatch.color);
 		}
+		
 		public function removeSwatch(swatch:ColorSwatch):void {
 			swatchContainer.removeChild(swatch);
 			swatch.removeEventListener(MouseEvent.MOUSE_DOWN, onSwatchClicked);
@@ -94,13 +93,12 @@ package com.furusystems.dconsole2.utilities
 			layout();
 		}
 		
-		private function layout():void 
-		{
+		private function layout():void {
 			var x:int = 0;
 			var y:int = 0;
 			for (var i:int = 0; i < swatchContainer.numChildren; i++) {
-				swatchContainer.getChildAt(i).x = x * ((ColorSwatch.RADIUS<<1)+2);
-				swatchContainer.getChildAt(i).y = y * ((ColorSwatch.RADIUS<<1)+2);
+				swatchContainer.getChildAt(i).x = x * ((ColorSwatch.RADIUS << 1) + 2);
+				swatchContainer.getChildAt(i).y = y * ((ColorSwatch.RADIUS << 1) + 2);
 				x++;
 				if (x > rowLength) {
 					x = 0;
@@ -110,10 +108,10 @@ package com.furusystems.dconsole2.utilities
 			nameField.y = swatchContainer.height + 2;
 		}
 		
-		public function get selectedSwatch():ColorSwatch 
-		{
+		public function get selectedSwatch():ColorSwatch {
 			return _selectedSwatch;
 		}
+		
 		public function save():XML {
 			var xml:XML = new XML(<data/>);
 			for (var i:int = swatchContainer.numChildren; i--; ) {
@@ -124,8 +122,7 @@ package com.furusystems.dconsole2.utilities
 			return xml;
 		}
 		
-		public function getColorByName(name:String):uint
-		{
+		public function getColorByName(name:String):uint {
 			for (var i:int = swatchContainer.numChildren; i--; ) {
 				var swatch:ColorSwatch = swatchContainer.getChildAt(i) as ColorSwatch;
 				if (swatch.color.name.toLowerCase() == name.toLowerCase()) {
@@ -135,17 +132,16 @@ package com.furusystems.dconsole2.utilities
 			return 0;
 		}
 		
-		public function selectSwatchByName(name:String):void 
-		{
+		public function selectSwatchByName(name:String):void {
 			for (var i:int = swatchContainer.numChildren; i--; ) {
 				var swatch:ColorSwatch = swatchContainer.getChildAt(i) as ColorSwatch;
 				if (swatch.color.name.toLowerCase() == name.toLowerCase()) {
-					setSelectedSwatch(swatch); 
+					setSelectedSwatch(swatch);
 					return;
 				}
 			}
 		}
-		
+	
 	}
 
 }

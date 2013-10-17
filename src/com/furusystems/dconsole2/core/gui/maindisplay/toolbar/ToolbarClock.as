@@ -1,5 +1,4 @@
-package com.furusystems.dconsole2.core.gui.maindisplay.toolbar 
-{
+package com.furusystems.dconsole2.core.gui.maindisplay.toolbar {
 	import com.furusystems.dconsole2.core.gui.TextFieldFactory;
 	import com.furusystems.dconsole2.core.Notifications;
 	import com.furusystems.dconsole2.core.style.Colors;
@@ -14,13 +13,11 @@ package com.furusystems.dconsole2.core.gui.maindisplay.toolbar
 	 * ...
 	 * @author Andreas Roenning
 	 */
-	public class ToolbarClock extends Sprite
-	{
+	public class ToolbarClock extends Sprite {
 		private var _tf:TextField;
 		private var _mouseOver:Boolean;
 		
-		public function ToolbarClock(messaging:PimpCentral) 
-		{
+		public function ToolbarClock(messaging:PimpCentral) {
 			_tf = TextFieldFactory.getLabel("test");
 			_tf.autoSize = TextFieldAutoSize.LEFT;
 			_tf.textColor = Colors.HEADER_FG;
@@ -32,31 +29,29 @@ package com.furusystems.dconsole2.core.gui.maindisplay.toolbar
 			addEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
 		}
 		
-		private function onMouseOut(e:MouseEvent):void 
-		{
+		private function onMouseOut(e:MouseEvent):void {
 			_mouseOver = false;
 		}
 		
-		private function onMouseOver(e:MouseEvent):void 
-		{
+		private function onMouseOver(e:MouseEvent):void {
 			_mouseOver = true;
 		}
+		
 		public function setColor(color:uint):void {
 			_tf.textColor = color;
 		}
 		
-		public function updateClock(md:MessageData):void 
-		{
-			if(_mouseOver){
+		public function updateClock(md:MessageData):void {
+			if (_mouseOver) {
 				_tf.text = new Date().toString();
 				_tf.alpha = 1;
-			}else {
+			} else {
 				_tf.text = new Date().toTimeString();
 				_tf.alpha = 0.5;
 			}
 			_tf.x = -_tf.width - 10;
 		}
-		
+	
 	}
 
 }

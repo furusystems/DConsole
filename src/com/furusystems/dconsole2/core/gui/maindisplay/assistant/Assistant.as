@@ -1,5 +1,4 @@
-package com.furusystems.dconsole2.core.gui.maindisplay.assistant 
-{
+package com.furusystems.dconsole2.core.gui.maindisplay.assistant {
 	import com.furusystems.dconsole2.core.gui.layout.IContainable;
 	import com.furusystems.dconsole2.core.interfaces.IThemeable;
 	import com.furusystems.dconsole2.core.Notifications;
@@ -22,8 +21,7 @@ package com.furusystems.dconsole2.core.gui.maindisplay.assistant
 	 * The assistant is a line of text following the input field. It displays any relevant tooltips.
 	 * @author Andreas Roenning
 	 */
-	public class Assistant extends Sprite implements IContainable,IThemeable
-	{
+	public class Assistant extends Sprite implements IContainable, IThemeable {
 		private var _infoField:TextField;
 		private var _idle:Boolean = true;
 		private var _snapshot:BitmapData;
@@ -31,8 +29,8 @@ package com.furusystems.dconsole2.core.gui.maindisplay.assistant
 		private var _time:Number = 0;
 		private var _prevTimeUpdate:Number = 0;
 		private var _cornerHandle:CornerScaleHandle
-		public function Assistant(console:IConsole) 
-		{
+		
+		public function Assistant(console:IConsole) {
 			_cornerHandle = new CornerScaleHandle(console);
 			_infoField = new TextField();
 			_infoField.background = true;
@@ -56,30 +54,27 @@ package com.furusystems.dconsole2.core.gui.maindisplay.assistant
 			addChild(_cornerHandle).visible = false;
 		}
 		
-		private function onFrameUpdate(md:MessageData):void
-		{
-			if (text == "") return;
+		private function onFrameUpdate(md:MessageData):void {
+			if (text == "")
+				return;
 			if (_infoField.maxScrollH > 0) {
-				_time += getTimer()-_prevTimeUpdate;
+				_time += getTimer() - _prevTimeUpdate;
 				_infoField.scrollH = (Math.sin(_time / 1000) + 1) / 2 * _infoField.maxScrollH;
 				_prevTimeUpdate = getTimer();
-			}else {
+			} else {
 				_time = _prevTimeUpdate = 0;
 			}
 		}
 		
-		private function onClearRequest(md:MessageData):void
-		{
+		private function onClearRequest(md:MessageData):void {
 			clear();
 		}
 		
-		private function onMessageRequest(md:MessageData):void
-		{
+		private function onMessageRequest(md:MessageData):void {
 			text = md.data.toString();
 		}
 		
-		private function onMouseDown(e:MouseEvent):void 
-		{
+		private function onMouseDown(e:MouseEvent):void {
 			stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
 			_snapshot = new BitmapData(_infoField.width, _infoField.height, false, 0);
 			_snapshot.draw(_infoField);
@@ -88,22 +83,24 @@ package com.furusystems.dconsole2.core.gui.maindisplay.assistant
 			_infoField.visible = false;
 		}
 		
-		private function onMouseUp(e:MouseEvent):void 
-		{
+		private function onMouseUp(e:MouseEvent):void {
 			stage.removeEventListener(MouseEvent.MOUSE_UP, onMouseUp);
 			_snapshot.dispose();
 			_snapshotDisplay.visible = false;
 			_infoField.visible = true;
 		}
+		
 		public function get text():String {
 			return _infoField.text;
 		}
+		
 		public function set text(s:String):void {
 			_infoField.text = s;
 			_infoField.scrollH = 0;
 			_time = _prevTimeUpdate = 0;
 			_idle = false;
 		}
+		
 		/**
 		 * Sets the current text, but doesn't mark the assistant as busy
 		 * @param	s
@@ -112,6 +109,7 @@ package com.furusystems.dconsole2.core.gui.maindisplay.assistant
 			_infoField.text = s;
 			_idle = true;
 		}
+		
 		public function clear():void {
 			setWeakText(Strings.ASSISTANT_STRINGS.get(Strings.ASSISTANT_STRINGS.DEFAULT_ID));
 			//text = "";
@@ -120,8 +118,7 @@ package com.furusystems.dconsole2.core.gui.maindisplay.assistant
 		
 		/* INTERFACE com.furusystems.dconsole2.core.gui.layout.IContainable */
 		
-		public function onParentUpdate(allotedRect:Rectangle):void
-		{
+		public function onParentUpdate(allotedRect:Rectangle):void {
 			y = allotedRect.y;
 			x = allotedRect.x;
 			_infoField.height = GUIUnits.SQUARE_UNIT;
@@ -131,31 +128,31 @@ package com.furusystems.dconsole2.core.gui.maindisplay.assistant
 		
 		/* INTERFACE com.furusystems.dconsole2.core.interfaces.IThemeable */
 		
-		public function onThemeChange(md:MessageData):void
-		{
+		public function onThemeChange(md:MessageData):void {
 			_infoField.backgroundColor = Colors.ASSISTANT_BG
 			_infoField.textColor = Colors.ASSISTANT_FG;
 		}
 		
-		public function get rect():Rectangle
-		{
+		public function get rect():Rectangle {
 			return getRect(parent);
 		}
 		
-		public function get minHeight():Number
-		{
+		public function get minHeight():Number {
 			return 0;
 		}
 		
-		public function get minWidth():Number
-		{
+		public function get minWidth():Number {
 			return 0;
 		}
 		
-		public function get idle():Boolean { return _idle; }
+		public function get idle():Boolean {
+			return _idle;
+		}
 		
-		public function get cornerHandle():CornerScaleHandle { return _cornerHandle; }
-		
+		public function get cornerHandle():CornerScaleHandle {
+			return _cornerHandle;
+		}
+	
 	}
 
 }

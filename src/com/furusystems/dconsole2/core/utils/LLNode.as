@@ -1,25 +1,25 @@
-package com.furusystems.dconsole2.core.utils 
-{
+package com.furusystems.dconsole2.core.utils {
 	import com.furusystems.dconsole2.core.interfaces.IDisposable;
+	
 	/**
 	 * Generic doubly linked list node. Can serve as head, tail or whatever
 	 * @author Andreas Ronning
 	 */
-	public final class LLNode implements IDisposable
-	{
+	public final class LLNode implements IDisposable {
 		public var data:* = null;
 		public var next:LLNode = null;
 		public var prev:LLNode = null;
+		
 		/**
 		 * Create a new node with data
 		 * @param	data
 		 */
-		public function LLNode(data:*) 
-		{
+		public function LLNode(data:*) {
 			this.data = data;
 		}
+		
 		/**
-		 * Adds a node to the back of this node 
+		 * Adds a node to the back of this node
 		 * If THIS node has no data, this node is populated instead
 		 * @param	data The data to append
 		 * @return The newly created node
@@ -38,8 +38,9 @@ package com.furusystems.dconsole2.core.utils
 			next = node;
 			return node;
 		}
+		
 		/**
-		 * Adds a node to the front of this node. 
+		 * Adds a node to the front of this node.
 		 * If THIS node has no data, this node is populated instead
 		 * @param	data The data to prepend
 		 * @return The newly created node
@@ -58,12 +59,14 @@ package com.furusystems.dconsole2.core.utils
 			prev = node;
 			return node;
 		}
+		
 		/**
 		 * Does this node have a trailing node?
 		 */
 		public function get hasNext():Boolean {
 			return next != null;
 		}
+		
 		/**
 		 * Does this node have a preceding node?
 		 */
@@ -81,6 +84,7 @@ package com.furusystems.dconsole2.core.utils
 			}
 			return this;
 		}
+		
 		/**
 		 * Get the first node in this list
 		 * @return
@@ -93,13 +97,12 @@ package com.furusystems.dconsole2.core.utils
 		}
 		
 		/**
-		 * Removes this node from the list. 
+		 * Removes this node from the list.
 		 * If it is the head, it merges with the next node in the list, taking on its data
 		 * If it is the tail, it removes the reference to itself and disposes
 		 * If it's the last item in the list, it disposes
 		 */
-		public function remove():* 
-		{
+		public function remove():* {
 			var d:*;
 			if (!hasNext && !hasPrev) {
 				d = data;
@@ -109,7 +112,7 @@ package com.furusystems.dconsole2.core.utils
 			
 			if (hasNext) {
 				next.prev = prev;
-			}else {
+			} else {
 				prev.next = null;
 				d = data;
 				dispose();
@@ -118,7 +121,7 @@ package com.furusystems.dconsole2.core.utils
 			
 			if (hasPrev) {
 				prev.next = next;
-			}else {
+			} else {
 				d = data;
 				merge(next);
 				//prev = null;
@@ -126,6 +129,7 @@ package com.furusystems.dconsole2.core.utils
 			}
 			return data;
 		}
+		
 		/**
 		 * Absorbs attributes of a given node, and then disposes the target node
 		 * @param	node
@@ -147,8 +151,7 @@ package com.furusystems.dconsole2.core.utils
 		 * Clear this node's data and linked list position
 		 * You should use remove() instead to maintain list contiguity
 		 */
-		public function dispose():void 
-		{
+		public function dispose():void {
 			data = null;
 			next = prev = null;
 		}
@@ -165,21 +168,21 @@ package com.furusystems.dconsole2.core.utils
 				while (size > 0) {
 					count++;
 					var ob:* = getTail().remove();
-					if(disposeDisposables){
+					if (disposeDisposables) {
 						if (ob is IDisposable) {
 							IDisposable(ob).dispose();
 						}
 					}
 				}
 				return count;
-			}else{
+			} else {
 				return head.clearList();
 			}
 		}
 		
 		/**
 		 * Executes a callback on the data of every node following this node
-		 * @param	func 
+		 * @param	func
 		 */
 		public function forEach(func:Function):void {
 			if (func.length != 1) {
@@ -192,10 +195,11 @@ package com.furusystems.dconsole2.core.utils
 				func(n.data);
 			}
 		}
-		public function toString():String 
-		{
+		
+		public function toString():String {
 			return "[LLNode data=" + data + " hasNext=" + hasNext + " hasPrev=" + hasPrev + "]";
 		}
+		
 		/**
 		 * Retrieve a node by its list index
 		 * @param	idx
@@ -205,12 +209,14 @@ package com.furusystems.dconsole2.core.utils
 			var out:LLNode = getHead();
 			var count:int = 0;
 			while (out.hasNext) {
-				if (count == idx) return out;
+				if (count == idx)
+					return out;
 				count++;
 				out = out.next;
 			}
 			return null;
 		}
+		
 		/**
 		 * Retrieve a node by its data
 		 * @param	data
@@ -219,7 +225,8 @@ package com.furusystems.dconsole2.core.utils
 		public function getByData(data:*):LLNode {
 			var out:LLNode = getHead();
 			while (out.hasNext) {
-				if (out.data == data) return out;
+				if (out.data == data)
+					return out;
 				out = out.next;
 			}
 			return null;
@@ -231,7 +238,7 @@ package com.furusystems.dconsole2.core.utils
 		 * @param rest Any arguments to append to the filtering function
 		 * @return
 		 */
-		public function filter(func:Function, ...args:Array):LLNode {
+		public function filter(func:Function, ... args:Array):LLNode {
 			var out:LLNode = new LLNode(null);
 			var n:LLNode = getHead();
 			while (n.hasNext) {
@@ -242,13 +249,14 @@ package com.furusystems.dconsole2.core.utils
 			}
 			return out;
 		}
+		
 		/**
 		 * Execute a function for every node's data, and if it returns true, add it to a list.
 		 * @param	func A filtering function taking at least one argument
 		 * @param rest Any arguments to append to the filtering function
 		 * @return An untyped vector
 		 */
-		public function filterToArray(func:Function, ...args:Array):Array{
+		public function filterToArray(func:Function, ... args:Array):Array {
 			var out:Array = [];
 			var n:LLNode = getHead();
 			while (n.hasNext) {
@@ -259,9 +267,11 @@ package com.furusystems.dconsole2.core.utils
 			}
 			return out;
 		}
+		
 		public function contains(data:*):Boolean {
-			return getByData(data)!=null;
+			return getByData(data) != null;
 		}
+		
 		/**
 		 * Steps through the list and removes any nodes with null data
 		 * @return The number of items that were removed
@@ -273,13 +283,14 @@ package com.furusystems.dconsole2.core.utils
 				var n:LLNode = head;
 				while (n.hasNext) {
 					n = n.next;
-					if (n.data == null) nodesToRemove.push(n);
+					if (n.data == null)
+						nodesToRemove.push(n);
 				}
-				for each(n in nodesToRemove) {
+				for each (n in nodesToRemove) {
 					n.remove();
 				}
 				return nodesToRemove.length;
-			}else{
+			} else {
 				return head.consolidate();
 			}
 		}
@@ -289,16 +300,17 @@ package com.furusystems.dconsole2.core.utils
 		 */
 		public function get size():int {
 			var out:LLNode = getHead();
-			var size:int = out.data == null?0:1;
+			var size:int = out.data == null ? 0 : 1;
 			while (out.hasNext) {
 				out = out.next;
-				size ++;
+				size++;
 			}
 			return size;
 		}
+		
 		public function getIterator():ListIterator {
 			return new ListIterator(this);
 		}
-		
+	
 	}
 }

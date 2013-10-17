@@ -1,5 +1,4 @@
-﻿package com.furusystems.dconsole2.core.bitmap
-{
+﻿package com.furusystems.dconsole2.core.bitmap {
 	import flash.display.BitmapData;
 	import flash.geom.Point;
 	
@@ -8,19 +7,18 @@
 	 * @author Andreas Roenning
 	 */
 	
-	public final class Bresenham 
-	{
+	public final class Bresenham {
 		private static const _XY:BresenhamSharedData = new BresenhamSharedData();
+		
 		public static function line_pixel(p1:Point, p2:Point, target:BitmapData, color:uint = 0):void {
 			_XY.update(p1, p2);
 			var y:int = _XY.y0;
 			target.lock();
 			target.setPixel(p1.x, p1.y, color);
-			for (var x:int = _XY.x0; x < _XY.x1; x++) 
-			{	
+			for (var x:int = _XY.x0; x < _XY.x1; x++) {
 				if (_XY.steep) {
 					target.setPixel(y, x, color);
-				}else {
+				} else {
 					target.setPixel(x, y, color);
 				}
 				_XY.error = _XY.error - _XY.deltay;
@@ -32,16 +30,16 @@
 			target.setPixel(p2.x, p2.y, color);
 			target.unlock();
 		}
+		
 		public static function line_pixel32(p1:Point, p2:Point, target:BitmapData, color:uint = 0xFF000000):void {
 			_XY.update(p1, p2);
 			var y:int = _XY.y0;
 			target.lock();
 			target.setPixel32(p1.x, p1.y, color);
-			for (var x:int = _XY.x0; x < _XY.x1; x++) 
-			{	
+			for (var x:int = _XY.x0; x < _XY.x1; x++) {
 				if (_XY.steep) {
 					target.setPixel32(y, x, color);
-				}else {
+				} else {
 					target.setPixel32(x, y, color);
 				}
 				_XY.error = _XY.error - _XY.deltay;
@@ -53,6 +51,7 @@
 			target.setPixel32(p2.x, p2.y, color);
 			target.unlock();
 		}
+		
 		public static function line_stamp(p1:Point, p2:Point, target:BitmapData, stampSource:BitmapData, centerStamp:Boolean = true):void {
 			if (centerStamp) {
 				var offsetX:int = 0;
@@ -68,15 +67,14 @@
 			var targetPointInv:Point = new Point();
 			target.lock();
 			target.copyPixels(stampSource, stampSource.rect, p1, null, null, true);
-			for (var x:int = _XY.x0; x < _XY.x1; x++) 
-			{
+			for (var x:int = _XY.x0; x < _XY.x1; x++) {
 				targetPoint.x = x;
 				targetPoint.y = y;
 				targetPointInv.x = y;
 				targetPointInv.y = x;
 				if (_XY.steep) {
 					target.copyPixels(stampSource, stampSource.rect, targetPointInv, null, null, true);
-				}else {
+				} else {
 					target.copyPixels(stampSource, stampSource.rect, targetPoint, null, null, true);
 				}
 				_XY.error = _XY.error - _XY.deltay;
@@ -88,7 +86,8 @@
 			target.copyPixels(stampSource, stampSource.rect, p2, null, null, true);
 			target.unlock();
 		}
-		public static function circle(p:Point, radius:int,target:BitmapData,color:uint = 0):void {
+		
+		public static function circle(p:Point, radius:int, target:BitmapData, color:uint = 0):void {
 			var f:int = 1 - radius;
 			var ddF_x:int = 1;
 			var ddF_y:int = -2 * radius;
@@ -96,35 +95,35 @@
 			var y:int = radius;
 			var x0:int = p.x;
 			var y0:int = p.y;
-		 
+			
 			target.lock();
 			target.setPixel(x0, y0 + radius, color);
 			target.setPixel(x0, y0 - radius, color);
 			target.setPixel(x0 + radius, y0, color);
 			target.setPixel(x0 - radius, y0, color);
-		 
-			while(x < y){
-			  if(f >= 0) 
-			  {
-				y--;
-				ddF_y += 2;
-				f += ddF_y;
-			  }
-			  x++;
-			  ddF_x += 2;
-			  f += ddF_x;    
-			  target.setPixel(x0 + x, y0 + y, color);
-			  target.setPixel(x0 - x, y0 + y, color);
-			  target.setPixel(x0 + x, y0 - y, color);
-			  target.setPixel(x0 - x, y0 - y, color);
-			  target.setPixel(x0 + y, y0 + x, color);
-			  target.setPixel(x0 - y, y0 + x, color);
-			  target.setPixel(x0 + y, y0 - x, color);
-			  target.setPixel(x0 - y, y0 - x, color);
+			
+			while (x < y) {
+				if (f >= 0) {
+					y--;
+					ddF_y += 2;
+					f += ddF_y;
+				}
+				x++;
+				ddF_x += 2;
+				f += ddF_x;
+				target.setPixel(x0 + x, y0 + y, color);
+				target.setPixel(x0 - x, y0 + y, color);
+				target.setPixel(x0 + x, y0 - y, color);
+				target.setPixel(x0 - x, y0 - y, color);
+				target.setPixel(x0 + y, y0 + x, color);
+				target.setPixel(x0 - y, y0 + x, color);
+				target.setPixel(x0 + y, y0 - x, color);
+				target.setPixel(x0 - y, y0 - x, color);
 			}
 			target.unlock();
 		}
-		public static function circle32(p:Point, radius:int,target:BitmapData,color:uint = 0xFF000000):void {
+		
+		public static function circle32(p:Point, radius:int, target:BitmapData, color:uint = 0xFF000000):void {
 			var f:int = 1 - radius;
 			var ddF_x:int = 1;
 			var ddF_y:int = -2 * radius;
@@ -132,41 +131,42 @@
 			var y:int = radius;
 			var x0:int = p.x;
 			var y0:int = p.y;
-		 
+			
 			target.lock();
 			target.setPixel32(x0, y0 + radius, color);
 			target.setPixel32(x0, y0 - radius, color);
 			target.setPixel32(x0 + radius, y0, color);
 			target.setPixel32(x0 - radius, y0, color);
-		 
-			while(x < y){
-			  if(f >= 0) 
-			  {
-				y--;
-				ddF_y += 2;
-				f += ddF_y;
-			  }
-			  x++;
-			  ddF_x += 2;
-			  f += ddF_x;    
-			  target.setPixel32(x0 + x, y0 + y, color);
-			  target.setPixel32(x0 - x, y0 + y, color);
-			  target.setPixel32(x0 + x, y0 - y, color);
-			  target.setPixel32(x0 - x, y0 - y, color);
-			  target.setPixel32(x0 + y, y0 + x, color);
-			  target.setPixel32(x0 - y, y0 + x, color);
-			  target.setPixel32(x0 + y, y0 - x, color);
-			  target.setPixel32(x0 - y, y0 - x, color);
+			
+			while (x < y) {
+				if (f >= 0) {
+					y--;
+					ddF_y += 2;
+					f += ddF_y;
+				}
+				x++;
+				ddF_x += 2;
+				f += ddF_x;
+				target.setPixel32(x0 + x, y0 + y, color);
+				target.setPixel32(x0 - x, y0 + y, color);
+				target.setPixel32(x0 + x, y0 - y, color);
+				target.setPixel32(x0 - x, y0 - y, color);
+				target.setPixel32(x0 + y, y0 + x, color);
+				target.setPixel32(x0 - y, y0 + x, color);
+				target.setPixel32(x0 + y, y0 - x, color);
+				target.setPixel32(x0 - y, y0 - x, color);
 			}
 			target.unlock();
 		}
 	}
 }
 import flash.geom.Point;
+
 internal final class BresenhamSharedData {
 	public var x0:int, x1:int, y0:int, y1:int, deltax:int, deltay:int, error:int, ystep:int;
 	public var steep:Boolean;
 	private var t1:int, t2:int, temp:int;
+	
 	public function update(p1:Point, p2:Point):void {
 		t1 = p1.y - p2.y;
 		t2 = p1.x - p2.x;

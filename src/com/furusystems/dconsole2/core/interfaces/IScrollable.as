@@ -1,12 +1,10 @@
-package com.furusystems.dconsole2.core.interfaces 
-{
+package com.furusystems.dconsole2.core.interfaces {
 	
 	/**
 	 * ...
 	 * @author Andreas Roenning
 	 */
-	public interface IScrollable 
-	{
+	public interface IScrollable {
 		function scrollByDelta(x:Number, y:Number):void;
 		function get scrollX():Number;
 		function get scrollY():Number;
@@ -17,5 +15,5 @@ package com.furusystems.dconsole2.core.interfaces
 		function get scrollXEnabled():Boolean;
 		function get scrollYEnabled():Boolean;
 	}
-	
+
 }

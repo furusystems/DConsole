@@ -1,5 +1,4 @@
-package com.furusystems.dconsole2.core.gui
-{
+package com.furusystems.dconsole2.core.gui {
 	import com.furusystems.dconsole2.core.style.Colors;
 	import com.furusystems.dconsole2.core.style.GUIUnits;
 	import flash.display.Bitmap;
@@ -8,12 +7,12 @@ package com.furusystems.dconsole2.core.gui
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.geom.Rectangle;
+	
 	/**
 	 * ...
 	 * @author Andreas Roenning
 	 */
-	public class AbstractButton extends Sprite
-	{
+	public class AbstractButton extends Sprite {
 		protected var _bg:Shape = new Shape();
 		protected var _iconDisplay:Bitmap = new Bitmap();
 		protected var _inactiveBmd:BitmapData;
@@ -22,8 +21,8 @@ package com.furusystems.dconsole2.core.gui
 		protected var _toggleSwitch:Boolean = false;
 		protected var _height:Number;
 		protected var _width:Number;
-		public function AbstractButton(width:Number = GUIUnits.SQUARE_UNIT, height:Number = GUIUnits.SQUARE_UNIT)
-		{
+		
+		public function AbstractButton(width:Number = GUIUnits.SQUARE_UNIT, height:Number = GUIUnits.SQUARE_UNIT) {
 			_width = width;
 			_height = height;
 			addChild(_bg);
@@ -35,35 +34,37 @@ package com.furusystems.dconsole2.core.gui
 			addEventListener(MouseEvent.MOUSE_DOWN, doClick, false, 0, true);
 		}
 		
-		protected function doClick(e:MouseEvent):void 
-		{
+		protected function doClick(e:MouseEvent):void {
 			if (_toggleSwitch) {
 				active = !active;
 			}
 		}
+		
 		public function setIcon(bmd:BitmapData):void {
 			_iconDisplay.bitmapData = bmd;
 			_iconDisplay.x = Math.floor(_bg.width / 2 - _iconDisplay.width / 2);
 			_iconDisplay.y = Math.floor(_bg.height / 2 - _iconDisplay.height / 2);
 		}
 		
-		public function get active():Boolean { return _active; }
+		public function get active():Boolean {
+			return _active;
+		}
 		
-		public function set active(value:Boolean):void 
-		{
+		public function set active(value:Boolean):void {
 			_active = value;
 			_bg.graphics.clear();
 			if (_active) {
 				_bg.graphics.beginFill(Colors.BUTTON_ACTIVE_BG);
-			}else {
+			} else {
 				_bg.graphics.beginFill(Colors.BUTTON_INACTIVE_BG);
 			}
 			_bg.graphics.drawRect(0, 0, _width, _height);
 		}
+		
 		public function updateAppearance():void {
 			active = active;
 		}
-		
+	
 	}
 
 }

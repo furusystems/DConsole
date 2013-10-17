@@ -1,5 +1,4 @@
-package com.furusystems.dconsole2.core.gui.maindisplay.assistant 
-{
+package com.furusystems.dconsole2.core.gui.maindisplay.assistant {
 	import com.furusystems.dconsole2.core.Notifications;
 	import com.furusystems.dconsole2.core.strings.Strings;
 	import com.furusystems.dconsole2.core.style.Colors;
@@ -15,14 +14,13 @@ package com.furusystems.dconsole2.core.gui.maindisplay.assistant
 	 * The scaling handle shown in the lower right corner when the console is in windowed mode
 	 * @author Andreas Roenning
 	 */
-	public class CornerScaleHandle extends Sprite
-	{
+	public class CornerScaleHandle extends Sprite {
 		
 		private var _delta:Point = new Point();
 		private var _prevDragPos:Point = new Point();
 		private var _messaging:PimpCentral;
-		public function CornerScaleHandle(console:IConsole) 
-		{
+		
+		public function CornerScaleHandle(console:IConsole) {
 			_messaging = console.messaging;
 			//TODO: Tie into theming
 			alpha = 0.8;
@@ -38,18 +36,15 @@ package com.furusystems.dconsole2.core.gui.maindisplay.assistant
 			addEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
 		}
 		
-		private function onMouseOut(e:MouseEvent):void 
-		{
+		private function onMouseOut(e:MouseEvent):void {
 			_messaging.send(Notifications.ASSISTANT_CLEAR_REQUEST);
 		}
 		
-		private function onMouseOver(e:MouseEvent):void 
-		{
+		private function onMouseOver(e:MouseEvent):void {
 			_messaging.send(Notifications.ASSISTANT_MESSAGE_REQUEST, Strings.ASSISTANT_STRINGS.get(Strings.ASSISTANT_STRINGS.CORNER_HANDLE_ID), this);
 		}
 		
-		private function onMouseDown(e:MouseEvent):void 
-		{
+		private function onMouseDown(e:MouseEvent):void {
 			alpha = 1;
 			stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
 			stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
@@ -58,8 +53,7 @@ package com.furusystems.dconsole2.core.gui.maindisplay.assistant
 			_messaging.send(Notifications.CORNER_DRAG_START, _prevDragPos, this);
 		}
 		
-		private function onMouseMove(e:MouseEvent):void 
-		{
+		private function onMouseMove(e:MouseEvent):void {
 			_delta.x = stage.mouseX - _prevDragPos.x;
 			_delta.y = stage.mouseY - _prevDragPos.y;
 			_prevDragPos.x = stage.mouseX;
@@ -67,8 +61,7 @@ package com.furusystems.dconsole2.core.gui.maindisplay.assistant
 			_messaging.send(Notifications.CORNER_DRAG_UPDATE, _delta, this);
 		}
 		
-		private function onMouseUp(e:MouseEvent):void 
-		{
+		private function onMouseUp(e:MouseEvent):void {
 			alpha = 0.8;
 			_delta.x = stage.mouseX - _prevDragPos.x;
 			_delta.y = stage.mouseY - _prevDragPos.y;
@@ -78,7 +71,7 @@ package com.furusystems.dconsole2.core.gui.maindisplay.assistant
 			stage.removeEventListener(MouseEvent.MOUSE_UP, onMouseUp);
 			_messaging.send(Notifications.CORNER_DRAG_STOP, _delta, this);
 		}
-		
+	
 	}
 
 }

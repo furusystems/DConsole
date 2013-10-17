@@ -1,11 +1,10 @@
-package com.furusystems.dconsole2.core.style 
-{
+package com.furusystems.dconsole2.core.style {
+	
 	/**
 	 * ...
 	 * @author Andreas Roenning
 	 */
-	public class BaseColors
-	{
+	public class BaseColors {
 		public static const WHITE:uint = 0xFFFFFF;
 		public static const BLACK:uint = 0;
 		public static const GRAY:uint = 0x808080;
@@ -19,9 +18,7 @@ package com.furusystems.dconsole2.core.style
 		public static const BLUE:uint = 0x268bd2;
 		public static const CYAN:uint = 0x2aa198;
 		public static const GREEN:uint = 0x859900;
-		
-		
-		
+	
 	}
 
 }

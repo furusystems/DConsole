@@ -1,5 +1,4 @@
-﻿package com.furusystems.dconsole2.core.input
-{
+﻿package com.furusystems.dconsole2.core.input {
 	import flash.display.InteractiveObject;
 	import flash.events.EventDispatcher;
 	import flash.events.KeyboardEvent;
@@ -10,8 +9,7 @@
 	 * @author Andreas Roenning, Cristobal Dabed
 	 * @version 0.3
 	 */
-	public final class KeyboardManager extends EventDispatcher
-	{
+	public final class KeyboardManager extends EventDispatcher {
 		/*  Variables */
 		private static var INSTANCE:KeyboardManager;
 		private var keyboardSource:InteractiveObject = null;
@@ -22,10 +20,8 @@
 		 * Gets a singleton instance of the input manager
 		 * @return
 		 */
-		public static function get instance():KeyboardManager
-		{
-			if (!INSTANCE)
-			{
+		public static function get instance():KeyboardManager {
+			if (!INSTANCE) {
 				INSTANCE = new KeyboardManager();
 			}
 			return INSTANCE;
@@ -37,14 +33,10 @@
 		 * @param	eventSource
 		 * The object whose events to respond to (typically stage)
 		 */
-		public function setup(eventSource:InteractiveObject):void
-		{
-			try
-			{
+		public function setup(eventSource:InteractiveObject):void {
+			try {
 				//shutdown();
-			}
-			catch (e:Error)
-			{
+			} catch (e:Error) {
 			}
 			//eventSource.addEventListener(KeyboardEvent.KEY_DOWN, handleKeyDown,false,Number.POSITIVE_INFINITY,true);
 			//eventSource.addEventListener(KeyboardEvent.KEY_UP, handleKeyUp, false, Number.POSITIVE_INFINITY, true);
@@ -54,8 +46,7 @@
 		/**
 		 * Stop tracking keyboard events
 		 */
-		public function shutdown():void
-		{
+		public function shutdown():void {
 			//keyboardSource.removeEventListener(KeyboardEvent.KEY_DOWN, handleKeyDown);
 			//keyboardSource.removeEventListener(KeyboardEvent.KEY_UP, handleKeyUp);
 			//keyboardSource = null;
@@ -75,8 +66,7 @@
 		 * @return
 		 * 	Return true or false depending on wether the shortcut was successfully added or not.
 		 */
-		public function addKeyboardShortcut(keystroke:uint, modifier:uint, callback:Function, override:Boolean = false):Boolean
-		{
+		public function addKeyboardShortcut(keystroke:uint, modifier:uint, callback:Function, override:Boolean = false):Boolean {
 			return KeyboardShortcuts.instance.add(keystroke, modifier, callback, override);
 		}
 		
@@ -88,8 +78,7 @@
 		 * @return
 		 * 	Returns true or false depending on wether it managed to release the shortcut or not.
 		 */
-		public function removeKeyboardShortcut(keystroke:uint, modifier:uint):Boolean
-		{
+		public function removeKeyboardShortcut(keystroke:uint, modifier:uint):Boolean {
 			return KeyboardShortcuts.instance.remove(keystroke, modifier);
 		}
 		
@@ -101,8 +90,7 @@
 		 * @return
 		 * 	Returns true or false depending on wether it managed release all the shortcuts or not.
 		 */
-		public function removeAll(source:Object = null):void
-		{
+		public function removeAll(source:Object = null):void {
 			KeyboardSequences.instance.removeAll();
 			KeyboardShortcuts.instance.removeAll();
 		}
@@ -116,8 +104,7 @@
 		 * @return
 		 * 	Returns true or false wether the keyboard shortcut is valid or not.
 		 */
-		public function validateKeyboardShortcut(keystroke:uint, modifier:uint):Boolean
-		{
+		public function validateKeyboardShortcut(keystroke:uint, modifier:uint):Boolean {
 			return KeyboardShortcuts.instance.validateKeystrokeWithModifier(keystroke, modifier);
 		}
 		
@@ -129,8 +116,7 @@
 		 * @param callback	The callback function to call.
 		 * @param override	Optional override for an existing keyboard sequence with the new function.
 		 */
-		public function addKeyboardSequence(keyCodes:Array, callback:Function, override:Boolean = false):Boolean
-		{
+		public function addKeyboardSequence(keyCodes:Array, callback:Function, override:Boolean = false):Boolean {
 			return KeyboardSequences.instance.add(keyCodes, callback, override);
 		}
 		
@@ -142,8 +128,7 @@
 		 * @return
 		 * 	Returns true or false depending on wether it successfully removed the keyCode sequence from the list or not.
 		 */
-		public function removeKeyboardSequence(keyCodes:Array):Boolean
-		{
+		public function removeKeyboardSequence(keyCodes:Array):Boolean {
 			return KeyboardSequences.instance.remove(keyCodes);
 		}
 		
@@ -155,8 +140,7 @@
 		 * @return
 		 * 	Returns true or false wether the keyboard sequence is valid or not.
 		 */
-		public function validateKeyboardSequence(keyCodes:Array):Boolean
-		{
+		public function validateKeyboardSequence(keyCodes:Array):Boolean {
 			return KeyboardSequences.instance.validateKeyboardSequence(keyCodes);
 		}
 		
@@ -169,10 +153,8 @@
 		 *
 		 * @param event	The keyboard event.
 		 */
-		public function handleKeyDown(event:KeyboardEvent):void
-		{
-			if (KeyboardSequences.instance.onKeyDown(event) || KeyboardShortcuts.instance.onKeyDown(event))
-			{
+		public function handleKeyDown(event:KeyboardEvent):void {
+			if (KeyboardSequences.instance.onKeyDown(event) || KeyboardShortcuts.instance.onKeyDown(event)) {
 				event.stopImmediatePropagation();
 				event.stopPropagation();
 				event.preventDefault();
@@ -184,8 +166,7 @@
 		 *
 		 * @param event The keyboard event
 		 */
-		public function handleKeyUp(event:KeyboardEvent):void
-		{
+		public function handleKeyUp(event:KeyboardEvent):void {
 			KeyboardSequences.instance.onKeyUp(event);
 			KeyboardShortcuts.instance.onKeyUp(event);
 		}

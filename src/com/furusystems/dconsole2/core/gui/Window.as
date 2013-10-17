@@ -1,5 +1,4 @@
-﻿package com.furusystems.dconsole2.core.gui 
-{
+﻿package com.furusystems.dconsole2.core.gui {
 	import com.furusystems.dconsole2.core.style.Colors;
 	import com.furusystems.dconsole2.core.style.TextFormats;
 	import flash.display.BlendMode;
@@ -13,12 +12,12 @@
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	import flash.text.TextField;
+	
 	/**
 	 * ...
 	 * @author Andreas Roenning
 	 */
-	public class Window extends Sprite
-	{
+	public class Window extends Sprite {
 		public static const BAR_HEIGHT:int = 12;
 		public static const SCALE_HANDLE_SIZE:int = 10;
 		private static const GRADIENT_MATRIX:Matrix = new Matrix();
@@ -41,8 +40,8 @@
 		public var viewRect:Rectangle;
 		private var _constrainToStage:Boolean;
 		private var pt:Point = new Point();
-		public function Window(title:String, rect:Rectangle, contents:DisplayObject = null, maxRect:Rectangle = null, minRect:Rectangle = null,enableClose:Boolean = true, enableScroll:Boolean = true,enableScale:Boolean = true,constrainToStage:Boolean = true)
-		{
+		
+		public function Window(title:String, rect:Rectangle, contents:DisplayObject = null, maxRect:Rectangle = null, minRect:Rectangle = null, enableClose:Boolean = true, enableScroll:Boolean = true, enableScale:Boolean = true, constrainToStage:Boolean = true) {
 			tabEnabled = tabChildren = false;
 			_scrollBarBottom.addEventListener(Event.CHANGE, onScroll);
 			_scrollBarRight.addEventListener(Event.CHANGE, onScroll);
@@ -62,7 +61,7 @@
 			this._minRect = minRect;
 			
 			//rect.height += BAR_HEIGHT;
-			_titleField.height = BAR_HEIGHT+3;
+			_titleField.height = BAR_HEIGHT + 3;
 			_titleField.selectable = false;
 			_titleField.defaultTextFormat = TextFormats.consoleTitleFormat;
 			_titleField.embedFonts = true;
@@ -96,8 +95,10 @@
 				_chrome.addChild(_scrollBarBottom);
 				_chrome.addChild(_scrollBarRight);
 			}
-			if(enableScale) _chrome.addChild(_resizeHandle);
-			if(enableClose) _chrome.addChild(_closeButton);
+			if (enableScale)
+				_chrome.addChild(_resizeHandle);
+			if (enableClose)
+				_chrome.addChild(_closeButton);
 			_chrome.addChild(_outlines);
 			
 			_resizeHandle.buttonMode = _header.buttonMode = true;
@@ -105,7 +106,7 @@
 			x = rect.x;
 			y = rect.y;
 			
-			var dsf:DropShadowFilter = new DropShadowFilter(4, 45, 0, .1,8,8);
+			var dsf:DropShadowFilter = new DropShadowFilter(4, 45, 0, .1, 8, 8);
 			//filters = [dsf];
 			
 			redraw(rect);
@@ -117,62 +118,57 @@
 				setContents(contents);
 			}
 		}
+		
 		public function setViewRect(rect:Rectangle):void {
 			redraw(rect);
 		}
 		
-		private function onCloseRollout(e:MouseEvent):void 
-		{
+		private function onCloseRollout(e:MouseEvent):void {
 			DisplayObject(e.target).blendMode = BlendMode.NORMAL;
 		}
 		
-		private function onCloseRollover(e:MouseEvent):void 
-		{
+		private function onCloseRollover(e:MouseEvent):void {
 			DisplayObject(e.target).blendMode = BlendMode.INVERT;
 		}
+		
 		protected function setTitle(str:String):void {
 			_titleField.text = str;
 		}
 		
-		protected function onClose(e:MouseEvent):void 
-		{
+		protected function onClose(e:MouseEvent):void {
 			_header.removeEventListener(MouseEvent.MOUSE_DOWN, startDragging);
 			_resizeHandle.removeEventListener(MouseEvent.MOUSE_DOWN, startResizing);
 			removeEventListener(MouseEvent.MOUSE_DOWN, setDepth);
 		}
 		
-		protected function onScroll(e:Event):void 
-		{
+		protected function onScroll(e:Event):void {
 			var r:Rectangle = getContentsRect();
 			var newRect:Rectangle = _contents.scrollRect.clone();
-			switch(e.target) {
+			switch (e.target) {
 				case _scrollBarBottom:
 					newRect.x = _scrollBarBottom.outValue * (_maxScrollH - newRect.width);
-				break;
+					break;
 				case _scrollBarRight:
-					newRect.y = _scrollBarRight.outValue * (_maxScrollV-newRect.height);
-				break;
+					newRect.y = _scrollBarRight.outValue * (_maxScrollV - newRect.height);
+					break;
 			}
 			_contents.scrollRect = newRect;
 			redraw(viewRect);
 		}
 		
-		protected function startResizing(e:MouseEvent):void 
-		{
+		protected function startResizing(e:MouseEvent):void {
 			_clickOffset.x = SCALE_HANDLE_SIZE - _resizeHandle.mouseX;
 			_clickOffset.y = SCALE_HANDLE_SIZE - _resizeHandle.mouseY;
 			stage.addEventListener(MouseEvent.MOUSE_MOVE, onResizeDrag);
 			stage.addEventListener(MouseEvent.MOUSE_UP, onResizeStop);
 		}
 		
-		protected function onResizeStop(e:MouseEvent):void 
-		{
+		protected function onResizeStop(e:MouseEvent):void {
 			stage.removeEventListener(MouseEvent.MOUSE_MOVE, onResizeDrag);
 			stage.removeEventListener(MouseEvent.MOUSE_UP, onResizeStop);
 		}
 		
-		protected function onResizeDrag(e:MouseEvent):void 
-		{
+		protected function onResizeDrag(e:MouseEvent):void {
 			e.updateAfterEvent();
 			pt.x = mouseX + _clickOffset.x;
 			pt.y = mouseY + _clickOffset.y;
@@ -183,7 +179,6 @@
 			
 			pt.x = Math.max(SCALE_HANDLE_SIZE + BAR_HEIGHT, pt.x);
 			pt.y = Math.max(SCALE_HANDLE_SIZE + BAR_HEIGHT, pt.y);
-			
 			
 			_resizeRect.width = pt.x;
 			_resizeRect.height = pt.y - BAR_HEIGHT;
@@ -197,31 +192,36 @@
 			redraw(_resizeRect);
 		}
 		
-		protected function onResize():void
-		{
-			
+		protected function onResize():void {
+		
 		}
+		
 		protected function scroll(x:int = 0, y:int = 0):void {
 			if (_contents.scrollRect.x + x >= 0) {
-				if (_contents.scrollRect.width + x <= _maxScrollH) _contents.scrollRect.x += x;
+				if (_contents.scrollRect.width + x <= _maxScrollH)
+					_contents.scrollRect.x += x;
 			}
 			if (_contents.scrollRect.y + y >= 0) {
-				if (_contents.scrollRect.height + y <= _maxScrollV) _contents.scrollRect.y += y;
+				if (_contents.scrollRect.height + y <= _maxScrollV)
+					_contents.scrollRect.y += y;
 			}
 		}
+		
 		protected function resetScroll():void {
 			_contents.scrollRect.x = 0;
 			_contents.scrollRect.y = 0;
 			_scrollBarBottom.outValue = 0;
 			_scrollBarRight.outValue = 0;
 		}
+		
 		public function updateAppearance():void {
 			//TODO: Update theme
 		}
+		
 		protected function redraw(rect:Rectangle):void {
 			//GRADIENT_MATRIX.createGradientBox(rect.width * 3, rect.height * 3);
 			
-			_background.graphics.clear();	
+			_background.graphics.clear();
 			_background.graphics.beginFill(Colors.ASSISTANT_BG);
 			//_background.graphics.beginGradientFill(GradientType.RADIAL, [Colors.CORE, Colors.DROPDOWN_BG_INACTIVE], [1, 1], [0, 255], GRADIENT_MATRIX);
 			_background.graphics.drawRect(0, 0, rect.width, rect.height);
@@ -236,22 +236,22 @@
 			_outlines.graphics.drawRect(0, 0, rect.width, rect.height + BAR_HEIGHT);
 			
 			_titleField.width = rect.width;
-			_closeButton.x = rect.width - (BAR_HEIGHT-2);
+			_closeButton.x = rect.width - (BAR_HEIGHT - 2);
 			_closeButton.y = 1;
 			
 			_resizeHandle.x = rect.width - SCALE_HANDLE_SIZE;
 			_resizeHandle.y = rect.height + BAR_HEIGHT - SCALE_HANDLE_SIZE;
 			
 			var cRect:Rectangle = getContentsRect();
-		
+			
 			if (rect.width < cRect.width) {
 				_maxScrollH = cRect.width;
-			}else {
+			} else {
 				_maxScrollH = 0;
 			}
 			if (rect.height < cRect.height) {
 				_maxScrollV = cRect.height;
-			}else {
+			} else {
 				_maxScrollV = 0;
 			}
 			_contents.scrollRect = new Rectangle(Math.max(0, _scrollBarBottom.outValue * (_maxScrollH - rect.width)), Math.max(0, _scrollBarRight.outValue * (_maxScrollV - rect.height)), rect.width + 1, rect.height + 1);
@@ -262,13 +262,12 @@
 			y = viewRect.y;
 		}
 		
-		protected function updateScrollBars(maxH:Number,maxV:Number,rect:Rectangle):void
-		{
+		protected function updateScrollBars(maxH:Number, maxV:Number, rect:Rectangle):void {
 			if (maxH > 0) {
 				_scrollBarBottom.visible = true;
-				_scrollBarBottom.y = rect.height+BAR_HEIGHT-_scrollBarBottom.trackWidth;
+				_scrollBarBottom.y = rect.height + BAR_HEIGHT - _scrollBarBottom.trackWidth;
 				_scrollBarBottom.draw(rect.width - SCALE_HANDLE_SIZE, _contents.scrollRect, _contents.scrollRect.x, maxH);
-			}else {
+			} else {
 				_scrollBarBottom.visible = false;
 			}
 			
@@ -277,48 +276,47 @@
 				_scrollBarRight.x = rect.width - _scrollBarRight.trackWidth;
 				_scrollBarRight.y = BAR_HEIGHT;
 				_scrollBarRight.draw(rect.height - SCALE_HANDLE_SIZE, _contents.scrollRect, _contents.scrollRect.y, maxV);
-			}else {
+			} else {
 				_scrollBarRight.visible = false;
 			}
 		}
+		
 		protected function getContentsRect():Rectangle {
-			if (_contents.numChildren < 1) return new Rectangle();
+			if (_contents.numChildren < 1)
+				return new Rectangle();
 			return _contents.getChildAt(0).getRect(_contents);
 		}
 		
-		protected function setDepth(e:MouseEvent):void 
-		{
-			parent.setChildIndex(this, parent.numChildren - 1);	
+		protected function setDepth(e:MouseEvent):void {
+			parent.setChildIndex(this, parent.numChildren - 1);
 		}
 		
-		protected function startDragging(e:MouseEvent):void 
-		{
+		protected function startDragging(e:MouseEvent):void {
 			_clickOffset.x = _chrome.mouseX;
 			_clickOffset.y = _chrome.mouseY;
 			stage.addEventListener(MouseEvent.MOUSE_MOVE, onWindowDrag);
 			stage.addEventListener(MouseEvent.MOUSE_UP, stopDragging);
 		}
 		
-		protected function stopDragging(e:MouseEvent):void 
-		{
+		protected function stopDragging(e:MouseEvent):void {
 			stage.removeEventListener(MouseEvent.MOUSE_MOVE, onWindowDrag);
 			stage.removeEventListener(MouseEvent.MOUSE_UP, stopDragging);
 		}
 		
-		protected function onWindowDrag(e:MouseEvent):void 
-		{
+		protected function onWindowDrag(e:MouseEvent):void {
 			x = stage.mouseX - _clickOffset.x;
 			y = stage.mouseY - _clickOffset.y;
 			/*if (_constrainToStage) {
-				x = Math.max(0, Math.min(x, stage.stageWidth - width));
-				y = Math.max(0, Math.min(y, stage.stageHeight - height));
-			}*/
+			   x = Math.max(0, Math.min(x, stage.stageWidth - width));
+			   y = Math.max(0, Math.min(y, stage.stageHeight - height));
+			 }*/
 			viewRect.x = x;
 			viewRect.y = y;
 			//e.updateAfterEvent();
 			dispatchEvent(new Event(Event.CHANGE));
 		}
-		public function setContents(d:DisplayObject,autoScale:Boolean = false):void {
+		
+		public function setContents(d:DisplayObject, autoScale:Boolean = false):void {
 			while (_contents.numChildren > 0) {
 				_contents.removeChildAt(0);
 			}
@@ -327,14 +325,17 @@
 				scaleToContents();
 			}
 		}
+		
 		protected function scaleToContents():void {
 			viewRect = getContentsRect();
 			redraw(viewRect);
 			onResize();
 		}
 		
-		public function get header():Sprite { return _header; }
-		
+		public function get header():Sprite {
+			return _header;
+		}
+	
 	}
 
 }

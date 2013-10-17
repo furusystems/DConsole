@@ -1,13 +1,12 @@
-﻿package com.furusystems.dconsole2.core.introspection 
-{
+﻿package com.furusystems.dconsole2.core.introspection {
 	import com.furusystems.dconsole2.core.introspection.descriptions.*;
 	import com.furusystems.dconsole2.core.text.autocomplete.AutocompleteDictionary;
+	
 	/**
 	 * ...
 	 * @author Andreas Roenning
 	 */
-	public class IntrospectionScope
-	{
+	public class IntrospectionScope {
 		public var autoCompleteDict:AutocompleteDictionary = new AutocompleteDictionary();
 		public var children:Vector.<ChildScopeDesc>; //child display objects
 		public var accessors:Vector.<AccessorDesc>; //accessors/setters/getters
@@ -18,9 +17,9 @@
 		public var qualifiedClassName:String;
 		public var inheritanceChain:Vector.<String>;
 		public var interfaces:Vector.<String>;
-		public function IntrospectionScope() 
-		{
-			
+		
+		public function IntrospectionScope() {
+		
 		}
 	}
 
