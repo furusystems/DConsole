@@ -10,6 +10,19 @@ It functions as an easily-implemented layer that sits on top of your application
 
 	addChild(DConsole.view)
 
+The console allows you to bind AS3 functions to console "commands".
+
+    function getUserByName(name:String):UserData{
+    	...
+        return foundUser;
+    }
+	DConsole.createCommand("getUser",getUserByName);
+    
+These commands can then be invoked from the commandline to execute their functionality and print their returned results.
+
+	>> getUser John User
+    << [object UserData]
+
 It also doubles as a flexible logging view, offering a loose coupling with SLF4AS and AS3Commons logging to offer meaningful logging with metadata such as message origin and importance.
 
 	public static const L:ILogger = Logging.getLogger(MyClass);
