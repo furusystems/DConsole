@@ -18,6 +18,7 @@ package com.furusystems.dconsole2.plugins.plugcollections
 	import com.furusystems.dconsole2.plugins.JSONParserUtil;
 	import com.furusystems.dconsole2.plugins.JSRouterUtil;
 	import com.furusystems.dconsole2.plugins.LogFileUtil;
+	import com.furusystems.dconsole2.plugins.MathUtil;
 	import com.furusystems.dconsole2.plugins.measurebracket.MeasurementBracketUtil;
 	import com.furusystems.dconsole2.plugins.mediatester.MediaTesterUtil;
 	import com.furusystems.dconsole2.plugins.MouseUtil;
@@ -35,7 +36,7 @@ package com.furusystems.dconsole2.plugins.plugcollections
 	public class AllPlugins implements IPluginBundle
 	{
 		private var _plugins:Vector.<Class>;
-		public function AllPlugins() 
+		public function AllPlugins()
 		{
 			_plugins = Vector.<Class>([
 				BytearrayHexdumpUtil,
@@ -64,7 +65,8 @@ package com.furusystems.dconsole2.plugins.plugcollections
 				InputMonitorUtil,
 				BugReporterUtil,
 				TreeViewUtil,
-				SelectionHistoryUtil
+				SelectionHistoryUtil,
+				MathUtil
 			]);
 		}
 		
