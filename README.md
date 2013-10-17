@@ -1,10 +1,8 @@
-==Did you ever wish you could talk back to your trace window?==
-DConsole is a combined logger/[http://en.wikipedia.org/wiki/Command-line_interface command-line interface] for Flash 10 ActionScript 3 developers. 
+DConsole is a combined logger and command-line interface for Flash 11 ActionScript 3 developers. 
 
  * Call any function.
  * Poll or change any property.
  * Visually tweak what's on stage.
- * Anytime, anywhere.
 
 Enjoy the power a developer _should_ have over his or her own creation.
 
