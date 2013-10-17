@@ -61,21 +61,6 @@
 		}
 		
 		/**
-		 * Removes every child off the displaylist, and optionally calls a method on each of them
-		 * @param	forEachFunction
-		 * @return
-		 */
-		public function removeAllChildren(forEachFunction:Function = null):int {
-			var count:int = numChildren;
-			while (numChildren > 0) {
-				var ob:DisplayObject = removeChild(getChildAt(0));
-				if (forEachFunction != null)
-					forEachFunction(ob);
-			}
-			return count;
-		}
-		
-		/**
 		 * Returns an array of first level child display objects
 		 * @return an array of display objects
 		 */

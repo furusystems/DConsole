@@ -25,8 +25,6 @@ package com.furusystems.dconsole2.core.gui.maindisplay.sections {
 			addChild(toolBar);
 			buttonMode = true;
 			addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
-			addEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
-			addEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
 		}
 		
 		private function onMouseOut(e:MouseEvent):void {
@@ -40,6 +38,8 @@ package com.furusystems.dconsole2.core.gui.maindisplay.sections {
 		private function onMouseDown(e:MouseEvent):void {
 			stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
 			stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
+			removeEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
+			removeEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
 			_prevDragPos.x = stage.mouseX;
 			_prevDragPos.y = stage.mouseY;
 			_console.messaging.send(Notifications.TOOLBAR_DRAG_START, _prevDragPos, this);
@@ -58,6 +58,8 @@ package com.furusystems.dconsole2.core.gui.maindisplay.sections {
 			_delta.y = stage.mouseY - _prevDragPos.y;
 			_prevDragPos.x = stage.mouseX;
 			_prevDragPos.y = stage.mouseY;
+			addEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
+			addEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
 			stage.removeEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
 			stage.removeEventListener(MouseEvent.MOUSE_UP, onMouseUp);
 			_console.messaging.send(Notifications.TOOLBAR_DRAG_STOP, _delta, this);

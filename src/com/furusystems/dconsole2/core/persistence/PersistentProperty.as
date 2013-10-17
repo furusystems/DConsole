@@ -31,9 +31,10 @@ package com.furusystems.dconsole2.core.persistence {
 		}
 		
 		override public function set value(value:*):void {
-			if (!_synced) {
-				consolidate();
-			}
+			//if (!_synced) {
+				//consolidate();
+			//}
+			_synced = false;
 			super.value = value;
 			_sharedObject.data[_fieldName] = super.value;
 		}

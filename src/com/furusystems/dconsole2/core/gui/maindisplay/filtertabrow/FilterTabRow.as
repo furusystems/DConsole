@@ -96,7 +96,7 @@ package com.furusystems.dconsole2.core.gui.maindisplay.filtertabrow {
 		}
 		
 		private function updateButtons():void {
-			_buttonContainer.removeAllChildren();
+			_buttonContainer.removeChildren();
 			var btnNames:Vector.<String> = _logManager.getLogNames();
 			_buttons = [];
 			for (var i:int = 0; i < btnNames.length; i++) {

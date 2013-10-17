@@ -2,6 +2,7 @@ package com.furusystems.dconsole2.core.gui.maindisplay {
 	//{
 	import com.furusystems.dconsole2.core.animation.ConsoleTweener;
 	import com.furusystems.dconsole2.core.animation.EasingTween;
+	import com.furusystems.dconsole2.core.effects.Filters;
 	import com.furusystems.dconsole2.core.gui.DockingGuides;
 	import com.furusystems.dconsole2.core.gui.layout.HorizontalSplit;
 	import com.furusystems.dconsole2.core.gui.layout.IContainable;
@@ -72,7 +73,7 @@ package com.furusystems.dconsole2.core.gui.maindisplay {
 		
 		private var _scaleHandle:ScaleHandle;
 		
-		private var _prevRect:Rectangle;
+		private var _prevRect:Rectangle = null;
 		private var _firstRun:Boolean;
 		
 		public function get input():InputField {
@@ -113,6 +114,7 @@ package com.furusystems.dconsole2.core.gui.maindisplay {
 		public function ConsoleView(console:DConsole = null) {
 			_scaleHandle = new ScaleHandle(console);
 			visible = false;
+			
 			_console = console;
 			
 			_texture = new BitmapData(3, 3, true, 0);
@@ -122,7 +124,6 @@ package com.furusystems.dconsole2.core.gui.maindisplay {
 			_mainSection = new MainSection(console);
 			_inspectorSection = new InspectorSection(console);
 			_headerSection = new HeaderSection(console);
-			//_bg.cacheAsBitmap = true;
 			
 			addChild(_bg);
 			addChild(_headerSection);
@@ -145,8 +146,6 @@ package com.furusystems.dconsole2.core.gui.maindisplay {
 			_mainSplitDragBar.doubleClickEnabled = true;
 			_mainSplitDragBar.buttonMode = true;
 			
-			//filters = [Filters.CONSOLE_DROPSHADOW];
-			
 			scaleHandle.addEventListener(MouseEvent.MOUSE_DOWN, beginScaleDrag);
 			scaleHandle.addEventListener(MouseEvent.DOUBLE_CLICK, onScaleDoubleclick);
 			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
@@ -164,7 +163,7 @@ package com.furusystems.dconsole2.core.gui.maindisplay {
 			_console.messaging.addCallback(Notifications.CORNER_DRAG_STOP, onCornerScale);
 			_console.messaging.addCallback(Notifications.CORNER_DRAG_UPDATE, onCornerScale);
 			
-			setupBloom();
+			//setupBloom();
 			//addChild(bloom);
 		}
 		
@@ -209,6 +208,7 @@ package com.furusystems.dconsole2.core.gui.maindisplay {
 		}
 		
 		override public function set x(value:Number):void {
+			if (super.x == value) return;
 			super.x = _console.persistence.consoleX = value;
 		}
 		
@@ -217,6 +217,7 @@ package com.furusystems.dconsole2.core.gui.maindisplay {
 		}
 		
 		override public function set y(value:Number):void {
+			if (super.y == value) return;
 			super.y = _console.persistence.consoleY = value;
 		}
 		
@@ -279,8 +280,8 @@ package com.furusystems.dconsole2.core.gui.maindisplay {
 		}
 		
 		private function onAddedToStage(e:Event):void {
-			_firstRun = true;
 			removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
+			_firstRun = true;
 			initFromPersistence();
 			switch (dockingMode) {
 				case DConsole.DOCK_BOT:
@@ -332,12 +333,8 @@ package com.furusystems.dconsole2.core.gui.maindisplay {
 		private function completeScale(e:MouseEvent):void {
 			Mouse.cursor = MouseCursor.AUTO;
 			scaleHandle.dragging = false;
-			/*if (!scaleHandle.rect.containsPoint(new Point(mouseX, mouseY))) {
-			   scaleHandle.alpha = 0;
-			 }*/
 			stage.removeEventListener(MouseEvent.MOUSE_MOVE, onScaleUpdate);
 			stage.removeEventListener(MouseEvent.MOUSE_UP, completeScale);
-			//rect.height = tempScaleRect.height;
 			doLayout();
 		}
 		
@@ -383,11 +380,10 @@ package com.furusystems.dconsole2.core.gui.maindisplay {
 		}
 		
 		private function doLayout():void {
-			//if (_prevRect) {
-			//if (_prevRect.equals(_rect)) return;
-			//}
+			if (_prevRect) {
+				if (_prevRect.equals(_rect)) return;
+			}
 			var r:Rectangle = _rect.clone();
-			_prevRect = r.clone();
 			_headerSection.onParentUpdate(r);
 			if (_headerSection.visible) {
 				r.y = GUIUnits.SQUARE_UNIT;
@@ -418,6 +414,8 @@ package com.furusystems.dconsole2.core.gui.maindisplay {
 					scaleHandle.onParentUpdate(r);
 					break;
 			}
+			
+			_prevRect = r.clone();
 		}
 		
 		private function onMainsplitMouseOut(e:MouseEvent):void {
@@ -587,8 +585,8 @@ package com.furusystems.dconsole2.core.gui.maindisplay {
 		
 		public function set rect(r:Rectangle):void {
 			//if (_rect) {
-			//if (_rect.equals(r)) return;
-			//} //TODO: why does this shit break everything? haha. God we need a rewrite.
+				//if (_rect.equals(r)) return;
+			//}
 			_rect = r;
 			_rect.x = _rect.y = 0;
 			_rect.height = Math.floor(Math.max(minHeight, _rect.height) / GUIUnits.SQUARE_UNIT) * GUIUnits.SQUARE_UNIT;

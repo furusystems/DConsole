@@ -123,12 +123,6 @@
 		static public const DOCK_BOT:int = 1;
 		static public const DOCK_WINDOWED:int = -1;
 		
-		static private const UPDATE_FROM_ENTER_FRAME:int = 0;
-		static private const UPDATE_FROM_TIMER:int = 1;
-		private var _updateSource:int = UPDATE_FROM_TIMER;
-		
-		private var _updateTimer:Timer = new Timer(33);
-		
 		//} end members
 		//{ Instance
 		/**
@@ -140,8 +134,6 @@
 			//Prepare logging
 			_styleManager = new StyleManager(this);
 			_persistence = new PersistenceManager(this);
-			
-			_updateTimer.addEventListener(TimerEvent.TIMER, frameUpdate);
 			
 			_logManager = new DLogManager(this);
 			_mainConsoleView = new ConsoleView(this);
@@ -183,6 +175,9 @@
 			messaging.addCallback(Notifications.EXECUTE_STATEMENT, onExecuteStatementNotification);
 			messaging.addCallback(Notifications.CONSOLE_VIEW_TRANSITION_COMPLETE, onConsoleViewTransitionComplete);
 			
+			messaging.addCallback(Notifications.TOOLBAR_DRAG_START, onWindowDragStart);
+			messaging.addCallback(Notifications.TOOLBAR_DRAG_STOP, onWindowDragStop);
+			
 			KeyboardManager.instance.addKeyboardShortcut(_keystroke, _modifier, toggleDisplay); //  [CTRL+SHIFT, ENTER]); //default keystroke
 			
 			_callCommand = new FunctionCallCommand("call", _scopeManager.callMethodOnScope, "Introspection", "Calls a method with args within the current introspection scope");
@@ -223,6 +218,14 @@
 			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		}
 		
+		private function onWindowDragStop():void {
+			beginFrameUpdates();
+		}
+		
+		private function onWindowDragStart():void {
+			stopFrameUpdates();
+		}
+		
 		private function onConsoleViewTransitionComplete(md:MessageData):void {
 			//md.data will be true if the console is now visible, or false if it's now hidden
 			if (!md.data) {
@@ -254,20 +257,12 @@
 			select(md.data);
 		}
 		
-		private function ceaseFrameUpdates():void {
-			if (_updateSource == UPDATE_FROM_ENTER_FRAME) {
-				removeEventListener(Event.ENTER_FRAME, frameUpdate);
-			} else {
-				_updateTimer.stop();
-			}
+		private function stopFrameUpdates():void {
+			removeEventListener(Event.ENTER_FRAME, frameUpdate);
 		}
 		
 		private function beginFrameUpdates():void {
-			if (_updateSource == UPDATE_FROM_ENTER_FRAME) {
-				addEventListener(Event.ENTER_FRAME, frameUpdate, false, -1000, false);
-			} else {
-				_updateTimer.start();
-			}
+			addEventListener(Event.ENTER_FRAME, frameUpdate, false, -1000, false);
 		}
 		
 		private function frameUpdate(e:Event = null):void {
@@ -894,7 +889,7 @@
 				messaging.send(Notifications.CONSOLE_SHOW, null, this);
 			} else {
 				tabOrderOn();
-				ceaseFrameUpdates();
+				stopFrameUpdates();
 				messaging.send(Notifications.CONSOLE_HIDE, null, this);
 			}
 		}

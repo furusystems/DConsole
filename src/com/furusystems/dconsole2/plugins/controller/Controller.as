@@ -1,4 +1,4 @@
-﻿package com.furusystems.dconsole2.plugins.controller 
+﻿package com.furusystems.dconsole2.plugins.controller
 {
 	import com.furusystems.dconsole2.core.gui.Window;
 	import com.furusystems.dconsole2.core.style.Colors;
@@ -19,7 +19,7 @@
 	 */
 	public class Controller extends Window
 	{
-		public var targetObj:*; 
+		public var targetObj:*;
 		private var paramsField:TextField = new TextField();
 		private var controlFields:Vector.<ControlField> = new Vector.<ControlField>();
 		private var clickOffset:Point;
@@ -28,10 +28,8 @@
 		private var manager:ControllerUtil;
 		private var bg:Shape = new Shape();
 		private var contents:Sprite = new Sprite();
-		public function Controller(o:*, params:Array,manager:ControllerUtil) 
+		public function Controller(o:*, params:Array,manager:ControllerUtil)
 		{
-			//cacheAsBitmap = true;
-			
 			var dragBarHeight:int = GUIUnits.SQUARE_UNIT;
 			this.manager = manager;
 			
@@ -45,7 +43,7 @@
 			paramsField.textColor = Colors.HEADER_FG;
 			paramsField.autoSize = TextFieldAutoSize.LEFT;
 			paramsField.text = o.toString();
-			for (var i:int = 0; i < params.length; i++) 
+			for (var i:int = 0; i < params.length; i++)
 			{
 				var cf:ControlField = new ControlField(params[i],typeof targetObj[params[i]]);
 				cf.addEventListener(ControllerEvent.VALUE_CHANGE, onCfChange,false,0,true);
@@ -60,23 +58,23 @@
 		}
 		
 		
-		override protected function onWindowDrag(e:MouseEvent):void 
+		override protected function onWindowDrag(e:MouseEvent):void
 		{
 			super.onWindowDrag(e);
 			update();
-		}	
-		override protected function onClose(e:MouseEvent):void 
+		}
+		override protected function onClose(e:MouseEvent):void
 		{
 			super.onClose(e);
 			close(e);
 		}
 		
-		private function close(e:MouseEvent):void 
+		private function close(e:MouseEvent):void
 		{
 			manager.removeController(this);
 		}
 		
-		private function onCfChange(e:Event):void 
+		private function onCfChange(e:Event):void
 		{
 			var t:ControlField = e.currentTarget as ControlField;
 			targetObj[t.targetProperty] = t.value;
@@ -85,7 +83,7 @@
 		
 		private function refresh():void
 		{
-			for (var i:int = 0; i < controlFields.length; i++) 
+			for (var i:int = 0; i < controlFields.length; i++)
 			{
 				if (controlFields[i].hasFocus) continue;
 				controlFields[i].value = targetObj[controlFields[i].targetProperty];
@@ -105,7 +103,7 @@
 			}
 		}
 		
-		public function destroy():void 
+		public function destroy():void
 		{
 			targetObj = null;
 			manager = null;
