@@ -5,8 +5,12 @@
 	import com.furusystems.dconsole2.DConsole;
 	import com.furusystems.dconsole2.plugins.controller.ControllerUtil;
 	import com.furusystems.dconsole2.plugins.measurebracket.MeasurementBracketUtil;
+
+	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
 	import flash.events.ContextMenuEvent;
+	import flash.geom.Point;
+	import flash.text.TextField;
 	import flash.ui.ContextMenu;
 	import flash.ui.ContextMenuItem;
 	
