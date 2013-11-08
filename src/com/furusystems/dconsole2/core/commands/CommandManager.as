@@ -7,6 +7,7 @@
 	import com.furusystems.dconsole2.core.references.ReferenceManager;
 	import com.furusystems.dconsole2.core.text.TextUtils;
 	import com.furusystems.dconsole2.DConsole;
+	import flash.utils.ByteArray;
 	
 	/**
 	 * Manages command definitions and executions
@@ -90,8 +91,10 @@
 					throw(e);
 					return;
 				}
-				if (!sub && val != null && val != undefined)
+				if (!sub && val != null && val != undefined){
+					if (val is ByteArray) return val;
 					_console.print(val);
+				}
 				return val;
 			}
 			throw new CommandError("'" + str + "' is not a command.");
