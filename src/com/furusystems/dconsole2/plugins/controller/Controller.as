@@ -40,7 +40,7 @@
 			paramsField.selectable = false;
 			paramsField.mouseEnabled = false;
 			paramsField.embedFonts = true;
-			paramsField.textColor = Colors.HEADER_FG;
+			paramsField.textColor = 0;
 			paramsField.autoSize = TextFieldAutoSize.LEFT;
 			paramsField.text = o.toString();
 			for (var i:int = 0; i < params.length; i++)
