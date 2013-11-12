@@ -48,7 +48,7 @@ package com.furusystems.dconsole2.core.style {
 		public static var FILTER_BG:uint = BaseColors.BLACK;
 		public static var FILTER_FG:uint = BaseColors.WHITE;
 		
-		public static var INSPECTOR_BG:uint = BaseColors.BLACK;
+		public static var INSPECTOR_BG:uint = BaseColors.DEEP_GREY;
 		public static var INSPECTOR_FG:uint = BaseColors.WHITE;
 		
 		public static var BUTTON_ACTIVE_BG:uint = BaseColors.WHITE;

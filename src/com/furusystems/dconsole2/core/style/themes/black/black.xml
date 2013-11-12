@@ -66,18 +66,18 @@
 	</filters>
 	<inspector>
 		<fore>WHITE</fore>
-		<back>BLACK</back>
+		<back>NEARBLACK</back>
 		<alpha>1</alpha>
 		<treeview>
 			<alpha>0.5</alpha>
 			<fore>WHITE</fore>
-			<back>BLACK</back>
+			<back>NEARBLACK</back>
 		</treeview>
 		<propertyview>
 			<tabs>
 				<header>
-					<fore>BLACK</fore>
-					<back>GRAY</back>
+					<fore>WHITE</fore>
+					<back>BLACK</back>
 				</header>
 				<content>
 					<fore>WHITE</fore>

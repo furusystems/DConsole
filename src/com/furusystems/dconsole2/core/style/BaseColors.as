@@ -8,6 +8,7 @@ package com.furusystems.dconsole2.core.style {
 		public static const WHITE:uint = 0xFFFFFF;
 		public static const BLACK:uint = 0;
 		public static const GRAY:uint = 0x808080;
+		public static const DEEP_GREY:uint = 0x333333;
 		public static const BLACK_SOLID_ALPHA:uint = 0xFF000000;
 		public static const WHITE_SOLID_ALPHA:uint = 0xFFFFFFFF;
 		public static const YELLOW:uint = 0xb58900;
