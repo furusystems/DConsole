@@ -35,7 +35,7 @@ package com.furusystems.dconsole2.plugins.remoteconsole {
 		}
 		
 		public function get dependencies():Vector.<Class> {
-			return Vector.<Class>([]);
+			return null;
 		}
 		
 		public function initialize(pm:PluginManager):void {

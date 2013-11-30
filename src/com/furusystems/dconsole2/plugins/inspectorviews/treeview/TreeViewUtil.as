@@ -37,6 +37,7 @@ package com.furusystems.dconsole2.plugins.inspectorviews.treeview
 		protected var _mouseSelectButton:EyeDropperButton;
 		public function TreeViewUtil() 
 		{
+			super("Display list");
 			_mouseSelectButton = new EyeDropperButton();
 			//addChild(_mouseSelectButton).y = 2; //TODO: Show button when functionality implemented
 			_mouseSelectButton.addEventListener(MouseEvent.MOUSE_DOWN, activateMouseSelect);
@@ -94,11 +95,11 @@ package com.furusystems.dconsole2.plugins.inspectorviews.treeview
 		public function set rootNode(value:DisplayObjectContainer):void 
 		{
 			if (_rootNode) {
-				_scrollableContent.removeChild(_rootNode);
+				content.removeChild(_rootNode);
 			}
 			ListNode.clearTable();
 			_rootNode = new ListNode(value, null, this);
-			_scrollableContent.addChildAt(_rootNode, 0);
+			content.addChildAt(_rootNode, 0);
 			render();
 			scrollByDelta(0, 0);
 		}
@@ -184,8 +185,6 @@ package com.furusystems.dconsole2.plugins.inspectorviews.treeview
 			render();
 			_mouseSelectButton.updateAppearance();
 		}
-		
-		override public function get title():String { return "Display list"; }
 		
 		override public function get descriptionText():String { 
 			return "Adds a tree view representing the current displaylist";

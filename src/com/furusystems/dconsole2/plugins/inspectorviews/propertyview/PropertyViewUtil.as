@@ -34,9 +34,10 @@ package com.furusystems.dconsole2.plugins.inspectorviews.propertyview
 		private var _console:IConsole;
 		public function PropertyViewUtil() 
 		{
+			super("Properties");
 			_tabs = new TabCollection();
 			_tabs.addEventListener(Event.CHANGE, onTabLayoutChange,false,0,true);
-			_scrollableContent.addChild(_tabs);
+			content.addChild(_tabs);
 			addEventListener(MouseEvent.MOUSE_WHEEL, onMouseWheel);
 			scrollXEnabled = false;
 		}
@@ -158,9 +159,6 @@ package com.furusystems.dconsole2.plugins.inspectorviews.propertyview
 		public function onThemeChange(md:MessageData):void
 		{
 			_tabs.update(true);
-		}
-		override public function get title():String {
-			return "Properties";
 		}
 		
 		override public function get descriptionText():String { 

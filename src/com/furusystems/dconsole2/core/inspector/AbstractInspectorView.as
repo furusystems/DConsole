@@ -19,11 +19,13 @@ package com.furusystems.dconsole2.core.inspector {
 		public var inspector:Inspector;
 		protected var _scrollMargin:Number;
 		protected var _bounds:Rectangle;
-		protected var _scrollableContent:Sprite = new Sprite();
+		private var _scrollableContent:Sprite = new Sprite();
+		private var _title:String;
 		
-		public function AbstractInspectorView() {
-			_scrollableContent.scrollRect = new Rectangle();
+		public function AbstractInspectorView(title:String) {
+			_title = title;
 			addChild(_scrollableContent);
+			_scrollableContent.scrollRect = new Rectangle();
 			_scrollMargin = 0;
 			addEventListener(Event.ADDED_TO_STAGE, onAddedtoStage);
 		}
@@ -33,7 +35,7 @@ package com.furusystems.dconsole2.core.inspector {
 		}
 		
 		protected function onShow():void {
-		
+			
 		}
 		
 		public function associateWithInspector(inspector:Inspector):void {
@@ -162,7 +164,7 @@ package com.furusystems.dconsole2.core.inspector {
 		}
 		
 		public function get title():String {
-			throw new NotImplementedError("An inspector view must have a title");
+			return _title;
 		}
 		
 		public function update(pm:PluginManager):void {
@@ -170,7 +172,7 @@ package com.furusystems.dconsole2.core.inspector {
 		}
 		
 		public function get descriptionText():String {
-			throw new NotImplementedError();
+			return "";
 		}
 		
 		public function initialize(pm:PluginManager):void {
@@ -181,6 +183,11 @@ package com.furusystems.dconsole2.core.inspector {
 		
 		public function get dependencies():Vector.<Class> {
 			return null;
+		}
+		
+		public function get content():Sprite 
+		{
+			return _scrollableContent;
 		}
 	
 	}

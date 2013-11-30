@@ -36,6 +36,7 @@ package com.furusystems.dconsole2.plugins.inspectorviews.inputmonitor
 		
 		public function InputMonitorUtil() 
 		{
+			super("Input");
 			scrollXEnabled = scrollYEnabled = false;
 			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 			output = new TextField();
@@ -44,7 +45,7 @@ package com.furusystems.dconsole2.plugins.inspectorviews.inputmonitor
 			//output.background = true;
 			//output.backgroundColor = 0xFF0000;
 			output.text = "";
-			_scrollableContent.addChild(output);
+			content.addChild(output);
 		}
 		
 		private function onAddedToStage(e:Event):void 
@@ -127,7 +128,6 @@ package com.furusystems.dconsole2.plugins.inspectorviews.inputmonitor
 		public function onThemeChange(md:MessageData):void
 		{
 		}
-		override public function get title():String { return "Input"; }
 		
 		override public function get descriptionText():String { 
 			return "Adds a dynamically updating table of current mouse and keyboard inputs";

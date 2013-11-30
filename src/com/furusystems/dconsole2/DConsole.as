@@ -33,6 +33,7 @@
 	import com.furusystems.dconsole2.core.output.ConsoleMessageRepeatMode;
 	import com.furusystems.dconsole2.core.output.ConsoleMessageTypes;
 	import com.furusystems.dconsole2.core.persistence.PersistenceManager;
+	import com.furusystems.dconsole2.core.plugins.IDConsolePlugin;
 	import com.furusystems.dconsole2.core.plugins.PluginManager;
 	import com.furusystems.dconsole2.core.references.ReferenceManager;
 	import com.furusystems.dconsole2.core.security.ConsoleLock;
@@ -1645,6 +1646,11 @@
 		
 		public function refresh():void {
 			scopeManager.updateScope();
+		}
+		
+		public function getPluginInstance(type:Class):IDConsolePlugin 
+		{
+			return pluginManager.getPluginByType(type);
 		}
 		
 		public function get messaging():PimpCentral {
