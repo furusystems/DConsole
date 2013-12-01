@@ -1,4 +1,4 @@
-DConsole is a combined logger and command-line interface for Flash 11 ActionScript 3 developers. 
+DConsole is a combined logger and command-line interface for Flash 11 ActionScript 3 developers, in development since 2006.
 
  * Call any function.
  * Poll or change any property.
