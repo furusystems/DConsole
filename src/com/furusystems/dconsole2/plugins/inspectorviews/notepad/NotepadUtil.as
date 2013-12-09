@@ -14,7 +14,7 @@ package com.furusystems.dconsole2.plugins.inspectorviews.notepad
 		
 		public function NotepadUtil() 
 		{
-			
+			super("Notepad");
 		}
 		
 		/* INTERFACE com.furusystems.dconsole2.core.plugins.IDConsoleInspectorPlugin */
