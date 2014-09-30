@@ -24,7 +24,7 @@
 		}
 		
 		public function toString():String {
-			var out:String = type + ":\t";
+			var out:String = type+":\t";
 			out += text;
 			return out;
 		}

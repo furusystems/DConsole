@@ -18,6 +18,15 @@ package com.furusystems.dconsole2.core.logmanager {
 			_manager = manager;
 		}
 		
+		public function toString():String {
+			var out:String = "";
+			for (var i:int = 0; i < _messages.length; i++) 
+			{
+				out += _messages[i].toString() + "\r\n";
+			}
+			return out;
+		}
+		
 		public function get messages():Vector.<ConsoleMessage> {
 			return _messages;
 		}

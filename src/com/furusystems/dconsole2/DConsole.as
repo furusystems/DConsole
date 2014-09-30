@@ -238,6 +238,10 @@
 			return console.debugDraw;
 		}
 		
+		public static function getLogString():String {
+			return console.getLogString();
+		}
+		
 		private function onTextInput(e:TextEvent):void {
 			//if (_cancelNextSpace && e.text==" ") {
 			if (_cancelNextKey) {
@@ -387,6 +391,10 @@
 		
 		private function get output():OutputField {
 			return _mainConsoleView.output;
+		}
+		
+		public function getLogString():String {
+			return logs.rootLog.toString();
 		}
 		
 		private function get scaleHandle():ScaleHandle {

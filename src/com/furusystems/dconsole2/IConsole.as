@@ -123,6 +123,11 @@ package com.furusystems.dconsole2 {
 		function get messaging():PimpCentral;
 		
 		/**
+		 * Get the full console log as a string
+		 */
+		function getLogString():String;
+		
+		/**
 		 * Print the stack trace up until where this method was called
 		 */
 		function stackTrace():void;
