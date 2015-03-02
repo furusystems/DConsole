@@ -124,6 +124,8 @@
 		static public const DOCK_BOT:int = 1;
 		static public const DOCK_WINDOWED:int = -1;
 		
+		static public var autoComplete:Boolean = true;
+		
 		//} end members
 		//{ Instance
 		/**
@@ -1163,6 +1165,7 @@
 		}
 		
 		private function doComplete():Boolean {
+			if (!DConsole.autoComplete) return false;
 			var flag:Boolean = false;
 			
 			if (input.text.length < 1 || _overrideCallback != null)
